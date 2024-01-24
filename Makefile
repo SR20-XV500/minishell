@@ -19,12 +19,15 @@ HEADERS = headers
 NAME = minishell
 LIBFT = libft/libft.a
 
-CFLAGS = -Wall -Wextra -Werror -g3 -I headers
+CFLAGS = -Wall -Wextra -Werror -g3
 CC = cc
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADERS) $(LIBFT)
+.c.o :
+	$(CC) $(CFLAGS) -I $(HEADERS) -c -o $@ $<
+
+$(NAME): $(LIBFT) $(OBJS) $(HEADERS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(LIBFT):
