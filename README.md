@@ -1,2 +1,0 @@
-# minishell
-team because team;
