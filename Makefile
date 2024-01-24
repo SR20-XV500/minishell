@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/24 02:19:35 by tlassere          #+#    #+#              #
+#    Updated: 2024/01/24 02:19:35 by tlassere         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SOURCES = 	sources/main.c
 
 OBJS = $(SOURCES:.c=.o)
@@ -13,7 +25,7 @@ CC = cc
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS) $(LIBFT)
-	$(CC) $(CFLAGS) -I $(HEADERS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(LIBFT):
 	make -C libft
