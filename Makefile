@@ -6,21 +6,16 @@
 #    By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 02:19:35 by tlassere          #+#    #+#              #
-#    Updated: 2024/01/24 02:19:35 by tlassere         ###   ########.fr        #
+#    Updated: 2024/01/25 01:12:34 by bcheronn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES = 	sources/main.c
-
-OBJS = $(SOURCES:.c=.o)
-
-HEADERS = headers
-
-NAME = minishell
-LIBFT = libft/libft.a
-
-CFLAGS = -Wall -Wextra -Werror -g3
-CC = cc
+SOURCES	::= sources/main.c
+OBJS	::= $(SOURCES:.c=.o)
+HEADERS	::= headers
+NAME	::= minishell
+LIBFT	::= libft/libft.a
+CFLAGS	::= -Wall -Wextra -Werror
 
 all: $(NAME)
 
