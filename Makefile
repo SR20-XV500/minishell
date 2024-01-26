@@ -10,9 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-UTILS	::= sources/utils/ft_check_args_main.c
-
-SOURCES	::= sources/main.c \
+SOURCES ::= sources/
+T_UTILS	::= ft_check_args_main
+UTILS	::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
+SOURCES	::= $(SOURCES)main.c \
 			$(UTILS)
 OBJS	::= $(SOURCES:.c=.o)
 HEADERS	::= headers
