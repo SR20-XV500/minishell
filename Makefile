@@ -10,20 +10,23 @@
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES	::= sources/main.c
+SOURCES ::= sources/
+T_UTILS	::= ft_check_args_main
+UTILS	::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
+SOURCES	::= $(SOURCES)main.c \
+			$(UTILS)
 OBJS	::= $(SOURCES:.c=.o)
 HEADERS	::= headers
 NAME	::= minishell
 LIBFT	::= libft/libft.a
 CFLAGS	::= -Wall -Wextra -Werror
-
 all: $(NAME)
 
 .c.o :
 	$(CC) $(CFLAGS) -I $(HEADERS) -c -o $@ $<
 
 $(NAME): $(LIBFT) $(OBJS) $(HEADERS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C libft
