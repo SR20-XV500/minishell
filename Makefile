@@ -14,8 +14,11 @@ SOURCES 		::= sources/
 T_UTILS			::= ft_check_args_main \
 					ft_get_line
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
+T_FT_AST		::= ft_ast
+FT_AST			::= $(foreach buffer, $(T_FT_AST), $(SOURCES)ft_ast/$(buffer).c)
 SOURCES			::= $(SOURCES)main.c \
-					$(UTILS)
+					$(UTILS) \
+					$(FT_AST)
 OBJS			::= $(SOURCES:.c=.o)
 HEADERS			::= headers
 HEADERS_CONTENT	::= headers/minishell.h \

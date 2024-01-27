@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ast.h                                           :+:      :+:    :+:   */
+/*   ft_ast.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/27 18:05:03 by tlassere         ###   ########.fr       */
+/*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
+/*   Updated: 2024/01/27 18:12:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_AST_H
-# define FT_AST_H
+#include "minishell.h"
 
-# define AST_ADD_LEFT 0
-# define AST_ADD_RIGHT 1
-
-typedef enum e_token
+t_ast	*ft_ast(char *str)
 {
-	TO_MAIN,
-	TO_PIPE,
-	TO_CMD
-}	t_token;
+	t_ast	*begin;
 
-typedef struct s_ast
-{
-	t_token			type;
-	char			*content;	
-	struct s_ast	*left;
-	struct s_ast	*right;
-}	t_ast;
-
-#endif
+	begin = NULL;
+	(void)str;
+	return (begin);
+}
