@@ -6,13 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/27 02:09:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/27 02:17:56 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**ft_get_line(void)
+static char	**ft_get_line(void)
 {
 	char	**lines;
 	char	*curent_line;
