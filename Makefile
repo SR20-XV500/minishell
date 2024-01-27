@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 SOURCES ::= sources/
-T_UTILS	::= ft_check_args_main
+T_UTILS	::= ft_check_args_main \
+			ft_get_line
 UTILS	::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 SOURCES	::= $(SOURCES)main.c \
 			$(UTILS)
@@ -20,13 +21,14 @@ HEADERS	::= headers
 NAME	::= minishell
 LIBFT	::= libft/libft.a
 CFLAGS	::= -Wall -Wextra -Werror
+LDFLAGS	::= $(CFLAGS) -lreadline
 all: $(NAME)
 
 .c.o :
 	$(CC) $(CFLAGS) -I $(HEADERS) -c -o $@ $<
 
 $(NAME): $(LIBFT) $(OBJS) $(HEADERS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(LDFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C libft
