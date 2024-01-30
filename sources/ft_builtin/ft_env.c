@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/30 20:58:12 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:21:51 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,11 @@ void	ft_env_free(t_env *env)
 	if (env)
 	{
 		if (env->envp)
-		{
 			ft_tab_free(env->envp);
-			env->envp = NULL;
-		}
 		if (env->path)
-		{
 			free(env->path);
-			env->path = NULL;
-		}
+		env->path = NULL;
+		env->envp = NULL;
 	}
 }
 
