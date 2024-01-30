@@ -53,7 +53,7 @@ void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
-void	ft_free_tab(char **tabs);
+void	ft_tab_free(char **tabs);
 
 char	*ft_strdup(const char *s);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
@@ -69,7 +69,7 @@ char	*ft_uint_convert_base(unsigned int dec, char *base);
 char	*ft_bt8_convert_base(t_bt8 dec, char *base);
 char	*ft_strrev(char *s);
 char	**ft_split(char const *s, char c);
-char	**ft_dump_tab(char **tab);
+char	**ft_tab_dump(char **tab);
 
 int		ft_atoi(const char *nptr);
 int		ft_toupper(int c);
