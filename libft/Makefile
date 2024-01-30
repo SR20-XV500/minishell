@@ -57,6 +57,7 @@ SOURCES	::= ft_atoi.c \
 		  	ft_printf/sources/ft_printf_utils2.c \
 		  	ft_tab_dump.c \
 		  	ft_tab_free.c\
+			ft_tab_len.c \
 		  	ft_lstnew.c \
 			ft_lstadd_front.c \
 			ft_lstsize.c \
