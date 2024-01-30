@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/27 02:17:56 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:51:39 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_use_line(void)
 	while (lines)
 	{
 		ft_use_current_line(lines);
-		ft_free_tab(lines);
+		ft_tab_free(lines);
 		lines = ft_get_line();
 	}
 }
