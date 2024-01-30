@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:47:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/30 16:53:31 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:21:41 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_ENV_H
 
 # define D_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-# define ENV_SUCCES 0
+# define ENV_SUCCESS 0
 # define ENV_FAIL 1
 
 typedef struct s_env
