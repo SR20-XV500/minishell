@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_ast.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 02:16:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/27 17:45:31 by tlassere         ###   ########.fr       */
+/*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
+/*   Updated: 2024/01/27 18:12:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+t_ast	*ft_ast(char *str)
 {
-	ft_check_args_main(argc);
-	ft_use_line();
-	(void)envp;
-	(void)argv;
-	return (0);
+	t_ast	*begin;
+
+	begin = NULL;
+	(void)str;
+	return (begin);
 }

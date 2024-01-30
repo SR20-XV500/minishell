@@ -10,23 +10,31 @@
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES ::= sources/
-T_UTILS	::= ft_check_args_main
-UTILS	::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
-SOURCES	::= $(SOURCES)main.c \
-			$(UTILS)
-OBJS	::= $(SOURCES:.c=.o)
-HEADERS	::= headers
-NAME	::= minishell
-LIBFT	::= libft/libft.a
-CFLAGS	::= -Wall -Wextra -Werror
+SOURCES 		::= sources/
+T_UTILS			::= ft_check_args_main \
+					ft_get_line
+UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
+T_FT_AST		::= ft_ast
+FT_AST			::= $(foreach buffer, $(T_FT_AST), $(SOURCES)ft_ast/$(buffer).c)
+SOURCES			::= $(SOURCES)main.c \
+					$(UTILS) \
+					$(FT_AST)
+OBJS			::= $(SOURCES:.c=.o)
+HEADERS			::= headers
+HEADERS_CONTENT	::= headers/minishell.h \
+					headers/utils.h \
+					headers/ft_ast.h
+NAME			::= minishell
+LIBFT			::= libft/libft.a
+CFLAGS			::= -Wall -Wextra -Werror
+LDFLAGS			::= $(CFLAGS) -lreadline
 all: $(NAME)
 
 .c.o :
 	$(CC) $(CFLAGS) -I $(HEADERS) -c -o $@ $<
 
-$(NAME): $(LIBFT) $(OBJS) $(HEADERS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(LIBFT) $(OBJS) $(HEADERS_CONTENT)
+	$(CC) $(LDFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C libft
