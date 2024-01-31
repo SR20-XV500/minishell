@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/31 13:27:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/31 21:07:03 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,32 @@ int	ft_env_update(t_env *env, const char *name, char *all_str)
 	}
 	return (ret);
 }
+
+/***
+ * @param env environement variable
+ * @param all_str all string put in env
+*/
+/*
+int	ft_env_add(t_env *env, char *all_str)
+{
+	int		ret;
+	char	*name;
+
+	ret = ENV_FAIL;
+	if (env && all_str)
+	{
+		name = ft_env_get_name(all_str);
+		if (name && ft_env_get_pos(*env, name) != -1)
+		{
+			ret = ENV_SUCCESS;
+				
+		}
+		if (name == NULL)
+			ret = MALLOC_FAIL;
+		else
+			ret = ENV_FAIL;
+		free(name);
+	}
+	return (ret);
+}
+*/

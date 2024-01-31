@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:57:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/31 13:32:57 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:41:35 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,19 @@ char	*ft_env_get_content(t_env env, const char *name)
 	else
 		content = ft_calloc(1, sizeof(char));
 	return (content);
+}
+
+char	*ft_env_get_name(const char *all_str)
+{
+	char	*name;
+
+	name = NULL;
+	if (all_str)
+	{
+		if (ft_strchr(all_str, '='))
+			name = ft_substr(all_str, 0, ft_strchr(all_str, '=') - all_str);
+		else
+			name = ft_strdup(all_str);
+	}
+	return (name);
 }
