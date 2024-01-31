@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/30 22:21:18 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:27:28 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param name he used to get pos but no free
  * @param all_str full line of the path, free if table is deleted
 */
-int	ft_env_update(t_env *env, char *name, char *all_str)
+int	ft_env_update(t_env *env, const char *name, char *all_str)
 {
 	int	ret;
 	int	pos;
