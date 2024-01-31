@@ -19,6 +19,7 @@
 # include "./get_next_line.h"
 # include "./ft_printf/headers/ft_printf.h"
 
+# define MEMORY_SET_BECAUSE_NO_MENORY_FRESH 69
 # define MALLOC_FAIL -12
 
 typedef struct s_list
