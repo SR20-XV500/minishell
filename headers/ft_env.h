@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:47:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/01 13:29:51 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:05:50 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define ENV_UPDATE_SUCCESS 0
 # define ENV_UPDATE_FAIL 1
 # define ENV_UPDATE_NONE 2
+# define ENV_EXISTING_VARIABLE 3
+# define ENV_BAD_PARAMETER 4
 
 typedef struct s_env
 {
