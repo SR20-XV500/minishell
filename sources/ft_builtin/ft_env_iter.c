@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/01 20:43:42 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/01 23:01:44 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,12 @@ int	ft_env_update(t_env *env, const char *name, const char *all_str)
 	return (ret);
 }
 
-
 static int	ft_env_add_content(t_env *env, const char *all_str)
 {
 	int		ret;
 	char	**table;
 
-	ret = MALLOC_FAIL;	
+	ret = MALLOC_FAIL;
 	table = ft_tab_join(env->envp, all_str);
 	if (table)
 	{
@@ -87,20 +86,27 @@ int	ft_env_add(t_env *env, const char *all_str)
 	return (ret);
 }
 
-//int	ft_env_del(t_env *env, const char *name)
-//{
-//	int	ret;
-//	int	pos;
+int	ft_env_del(t_env *env, const char *name)
+{
+	char	**buffer;
+	int		ret;
+	int		pos;
 
-//	ret = ENV_BAD_PARAMETER;
-//	if (env && name)
-//	{
-//		ret = 
-//		pos = ft_env_get_pos(*env, name);
-//		if (pos != -1)
-//		{
-			
-//		}
-//	}
-//	return (ret);
-//}
+	ret = ENV_BAD_PARAMETER;
+	if (env && name)
+	{
+		ret = ENV_NOT_EXISTING_VARIABLE;
+		pos = ft_env_get_pos(*env, name);
+		if (pos != -1)
+		{
+			ret = MALLOC_FAIL;
+			buffer = ft_tab_del(env->envp, pos);
+			if (buffer)
+			{
+				ret = ENV_SUCCESS;
+				env->envp = buffer;
+			}
+		}
+	}
+	return (ret);
+}
