@@ -68,7 +68,8 @@ SOURCES	::= ft_atoi.c \
 			ft_lstiter.c \
 			ft_lstmap.c \
 			ft_tab_join.c \
-			ft_tab_dump_join.c
+			ft_tab_dump_join.c \
+			ft_tab_del.c
 OBJS 	::= $(SOURCES:.c=.o)
 NAME 	::= libft.a
 CFLAGS	::= -Wall -Wextra -Werror

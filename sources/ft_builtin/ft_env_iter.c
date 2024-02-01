@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/01 20:14:16 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:43:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static int	ft_env_add_content(t_env *env, const char *all_str)
 	if (table)
 	{
 		ret = ENV_SUCCESS;
-		ft_tab_free(env->envp);
 		env->envp = table;
 	}
 	return (ret);

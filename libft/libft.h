@@ -76,6 +76,7 @@ int		ft_tab_len(char **tab);
 char	**ft_tab_dump(char **tab);
 char	**ft_tab_join(char **tab, const char *el);
 char	**ft_tab_dump_join(char *const *tab, const char *el);
+char	**ft_tab_del(char **tab, int index);
 char	**ft_split(char const *s, char c);
 
 int		ft_toupper(int c);
