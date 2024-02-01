@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/30 22:21:18 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/01 23:01:44 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,98 @@
 /**
  * @param env environement variable
  * @param name he used to get pos but no free
- * @param all_str full line of the path, free if table is deleted
+ * @param all_str full line of the path, this variable are dump
+ * @return
+ * MALLOC_FAIL;
+ * ENV_UPDATE_FAIL -> if arguments is bad;
+ * ENV_UPDATE_SUCCESS;
+ * ENV_UPDATE_NONE -> if variable don't existe
 */
-int	ft_env_update(t_env *env, char *name, char *all_str)
+int	ft_env_update(t_env *env, const char *name, const char *all_str)
 {
-	int	ret;
-	int	pos;
+	int		ret;
+	int		pos;
+	char	*new_str;	
 
 	ret = ENV_UPDATE_FAIL;
 	if (name && all_str)
 	{
 		ret = ENV_UPDATE_SUCCESS;
 		pos = ft_env_get_pos(*env, name);
-		if (pos != -1)
+		new_str = ft_strdup(all_str);
+		if (new_str == NULL)
+			ret = MALLOC_FAIL;
+		else if (pos != -1)
 		{
 			free(env->envp[pos]);
-			env->envp[pos] = all_str;
+			env->envp[pos] = new_str;
 		}
 		else
 			ret = ENV_UPDATE_NONE;
+	}
+	return (ret);
+}
+
+static int	ft_env_add_content(t_env *env, const char *all_str)
+{
+	int		ret;
+	char	**table;
+
+	ret = MALLOC_FAIL;
+	table = ft_tab_join(env->envp, all_str);
+	if (table)
+	{
+		ret = ENV_SUCCESS;
+		env->envp = table;
+	}
+	return (ret);
+}
+
+/**
+ * @param env environement variable
+ * @param all_str dump to add in table
+ */
+int	ft_env_add(t_env *env, const char *all_str)
+{
+	int		ret;
+	char	*name;
+
+	ret = ENV_BAD_PARAMETER;
+	if (env && all_str)
+	{
+		name = ft_env_get_name(all_str);
+		if (name && ft_env_get_pos(*env, name) == -1)
+			ret = ft_env_add_content(env, all_str);
+		else if (name == NULL)
+			ret = MALLOC_FAIL;
+		else
+			ret = ENV_EXISTING_VARIABLE;
+		free(name);
+	}
+	return (ret);
+}
+
+int	ft_env_del(t_env *env, const char *name)
+{
+	char	**buffer;
+	int		ret;
+	int		pos;
+
+	ret = ENV_BAD_PARAMETER;
+	if (env && name)
+	{
+		ret = ENV_NOT_EXISTING_VARIABLE;
+		pos = ft_env_get_pos(*env, name);
+		if (pos != -1)
+		{
+			ret = MALLOC_FAIL;
+			buffer = ft_tab_del(env->envp, pos);
+			if (buffer)
+			{
+				ret = ENV_SUCCESS;
+				env->envp = buffer;
+			}
+		}
 	}
 	return (ret);
 }

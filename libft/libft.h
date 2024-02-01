@@ -19,6 +19,7 @@
 # include "./get_next_line.h"
 # include "./ft_printf/headers/ft_printf.h"
 
+# define MEMORY_SET_BECAUSE_NO_MENORY_FRESH 69
 # define MALLOC_FAIL -12
 
 typedef struct s_list
@@ -73,6 +74,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 void	ft_tab_free(char **tabs);
 int		ft_tab_len(char **tab);
 char	**ft_tab_dump(char **tab);
+char	**ft_tab_join(char **tab, const char *el);
+char	**ft_tab_dump_join(char *const *tab, const char *el);
+char	**ft_tab_del(char **tab, int index);
 char	**ft_split(char const *s, char c);
 
 int		ft_toupper(int c);

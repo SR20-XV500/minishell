@@ -6,20 +6,20 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/30 21:21:51 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:35:06 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	ft_env_init(char **envp)
+t_env	ft_env_init(const char **envp)
 {
 	t_env	env;
 
 	ft_bzero(&env, sizeof(t_env));
 	if (envp)
 	{
-		env.envp = ft_tab_dump(envp);
+		env.envp = ft_tab_dump((char **)envp);
 		env.path = ft_strdup(D_PATH);
 	}
 	return (env);
