@@ -6,13 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 19:51:45 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/01 12:51:35 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:00:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**ft_tab_make(const char **tab)
+static char	**ft_tab_make(char *const *tab)
 {
 	char	**new_tab;
 	int		len;
@@ -26,7 +26,7 @@ static char	**ft_tab_make(const char **tab)
 	return (new_tab);
 }
 
-static int	ft_tab_insert(char **new_tab, const char **old_tab, const char *el)
+static int	ft_tab_insert(char **new_tab, char *const *old_tab, const char *el)
 {
 	int				ret;
 	unsigned int	i;
@@ -48,7 +48,7 @@ static int	ft_tab_insert(char **new_tab, const char **old_tab, const char *el)
 	return (ret);
 }
 
-char	**ft_tab_join(const char **tab, const char *el)
+char	**ft_tab_join(char *const *tab, const char *el)
 {
 	char	**new_tab;
 

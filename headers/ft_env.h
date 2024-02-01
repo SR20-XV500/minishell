@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:47:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/31 21:07:24 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:29:51 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*ft_env_get_content(t_env env, const char *name);
 char	*ft_env_get_name(const char *all_str);
 int		ft_env_check(t_env *env);
 int		ft_env_get_pos(t_env env, const char *name);
-int		ft_env_update(t_env *env, const char *name, char *all_str);
-int		ft_env_add(t_env *env, char *all_str);
+int		ft_env_update(t_env *env, const char *name, const char *all_str);
+int		ft_env_add(t_env *env, const char *all_str);
 t_env	ft_env_init(const char **envp);
 
 #endif
