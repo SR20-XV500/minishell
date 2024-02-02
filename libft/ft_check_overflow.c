@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 19:13:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/02 20:26:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/02 23:03:04 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_check_overflow(const char *str, long long nbr)
 			nbr /= 10;
 			i--;
 		}
-		if (ft_strchr("+-", str[i]) || ft_abs((int)(nbr % 10)) + '0' == str[i])
+		if ((ft_strchr("+-", str[i]) || ft_abs((int)(nbr % 10)) + '0' == str[i])
+			&& nbr < 10 && nbr > -10 && i == 0)
 			ret = SUCCESS;
 	}
 	return (ret);
