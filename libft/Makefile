@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 SOURCES	::= ft_atoi.c \
+			ft_atoll.c \
 		  	ft_bzero.c \
 		  	ft_isalnum.c \
 		  	ft_isalpha.c \
@@ -69,7 +70,8 @@ SOURCES	::= ft_atoi.c \
 			ft_lstmap.c \
 			ft_tab_join.c \
 			ft_tab_dump_join.c \
-			ft_tab_del.c
+			ft_tab_del.c \
+			ft_check_overflow.c
 OBJS 	::= $(SOURCES:.c=.o)
 NAME 	::= libft.a
 CFLAGS	::= -Wall -Wextra -Werror

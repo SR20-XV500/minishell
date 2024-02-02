@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_env_initial.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 02:16:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/02 16:59:05 by tlassere         ###   ########.fr       */
+/*   Created: 2024/02/02 19:28:56 by tlassere          #+#    #+#             */
+/*   Updated: 2024/02/02 19:28:58 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
-int	main(int argc, char **argv, const char **envp)
+int	ft_env_init_value(t_env *env)
 {
-	t_env	env;
+	int	ret;
 
-	//ft_check_args_main(argc);
-	//ft_use_line();
-	env = ft_env_init(envp);
-	ft_printf("%w", env.envp);
-	ft_env_free(&env);
-	(void)argc;
-	(void)argv;
-	return (0);
+	ret = MALLOC_FAIL;
+	if (env)
+	{
+		if (ft_env_init_shlvl(env) == ENV_SUCCESS)
+			ret = ENV_SUCCESS;
+	}
+	return (ret);
 }

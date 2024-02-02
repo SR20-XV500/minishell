@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_check_overflow.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 02:16:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/02 16:59:05 by tlassere         ###   ########.fr       */
+/*   Created: 2024/02/02 19:13:37 by tlassere          #+#    #+#             */
+/*   Updated: 2024/02/02 20:26:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-int	main(int argc, char **argv, const char **envp)
+int	ft_check_overflow(const char *str, long long nbr)
 {
-	t_env	env;
+	size_t	i;
+	int		ret;
 
-	//ft_check_args_main(argc);
-	//ft_use_line();
-	env = ft_env_init(envp);
-	ft_printf("%w", env.envp);
-	ft_env_free(&env);
-	(void)argc;
-	(void)argv;
-	return (0);
+	ret = BAD_PARAMETER;
+	if (str && *str)
+	{
+		ret = OVERFLOW;
+		i = ft_strlen(str) - 1;
+		while (ft_abs((int)(nbr % 10)) + '0' == str[i] && i)
+		{
+			nbr /= 10;
+			i--;
+		}
+		if (ft_strchr("+-", str[i]) || ft_abs((int)(nbr % 10)) + '0' == str[i])
+			ret = SUCCESS;
+	}
+	return (ret);
 }

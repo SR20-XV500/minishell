@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:47:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/01 23:06:10 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:12:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_ENV_H
 
 # define D_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+# define W_SH "minishell: warning: shell level (%d) too high, resetting to 1\n"
 # define ENV_SUCCESS 0
 # define ENV_FAIL 1
 # define ENV_UPDATE_SUCCESS 0
@@ -37,6 +38,9 @@ int		ft_env_get_pos(t_env env, const char *name);
 int		ft_env_update(t_env *env, const char *name, const char *all_str);
 int		ft_env_add(t_env *env, const char *all_str);
 int		ft_env_del(t_env *env, const char *name);
+int		ft_env_init_value(t_env *env);
 t_env	ft_env_init(const char **envp);
+int		ft_env_init_value(t_env *env);
+int		ft_env_init_shlvl(t_env *env);
 
 #endif

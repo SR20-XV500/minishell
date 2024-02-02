@@ -16,7 +16,7 @@ T_UTILS			::= ft_check_args_main \
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_AST		::= ft_ast
 FT_AST			::= $(foreach buffer, $(T_FT_AST), $(SOURCES)ft_ast/$(buffer).c)
-T_FT_BUILTIN	::= ft_env ft_env_get ft_env_iter
+T_FT_BUILTIN	::= ft_env ft_env_get ft_env_iter ft_env_initial ft_env_initial_shlvl
 FT_BUILTIN		::= $(foreach buffer, $(T_FT_BUILTIN), $(SOURCES)ft_builtin/$(buffer).c)
 SOURCES			::= $(SOURCES)main.c $(UTILS) $(FT_AST) $(FT_BUILTIN)
 OBJS			::= $(SOURCES:.c=.o)
