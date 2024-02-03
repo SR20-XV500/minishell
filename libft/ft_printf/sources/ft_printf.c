@@ -52,55 +52,53 @@ static int	ft_get_fd(const char *format, va_list arg, size_t *i, int old_fd)
 	return (fd);
 }
 
-int	ft_printf(const char *format, ...)
+static	int ft_print_content(int change_fd, int fd, const char *format, va_list args)
 {
 	int		size;
 	int		tmp;
-	int		fd;
 	size_t	i;
-	va_list	args;
 
-	if (format == NULL)
-		return (-1);
 	i = 0;
 	size = 0;
-	fd = 1;
-	va_start(args, format);
 	while (format[i])
 	{
-		fd = ft_get_fd(format + i, args, &i, fd);
-		if (format[i] == '\0')
-			break ;
+		if (change_fd)
+		{
+			fd = ft_get_fd(format + i, args, &i, fd);
+			if (format[i] == '\0')
+				break ;
+		}
 		tmp = ft_print_arg(format + i, &size, args, fd);
 		if (tmp == -1
 			|| (tmp == -12 && ft_print_char(format[i], &size, fd) == -1))
 			return (-1);
 		i += 1 + (tmp != -12);
 	}
-	va_end(args);
 	return (size);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		tmp;
+
+	if (format == NULL)
+		return (-1);
+	va_start(args, format);
+	tmp = ft_print_content(1, 1, format, args);
+	va_end(args);
+	return (tmp);
 }
 
 int	ft_fprintf(int fd, const char *format, ...)
 {
-	int		size;
-	int		tmp;
-	size_t	i;
 	va_list	args;
+	int		tmp;
 
-	if (format == NULL || fd <= -1)
+	if (format == NULL)
 		return (-1);
-	i = 0;
-	size = 0;
 	va_start(args, format);
-	while (format[i])
-	{
-		tmp = ft_print_arg(format + i, &size, args, fd);
-		if (tmp == -1
-			|| (tmp == -12 && ft_print_char(format[i], &size, fd) == -1))
-			return (-1);
-		i += 1 + (tmp != -12);
-	}
+	tmp = ft_print_content(0, fd, format, args);
 	va_end(args);
-	return (size);
+	return (tmp);
 }
