@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 19:11:17 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/02 20:18:03 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:25:13 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static long long	ft_env_shlvl_succes(const char *buffer)
 		value = 1;
 	else if (value >= 999 && value < INT_MAX)
 	{
-		ft_printf(W_SH, value); //TODO: changer pour la sortie des erreurs
+		ft_fprintf(2, W_SH, value);
 		value = 1;
 	}
 	else if (value < 0)
