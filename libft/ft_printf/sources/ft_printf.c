@@ -52,7 +52,8 @@ static int	ft_get_fd(const char *format, va_list arg, size_t *i, int old_fd)
 	return (fd);
 }
 
-static	int ft_print_content(int change_fd, int fd, const char *format, va_list args)
+static int	ft_print_content(int change_fd, int fd,
+	const char *format, va_list args)
 {
 	int		size;
 	int		tmp;
