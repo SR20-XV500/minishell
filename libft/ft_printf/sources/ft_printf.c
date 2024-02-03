@@ -44,10 +44,10 @@ static int	ft_get_fd(const char *format, va_list arg, size_t *i, int old_fd)
 	int	fd;
 
 	fd = old_fd;
-	if (ft_strcmp_s2(format, "%fdp") == 0)
+	if (ft_strcmp_s2(format, "%o") == 0)
 	{
 		fd = va_arg(arg, int);
-		*i += 4;
+		*i += 2;
 	}
 	return (fd);
 }
@@ -68,13 +68,38 @@ int	ft_printf(const char *format, ...)
 	va_start(args, format);
 	while (format[i])
 	{
-		fd = ft_get_fd(format, args, &i, fd);
+		fd = ft_get_fd(format + i, args, &i, fd);
 		if (format[i] == '\0')
 			break ;
 		tmp = ft_print_arg(format + i, &size, args, fd);
-		if (tmp == -1 ||(tmp == -12 && ft_print_char(format[i], &size, fd) == -1))
+		if (tmp == -1
+			|| (tmp == -12 && ft_print_char(format[i], &size, fd) == -1))
 			return (-1);
-		i += 1 + tmp != -12;
+		i += 1 + (tmp != -12);
+	}
+	va_end(args);
+	return (size);
+}
+
+int	ft_fprintf(int fd, const char *format, ...)
+{
+	int		size;
+	int		tmp;
+	size_t	i;
+	va_list	args;
+
+	if (format == NULL || fd <= -1)
+		return (-1);
+	i = 0;
+	size = 0;
+	va_start(args, format);
+	while (format[i])
+	{
+		tmp = ft_print_arg(format + i, &size, args, fd);
+		if (tmp == -1
+			|| (tmp == -12 && ft_print_char(format[i], &size, fd) == -1))
+			return (-1);
+		i += 1 + (tmp != -12);
 	}
 	va_end(args);
 	return (size);

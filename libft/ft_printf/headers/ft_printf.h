@@ -16,5 +16,6 @@
 # include <stdarg.h>
 
 int	ft_printf(const char *format, ...);
+int	ft_fprintf(int fd, const char *format, ...);
 
 #endif
