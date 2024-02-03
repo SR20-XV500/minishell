@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/31 13:35:06 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:47:50 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_env	ft_env_init(const char **envp)
 	{
 		env.envp = ft_tab_dump((char **)envp);
 		env.path = ft_strdup(D_PATH);
+		if (ft_env_init_value(&env) != ENV_SUCCESS)
+			ft_env_free(&env);
 	}
 	return (env);
 }
