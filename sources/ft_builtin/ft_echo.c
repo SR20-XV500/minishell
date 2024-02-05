@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:14:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/05 20:54:44 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/05 21:18:12 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,22 @@ static int	ft_print_arg(char **argv)
 {
 	int	triger;
 	int	error;
+	int	first;
 
 	triger = 0;
 	error = 0;
+	first = 0;
 	while (*argv && error != -1)
 	{
 		if (ft_is_arg(*argv) == IS_NOT_ARG)
 			triger = 1;
 		if (triger)
+		{
+			if (first)
+				ft_printf(" ");
 			error = ft_printf("%s", *argv);
+			first = 1;
+		}
 		argv++;
 	}
 	return ((error == -1));
