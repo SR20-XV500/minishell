@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:40 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/05 16:26:21 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:58:23 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_signal(void)
 	sa_int.sa_flags = SA_SIGINFO;
 	sa_int.sa_sigaction = &ft_get_signal;
 	ft_memset(&sa_quit, 0, sizeof(struct sigaction));
-	sa_quit.sa_handler =  SIG_IGN;
+	sa_quit.sa_handler = SIG_IGN;
 	if (sigaction(SIGQUIT, &sa_quit, NULL) == -1)
 		ret = SIGNAL_CRASH;
 	if (sigaction(SIGINT, &sa_int, NULL) == -1)
