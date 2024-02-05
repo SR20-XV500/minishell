@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:40 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/05 13:05:57 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:42:13 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ static void	ft_get_signal(int signal, siginfo_t *info, void *ucontext)
 		ft_printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	if (signal == SIGQUIT)
+	{
+		rl_on_new_line();
 		rl_redisplay();
 	}
 	(void)ucontext;
