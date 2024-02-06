@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:14:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/05 21:18:12 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:58:35 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	ft_echo(char **argv, char **envp)
 	flag = IS_NOT_ARG;
 	if (argv)
 	{
+		argv++;
 		flag = ft_is_arg(argv[0]);
 		ft_print_arg(argv);
 		ret = SUCCESS;
