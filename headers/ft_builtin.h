@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/05 21:10:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:00:44 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # define IS_ARG 0
 # define IS_NOT_ARG 1
-
+# define CD_TO_MANY_ARGS 3
+# define CD_HOME_NOT_SET 4
 int	ft_echo(char **argv, char **envp);
 
 #endif
