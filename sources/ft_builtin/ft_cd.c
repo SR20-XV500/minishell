@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:09:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/06 18:33:43 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:36:55 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	ft_display_prompt(int status)
 {
 	if (status == CD_TO_MANY_ARGS)
-		fprintf(2, "minishell: cd: HOME not set");
+		ft_fprintf(2, "minishell: cd: HOME not set");
 	if (status == CD_HOME_NOT_SET)
-		fprintf(2, "minishell: cd: too many arguments");
+		ft_fprintf(2, "minishell: cd: too many arguments");
 }
 
 static int	ft_check_args(char **argv, char **envp, int *exit_code)
