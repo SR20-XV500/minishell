@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 02:16:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/05 13:12:01 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/07 00:46:55 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	main(int argc, char **argv, const char **envp)
 	}
 	(void)argc;
 	(void)argv;
+	(void)envp;
 	return (0);
 }
