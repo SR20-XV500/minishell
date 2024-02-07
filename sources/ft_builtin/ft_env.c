@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/07 13:41:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/07 20:36:19 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_env_free(t_env *env)
 		if (env->path)
 			free(env->path);
 		if (env->pwd)
-			free(env->pwd)
+			free(env->pwd);
 		env->path = NULL;
 		env->envp = NULL;
 		env->pwd = NULL;

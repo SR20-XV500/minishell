@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 SOURCES 		::= sources/
-T_UTILS			::= ft_check_args_main ft_get_line ft_signal
+T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_AST		::= ft_ast
 FT_AST			::= $(foreach buffer, $(T_FT_AST), $(SOURCES)ft_ast/$(buffer).c)

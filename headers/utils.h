@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/05 12:45:01 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:02:41 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@
 # define SIGNAL_CRASH 1
 
 void	ft_check_args_main(int argc);
+
 void	ft_use_line(void);
+
 int		ft_signal(void);
+
+void	ft_pwd_init(char **content);
+char	*ft_pwd_get(void);
 
 #endif
