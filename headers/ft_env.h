@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:47:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/02 19:12:21 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:33:43 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_env
 {
 	char	**envp;
 	char	*path;
+	char	*pwd;
 }	t_env;
 
 void	ft_env_free(t_env *env);

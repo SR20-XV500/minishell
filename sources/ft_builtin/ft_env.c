@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/02 17:47:50 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:41:23 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ void	ft_env_free(t_env *env)
 			ft_tab_free(env->envp);
 		if (env->path)
 			free(env->path);
+		if (env->pwd)
+			free(env->pwd)
 		env->path = NULL;
 		env->envp = NULL;
+		env->pwd = NULL;
 	}
 }
 
@@ -49,7 +52,7 @@ int	ft_env_check(t_env *env)
 		buffer = ENV_FAIL;
 	if (buffer == ENV_SUCCESS)
 	{
-		if (env->envp == NULL || env->path == NULL)
+		if (env->envp == NULL || env->path == NULL || env->pwd == NULL)
 		{
 			buffer = ENV_FAIL;
 			ft_env_free(env);
