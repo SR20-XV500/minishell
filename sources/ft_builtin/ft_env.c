@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/08 00:01:41 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:27:23 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ t_env	*ft_env_init(const char **envp)
 			ft_bzero(env, sizeof(t_env));
 			env->envp = ft_tab_dump((char **)envp);
 			env->path = ft_strdup(D_PATH);
-			if (ft_env_init_value(env) != ENV_SUCCESS)
+			if (ft_env_init_value(env) != ENV_SUCCESS
+				|| ft_env_check(env) == ENV_FAIL)
+			{
 				ft_env_free(env);
-			if (ft_env_check(env) == ENV_FAIL)
 				env = NULL;
+			}
 		}
 	}
 	return (env);
@@ -55,16 +57,11 @@ int	ft_env_check(t_env *env)
 {
 	int	buffer;
 
-	buffer = ENV_SUCCESS;
-	if (env == NULL)
-		buffer = ENV_FAIL;
-	if (buffer == ENV_SUCCESS)
+	buffer = ENV_FAIL;
+	if (env)
 	{
-		if (env->envp == NULL || env->path == NULL || env->pwd == NULL)
-		{
-			buffer = ENV_FAIL;
-			ft_env_free(env);
-		}
+		if (env->envp && env->path && env->pwd)
+			buffer = ENV_SUCCESS;
 	}
 	return (buffer);
 }
