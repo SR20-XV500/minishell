@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env_initial.c                                   :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 19:28:56 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/08 14:23:58 by tlassere         ###   ########.fr       */
+/*   Created: 2024/02/07 11:48:43 by tlassere          #+#    #+#             */
+/*   Updated: 2024/02/07 21:21:23 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_env_init_pwd(t_env *env)
+static int	ft_pwd_is_arg(char **argv)
 {
-	char	*pwd;
-	int		ret;
+	int	ret;
 
-	ret = MALLOC_FAIL;
-	pwd = getcwd(NULL, 0);
-	if (pwd)
+	ret = IS_NOT_ARG;
+	if (argv && *argv)
 	{
-		ret = ENV_SUCCESS;
-		env->pwd = pwd;
+		argv++;
+		if (argv && (*argv)[0] == '-' && (*argv)[1] != '\0')
+			ret = IS_ARG;
 	}
 	return (ret);
 }
 
-int	ft_env_init_value(t_env *env)
+int	ft_pwd(char **argv, char **envp)
 {
 	int	ret;
 
-	ret = MALLOC_FAIL;
-	(void)ft_env_init_pwd;
-	if (env)
+	ret = 0;
+	if (ft_pwd_is_arg(argv) == IS_ARG)
 	{
-		if (ft_env_init_shlvl(env) == ENV_SUCCESS
-			&& ft_env_init_pwd(env) == ENV_SUCCESS)
-			ret = ENV_SUCCESS;
+		ft_fprintf(2, "minishell: pwd: not accept option");
+		ret = 2;
 	}
+	else
+		ft_printf("%s\n", ft_pwd_get());
+	(void)envp;
 	return (ret);
 }
