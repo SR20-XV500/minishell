@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:09:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/06 18:36:55 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/08 22:39:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	ft_cd(char **argv, char **envp)
 	exit_code = 0;
 	if (ft_check_args(argv, envp, &exit_code) == SUCCESS)
 	{
-		
 	}
 	return (exit_code);
 }
