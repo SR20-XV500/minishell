@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 02:16:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/09 16:53:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:05:40 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv, const char **envp)
 {
 	t_env	*env;
 
-	ft_check_args_main(argc);
+	//ft_check_args_main(argc);
 	env = NULL;
 	if (ft_signal() == SIGNAL_HANDLING)
 	{
@@ -24,8 +24,10 @@ int	main(int argc, char **argv, const char **envp)
 		if (env)
 		{
 			ft_pwd_init(&env->pwd);
-			ft_printf(ft_pwd_get());
-			ft_use_line();
+			ft_cd(argv, env->envp);
+			//printf("gwd : %s\n", getcwd(NULL, 0));
+			ft_printf("pwd: %s\n", ft_pwd_get());
+			//ft_use_line();
 			ft_env_free(env);
 		}
 	}

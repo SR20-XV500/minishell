@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:57:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/06 18:18:16 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:33:05 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,26 @@ int	ft_env_get_pos(t_env env, const char *name)
 	return (ft_env_tab_get_pos(env.envp, name));
 }
 
-char	*ft_env_get_content(t_env env, const char *name)
+char	*ft_env_tab_get_content(char **envp, const char *name)
 {
 	char	*content;
 	int		pos;
 
 	content = NULL;
-	pos = ft_env_get_pos(env, name);
+	pos = ft_env_tab_get_pos(envp, name);
 	if (pos != -1)
 	{
-		content = ft_substr(env.envp[pos], ft_strlen(name) + 1,
-				ft_strlen(env.envp[pos]));
+		content = ft_substr(envp[pos], ft_strlen(name) + 1,
+				ft_strlen(envp[pos]));
 	}
 	else
 		content = ft_calloc(1, sizeof(char));
 	return (content);
+}
+
+char	*ft_env_get_content(t_env env, const char *name)
+{
+	return (ft_env_tab_get_content(env.envp, name));
 }
 
 char	*ft_env_get_name(const char *all_str)
