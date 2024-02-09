@@ -26,6 +26,10 @@
 # define OVERFLOW 4
 # define SUCCESS 0
 # define FAIL 1
+# define CMP_EGAL 0
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 typedef struct s_list
 {

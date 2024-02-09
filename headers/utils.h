@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/07 21:02:41 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:50:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ int		ft_signal(void);
 
 void	ft_pwd_init(char **content);
 char	*ft_pwd_get(void);
+
+char	*ft_path_parser(const char *path, const char *change_path);
+char	*ft_path_tab_to_str(char **pwd);
 
 #endif

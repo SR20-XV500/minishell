@@ -15,7 +15,8 @@ T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_AST		::= ft_ast
 FT_AST			::= $(foreach buffer, $(T_FT_AST), $(SOURCES)ft_ast/$(buffer).c)
-T_FT_BUILTIN	::= ft_env ft_env_get ft_env_iter ft_env_initial ft_env_initial_shlvl ft_echo ft_pwd ft_cd ft_path_parser
+T_FT_BUILTIN	::= ft_env ft_env_get ft_env_iter ft_env_initial ft_env_initial_shlvl ft_echo ft_pwd ft_cd ft_path_parser \
+					ft_path_parser_join
 FT_BUILTIN		::= $(foreach buffer, $(T_FT_BUILTIN), $(SOURCES)ft_builtin/$(buffer).c)
 SOURCES			::= $(SOURCES)main.c $(UTILS) $(FT_AST) $(FT_BUILTIN)
 OBJS			::= $(SOURCES:.c=.o)
