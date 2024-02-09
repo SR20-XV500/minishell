@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:09:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/09 18:36:56 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/09 20:06:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static int	ft_check_args(char **argv, char **envp, int *exit_code)
 		arg_len = ft_tab_len(argv);
 		if (arg_len > 2)
 			ret = CD_TO_MANY_ARGS;
-		if (arg_len == 1 && ft_env_tab_get_pos(envp, "HOME") == -1)
+		if ((arg_len == 1 || (arg_len == 2 && argv[1][0] == '~'))
+			&& ft_env_tab_get_pos(envp, "HOME") == -1)
 			ret = CD_HOME_NOT_SET;
 	}
 	if (ret != SUCCESS)
@@ -63,9 +64,19 @@ char	*ft_get_path(char **argv, char **envp, char **used_path)
 	char	*path;
 
 	path = NULL;
-	path = ft_path_parser(ft_pwd_get(), argv[1]);
-	*used_path = ft_strdup(argv[1]);
-	(void)envp;
+	if (ft_tab_len(argv) == 1)
+	{
+		path = ft_env_tab_get_content(envp, "HOME");
+		*used_path = ft_strdup(path);
+	}
+	else
+	{
+		if (argv[1][0] == '/')
+			path = ft_strdup(argv[1]);
+		else
+			path = ft_path_parser(ft_pwd_get(), argv[1]);
+		*used_path = ft_strdup(argv[1]);
+	}
 	return (path);
 }
 
