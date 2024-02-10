@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ast.h                                           :+:      :+:    :+:   */
+/*   ft_parsing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/27 18:05:03 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/10 23:56:06 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_AST_H
-# define FT_AST_H
+#ifndef FT_PARSING_H
+# define FT_PARSING_H
 
-# define AST_ADD_LEFT 0
-# define AST_ADD_RIGHT 1
+# include "ft_env.h"
 
-typedef enum e_token
+typedef struct s_data
 {
-	TO_MAIN,
-	TO_PIPE,
-	TO_CMD
-}	t_token;
+	t_env	*env;
+}	t_data;
 
-typedef struct s_ast
-{
-	t_token			type;
-	char			*content;	
-	struct s_ast	*left;
-	struct s_ast	*right;
-}	t_ast;
+t_data	*ft_data_get(char *str, const char **envp);
+void	ft_data_free(t_data **data);
 
 #endif
