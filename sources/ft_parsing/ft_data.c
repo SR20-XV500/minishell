@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing.c                                       :+:      :+:    :+:   */
+/*   ft_data.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/10 23:56:59 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:32:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_data_free(t_data **data)
 			ft_env_free((*data)->env);
 			(*data)->env = NULL;
 		}
+		if ((*data)->words)
+			ft_word_lst_clear(*data);
 		free(*data);
 		*data = NULL;
 	}
@@ -43,12 +45,12 @@ static t_data	*ft_data_make(const char **envp)
 	return (data);
 }
 
-t_data *ft_data_get(char *str, const char **envp)
+t_data	*ft_data_get(const char **envp)
 {
 	t_data	*data;
 
 	data = NULL;
-	if (str && envp)
+	if (envp)
 	{
 		data = ft_data_make(envp);
 	}
