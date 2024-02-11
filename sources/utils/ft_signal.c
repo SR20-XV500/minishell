@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:40 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/05 17:58:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:35:38 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // TODO: with SIGINT return status code 130
+// TODO: manage rl_clear_history on signal exit
 
 static void	ft_get_signal(int signal, siginfo_t *info, void *ucontext)
 {
