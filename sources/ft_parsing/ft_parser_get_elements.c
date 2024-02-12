@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:17:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 15:18:59 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:37:29 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,27 @@ static int	ft_parser_add_delimitor(t_data *data, const char *str, size_t *i)
 
 static size_t	ft_parser_get_index(const char *str)
 {
+	char	*ptr_buffer;
 	size_t	index;
 
 	index = 0;
-	if (str)
+	while (str && *(str + index)
+		&& ft_strchr("|<> \t\v\f", *(str + index)) == NULL)
 	{
-		while (*(str + index)
-			&& ft_strchr("|<> \t\v\f", *(str + index)) == NULL)
+		ptr_buffer = NULL;
+		if (str[index] == '\"')
 		{
-			if (str[index] == '\"' && ft_strchr(str + index + 1, '\"'))
-				index += ft_strchr(str + index + 1, '\"') - (str + index);
-			else if (str[index] == '\'' && ft_strchr(str + index + 1, '\''))
-				index += ft_strchr(str + index + 1, '\'') - (str + index);
-			index++;
+			ptr_buffer = ft_strchr(str + index + 1, '\"');
+			if (ptr_buffer)
+				index += ptr_buffer - (str + index);
 		}
+		else if (str[index] == '\'')
+		{
+			ptr_buffer = ft_strchr(str + index + 1, '\'');
+			if (ptr_buffer)
+				index += ptr_buffer - (str + index);
+		}
+		index++;
 	}
 	return (index);
 }
