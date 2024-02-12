@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/11 19:06:18 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/12 01:35:04 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define FT_PARSING_H
 
 # include "ft_env.h"
-# define DELEMITOR_PIPE
+
+# define PARSER_WORD 12
+# define PARSER_NO_WORD 13
 
 enum e_delemitor
 {
@@ -46,5 +48,6 @@ void	ft_word_lst_clear(t_data *data);
 void	ft_word_free(void *data);
 int		ft_word_add(t_data *data, const char *str, int type);
 t_list	*ft_word_lst_make(const char *str, int type);
+int		ft_parser(t_data *data, const char *str);
 
 #endif
