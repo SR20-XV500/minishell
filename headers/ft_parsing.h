@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 16:50:24 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/12 20:12:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@
 
 # define PARSER_WORD 12
 # define PARSER_NO_WORD 13
+# define PARSER_ERR_OP_NEWLINE 1
+# define PARSER_NEAR_PIPE 2
 
 enum e_delemiter
 {
+	D_NOT_SET,
 	D_PIPE,
 	D_HEREDOC,
 	D_INPUT,
 	D_OUTPUT_APPEND,
 	D_OUTPUT_NEW,
 	D_QUOTE_ONE,
-	D_QUOTE_TWO,
-	D_NOT_SET
+	D_QUOTE_TWO
 };
 
 typedef struct s_word
@@ -52,5 +54,7 @@ t_list	*ft_word_lst_make(const char *str, int type);
 
 int		ft_parser(t_data *data, const char *str);
 int		ft_parser_use_line(t_data *data, const char *str);
+
+int		ft_check_lst(t_data *data);
 
 #endif
