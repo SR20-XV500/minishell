@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 16:14:15 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 02:25:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:15:36by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,26 @@ static int	ft_parser_add_delimitor(t_data *data, const char *str, size_t *i)
 	return (status);
 }
 
+static size_t	ft_parser_get_index(const char *str)
+{
+	size_t	sub_index;
+
+	sub_index = 0;
+	if (str)
+	{
+		while (*(str + sub_index)
+			&& ft_strchr("|<> \t\v\f", *(str + sub_index)) == NULL)
+		{
+			if (str[sub_index] == '\"' && ft_strchr(str + sub_index + 1, '\"'))
+				sub_index += ft_strchr(str + sub_index + 1, '\"') - (str + sub_index);
+			else if (str[sub_index] == '\'' && ft_strchr(str + sub_index + 1, '\''))
+				sub_index += ft_strchr(str + sub_index + 1, '\'') - (str + sub_index);
+			sub_index++;
+		}
+	}
+	return (sub_index);
+}
+
 static int	ft_parser_get_word(char **get_word, const char *str, size_t *i)
 {
 	size_t	sub_index;
@@ -51,9 +71,7 @@ static int	ft_parser_get_word(char **get_word, const char *str, size_t *i)
 	if (get_word && str && i)
 	{
 		status = PARSER_NO_WORD;
-		while (*(str + sub_index)
-			&& ft_strchr("|<> \t\v\f\"\'", *(str + sub_index)) == NULL)
-			sub_index++;
+		sub_index = ft_parser_get_index(str);
 		if (sub_index > 0)
 		{
 			status = PARSER_WORD;
@@ -66,33 +84,7 @@ static int	ft_parser_get_word(char **get_word, const char *str, size_t *i)
 	return (status);
 }
 
-//static int	ft_parser_quote(char **get_word, const char *str, size_t *i)
-//{
-//	size_t	sub_index;
-//	int		status;
-
-//	sub_index = 0;
-//	status = BAD_PARAMETER;
-//	if (get_word && str && i)
-//	{
-//		status = PARSER_NO_WORD;
-//		while (*(str + sub_index)
-//			&& ft_strchr("|<> \t\v\f, *(str + sub_index)) == NULL)
-//			sub_index++;
-//		if (sub_index > 0)
-//		{
-//			status = PARSER_WORD;
-//			*get_word = ft_substr(str, 0, sub_index);
-//			if (*get_word == NULL)
-//				status = MALLOC_FAIL;
-//		}
-//		*i += sub_index;
-//	}	
-//	return (status);
-//}
-
-static int	ft_parser_put_word(t_data *data, const char *str,
-	size_t *i, int type)
+static int	ft_parser_put_word(t_data *data, const char *str, size_t *i)
 {
 	char	*word;
 	int		status;
@@ -101,11 +93,7 @@ static int	ft_parser_put_word(t_data *data, const char *str,
 	word = NULL;
 	if (data && str && i)
 	{
-		if (type == D_QUOTE)
-		{
-		}
-		else
-			status = ft_parser_get_word(&word, str, i);
+		status = ft_parser_get_word(&word, str, i);
 		if (status == PARSER_WORD)
 		{
 			status = ft_word_add(data, word, D_NOT_SET);
@@ -131,13 +119,7 @@ static int	ft_parser_use_line(t_data *data, const char *str)
 			i++;
 		buffer = ft_parser_add_delimitor(data, str + i, &i);
 		if (buffer != MALLOC_FAIL)
-		{
-			if (buffer == D_QUOTE)
-			{
-			}
-			else
-				buffer = ft_parser_put_word(data, str + i, &i);
-		}
+			buffer = ft_parser_put_word(data, str + i, &i);
 		if (buffer == MALLOC_FAIL)
 			ret = MALLOC_FAIL;
 	}
