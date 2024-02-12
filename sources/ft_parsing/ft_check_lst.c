@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:16:24 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 22:24:49 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:59:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	ft_check_error(int err)
 	}
 	else if (err & PARSER_NEAR_PIPE)
 	{
-
 	}
 	ft_printf("%s\n", print);
 }

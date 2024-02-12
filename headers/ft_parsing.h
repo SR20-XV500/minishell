@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 20:12:18 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:58:49 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 enum e_delemiter
 {
-	D_NOT_SET,
+	D_NOT_SET = 50,
 	D_PIPE,
 	D_HEREDOC,
 	D_INPUT,

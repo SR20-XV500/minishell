@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:17:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 16:51:38 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:59:17 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ft_parser_add_delimiter(t_data *data, const char *str, size_t *i)
 		status = ft_word_add(data, "<", D_INPUT);
 	else if (ft_strcmp_s2(str, ">") == CMP_EGAL)
 		status = ft_word_add(data, ">", D_OUTPUT_NEW);
-	if (status != MALLOC_FAIL && status != D_NOT_SET)
+	if (status == SUCCESS)
 		(*i)++;
 	return (status);
 }
@@ -95,7 +95,7 @@ static int	ft_parser_put_word(t_data *data, const char *str, size_t *i)
 
 	status = BAD_PARAMETER;
 	word = NULL;
-	if (data && str && i)
+	if (data && str && i && *str)
 	{
 		status = ft_parser_get_word(&word, str, i);
 		if (status == PARSER_WORD)
@@ -117,7 +117,7 @@ int	ft_parser_use_line(t_data *data, const char *str)
 	i = 0;
 	while (str[i] && ret == SUCCESS)
 	{
-		while (ft_strchr(" \t\v\f", str[i]))
+		while (str[i] && ft_strchr(" \t\v\f", str[i]))
 			i++;
 		buffer = ft_parser_add_delimiter(data, str + i, &i);
 		if (buffer != MALLOC_FAIL)
