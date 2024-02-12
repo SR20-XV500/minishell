@@ -6,20 +6,20 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:17:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 15:37:29 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:51:38 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_parser_add_delimitor(t_data *data, const char *str, size_t *i)
+static int	ft_parser_add_delimiter(t_data *data, const char *str, size_t *i)
 {
 	int	status;
 
 	status = D_NOT_SET;
 	if (ft_strcmp_s2(str, ">>") == CMP_EGAL)
 	{
-		status = ft_word_add(data, ">>", D_OUTPUT_APEND);
+		status = ft_word_add(data, ">>", D_OUTPUT_APPEND);
 		(*i)++;
 	}
 	else if (ft_strcmp_s2(str, "<<") == CMP_EGAL)
@@ -30,13 +30,10 @@ static int	ft_parser_add_delimitor(t_data *data, const char *str, size_t *i)
 	else if (ft_strcmp_s2(str, "|") == CMP_EGAL)
 		status = ft_word_add(data, "|", D_PIPE);
 	else if (ft_strcmp_s2(str, "<") == CMP_EGAL)
-		status = ft_word_add(data, "<", D_INTPUT);
+		status = ft_word_add(data, "<", D_INPUT);
 	else if (ft_strcmp_s2(str, ">") == CMP_EGAL)
-		status = ft_word_add(data, ">", D_OUTPUT);
-	else if (ft_strcmp_s2(str, "\"") == CMP_EGAL
-		|| ft_strcmp_s2(str, "\'") == CMP_EGAL)
-		status = D_QUOTE;
-	if (status != MALLOC_FAIL && status != D_QUOTE && status != D_NOT_SET)
+		status = ft_word_add(data, ">", D_OUTPUT_NEW);
+	if (status != MALLOC_FAIL && status != D_NOT_SET)
 		(*i)++;
 	return (status);
 }
@@ -122,7 +119,7 @@ int	ft_parser_use_line(t_data *data, const char *str)
 	{
 		while (ft_strchr(" \t\v\f", str[i]))
 			i++;
-		buffer = ft_parser_add_delimitor(data, str + i, &i);
+		buffer = ft_parser_add_delimiter(data, str + i, &i);
 		if (buffer != MALLOC_FAIL)
 			buffer = ft_parser_put_word(data, str + i, &i);
 		if (buffer == MALLOC_FAIL)

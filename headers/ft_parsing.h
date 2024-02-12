@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 15:19:31 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:50:24 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
 # define PARSER_WORD 12
 # define PARSER_NO_WORD 13
 
-enum e_delemitor
+enum e_delemiter
 {
 	D_PIPE,
 	D_HEREDOC,
-	D_INTPUT,
-	D_OUTPUT_APEND,
-	D_OUTPUT,
-	D_QUOTE,
+	D_INPUT,
+	D_OUTPUT_APPEND,
+	D_OUTPUT_NEW,
+	D_QUOTE_ONE,
+	D_QUOTE_TWO,
 	D_NOT_SET
 };
 
