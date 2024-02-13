@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 02:16:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/13 02:11:29 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:30:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int	main(int argc, char **argv, const char **envp)
 
 	ft_check_args_main(argc);
 	data = ft_data_get(envp);
-	if (data && ft_signal() == SIGNAL_HANDLING)
+	if (data)
 	{
-		ft_use_line(data);
+		if (ft_signal() == SIGNAL_HANDLING)
+			ft_use_line(data);
 		ft_data_free(&data);
 	}
 	(void)argc;
