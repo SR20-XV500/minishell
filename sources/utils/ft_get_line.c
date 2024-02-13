@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
 /*   Updated: 2024/02/13 14:55:27 by tlassere         ###   ########.fr       */
@@ -63,4 +63,5 @@ void	ft_use_line(t_data *data)
 		ft_tab_free(lines);
 		lines = ft_get_line();
 	}
+	rl_clear_history();
 }
