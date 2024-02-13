@@ -6,11 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/08 14:27:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:40:28 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// TODO: set default OLDPWD, set default PWD
 
 t_env	*ft_env_init(const char **envp)
 {

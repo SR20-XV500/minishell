@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ast.h                                           :+:      :+:    :+:   */
+/*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/27 18:05:03 by tlassere         ###   ########.fr       */
+/*   Created: 2024/02/11 16:14:15 by tlassere          #+#    #+#             */
+/*   Updated: 2024/02/13 14:10:12 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_AST_H
-# define FT_AST_H
+#include "minishell.h"
 
-# define AST_ADD_LEFT 0
-# define AST_ADD_RIGHT 1
-
-typedef enum e_token
+int	ft_parser(t_data *data, const char *str)
 {
-	TO_MAIN,
-	TO_PIPE,
-	TO_CMD
-}	t_token;
+	int	ret;
 
-typedef struct s_ast
-{
-	t_token			type;
-	char			*content;	
-	struct s_ast	*left;
-	struct s_ast	*right;
-}	t_ast;
-
-#endif
+	ret = BAD_PARAMETER;
+	if (data && str)
+	{
+		ret = ft_parser_use_line(data, str);
+		if (ret == SUCCESS)
+			ret = ft_check_lst(data);
+		if (ret == SUCCESS)
+			ret = ft_type_set(data);
+	}
+	return (ret);
+}

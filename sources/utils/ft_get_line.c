@@ -6,11 +6,21 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/11 19:40:47 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:55:27 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_print_word(t_list *lst)
+{
+	if (lst)
+	{
+		ft_printf("%s ---> %d\n", ((t_word *)lst->content)->word,
+			((t_word *)lst->content)->type);
+		ft_print_word(lst->next);
+	}
+}
 
 static char	**ft_get_line(void)
 {
@@ -27,7 +37,7 @@ static char	**ft_get_line(void)
 	return (lines);
 }
 
-static void	ft_use_current_line(char **lines)
+static void	ft_use_current_line(char **lines, t_data *data)
 {
 	size_t	i;
 
@@ -35,19 +45,21 @@ static void	ft_use_current_line(char **lines)
 	while (lines[i])
 	{
 		add_history(lines[i]);
-		printf("%s\n", lines[i]);
+		if (ft_parser(data, lines[i]) == SUCCESS)
+			ft_print_word(data->words);
+		ft_word_lst_clear(data);
 		i++;
 	}
 }
 
-void	ft_use_line(void)
+void	ft_use_line(t_data *data)
 {
 	char	**lines;
 
 	lines = ft_get_line();
 	while (lines)
 	{
-		ft_use_current_line(lines);
+		ft_use_current_line(lines, data);
 		ft_tab_free(lines);
 		lines = ft_get_line();
 	}

@@ -6,13 +6,14 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/09 17:50:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/13 01:59:28 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+# include "ft_parsing.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
@@ -22,7 +23,7 @@
 
 void	ft_check_args_main(int argc);
 
-void	ft_use_line(void);
+void	ft_use_line(t_data *data);
 
 int		ft_signal(void);
 

@@ -6,11 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:09:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/10 13:25:24 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:21:55 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// TODO: use CDPATH
 
 static void	ft_display_prompt(int status, char *path)
 {
