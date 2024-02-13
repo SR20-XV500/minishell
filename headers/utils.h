@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/13 01:59:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:45:54 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define UTILS_H
 
 # include "ft_parsing.h"
-# include <readline/readline.h>
 # include <readline/history.h>
+# include <readline/readline.h>
 # include <signal.h>
 
 # define SIGNAL_HANDLING 0
