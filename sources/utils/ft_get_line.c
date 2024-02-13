@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/13 02:09:50 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:55:27 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static void	ft_print_word(t_list *lst)
 {
 	if (lst)
 	{
-		ft_printf("%s\n", ((t_word *)lst->content)->word);
+		ft_printf("%s ---> %d\n", ((t_word *)lst->content)->word,
+			((t_word *)lst->content)->type);
 		ft_print_word(lst->next);
 	}
 }

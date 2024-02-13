@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/13 00:43:35 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:53:43 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,16 @@ enum e_delimiter
 	D_OUTPUT_NEW,
 	D_QUOTE_ONE,
 	D_QUOTE_TWO,
-	D_NEW_LINE
+	D_NEW_LINE,
+};
+
+enum e_type
+{
+	TY_NOT_SET = 70,
+	TY_ARG,
+	TY_CMD,
+	TY_PATH,
+	TY_DELIM_HEREDOC
 };
 
 typedef struct s_word
@@ -57,5 +66,7 @@ int		ft_parser(t_data *data, const char *str);
 int		ft_parser_use_line(t_data *data, const char *str);
 
 int		ft_check_lst(t_data *data);
+
+int		ft_type_set(t_data *data);
 
 #endif
