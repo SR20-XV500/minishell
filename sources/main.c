@@ -6,13 +6,11 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 02:16:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/13 02:10:56 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/13 02:11:29 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO: implement parser to readline
 
 int	main(int argc, char **argv, const char **envp)
 {
