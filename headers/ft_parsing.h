@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 22:58:49 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/13 00:43:35 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define PARSER_ERR_OP_NEWLINE 1
 # define PARSER_NEAR_PIPE 2
 
-enum e_delemiter
+enum e_delimiter
 {
 	D_NOT_SET = 50,
 	D_PIPE,
@@ -29,7 +29,8 @@ enum e_delemiter
 	D_OUTPUT_APPEND,
 	D_OUTPUT_NEW,
 	D_QUOTE_ONE,
-	D_QUOTE_TWO
+	D_QUOTE_TWO,
+	D_NEW_LINE
 };
 
 typedef struct s_word
