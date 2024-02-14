@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/14 15:45:54 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/14 22:38:03 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,8 @@ void	ft_pwd_change_content(char *str);
 
 char	*ft_path_parser(const char *path, const char *change_path);
 char	*ft_path_tab_to_str(char **pwd);
+
+int		ft_is_file(const char *path);
+int		ft_file_is_directory(const char *path);
 
 #endif
