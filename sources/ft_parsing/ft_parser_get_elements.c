@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser_get_elements.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:17:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/12 22:59:17 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:50:03 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static size_t	ft_parser_get_index(const char *str)
 	size_t	index;
 
 	index = 0;
-	while (str && *(str + index)
-		&& ft_strchr("|<> \t\v\f", *(str + index)) == NULL)
+	while (str && *(str + index) && ft_strchr("|<> \t\v\f", *(str
+				+ index)) == NULL)
 	{
 		ptr_buffer = NULL;
 		if (str[index] == '\"')
@@ -84,7 +84,7 @@ static int	ft_parser_get_word(char **get_word, const char *str, size_t *i)
 				status = MALLOC_FAIL;
 		}
 		*i += sub_index;
-	}	
+	}
 	return (status);
 }
 
