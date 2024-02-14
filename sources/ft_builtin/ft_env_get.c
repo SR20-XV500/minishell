@@ -6,56 +6,47 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:57:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/09 18:33:05 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/14 22:19:36 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_env_tab_get_pos(char **envp, const char *name)
-{
-	int				pos;
-	unsigned int	len;
-
-	pos = -1;
-	if (envp && name)
-	{
-		pos = 0;
-		len = ft_strlen(name);
-		while (envp[pos] && (ft_strcmp_s2(envp[pos], name)
-				|| envp[pos][len] != '='))
-			pos++;
-		if (envp[pos] == NULL)
-			pos = -1;
-	}
-	return (pos);
-}
 
 int	ft_env_get_pos(t_env env, const char *name)
 {
 	return (ft_env_tab_get_pos(env.envp, name));
 }
 
-char	*ft_env_tab_get_content(char **envp, const char *name)
+static char	*ft_env_embigous_variable(t_env env, const char *name)
 {
 	char	*content;
-	int		pos;
 
 	content = NULL;
-	pos = ft_env_tab_get_pos(envp, name);
-	if (pos != -1)
+	if (name)
 	{
-		content = ft_substr(envp[pos], ft_strlen(name) + 1,
-				ft_strlen(envp[pos]));
+		if (ft_strncmp("PATH", name, 5) == CMP_EGAL)
+		{
+			if (env.path)
+				content = ft_strdup(env.path);
+		}
+		else if (ft_strncmp("?", name, 2) == CMP_EGAL)
+			content = ft_itoa(env.exit_status);
+		else
+			content = ft_calloc(1, sizeof(char));
 	}
-	else
-		content = ft_calloc(1, sizeof(char));
 	return (content);
 }
 
 char	*ft_env_get_content(t_env env, const char *name)
 {
-	return (ft_env_tab_get_content(env.envp, name));
+	char	*buffer;
+
+	buffer = NULL;
+	if (ft_env_get_pos(env, name) == -1)
+		buffer = ft_env_embigous_variable(env, name);
+	else
+		buffer = ft_env_tab_get_content(env.envp, name);
+	return (buffer);
 }
 
 char	*ft_env_get_name(const char *all_str)
