@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:17:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/14 15:50:03 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:54:34 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static size_t	ft_parser_get_index(const char *str)
 	size_t	index;
 
 	index = 0;
-	while (str && *(str + index) && ft_strchr("|<> \t\v\f", *(str
-				+ index)) == NULL)
+	while (str && *(str + index) && ft_strchr("|<> \t\v\f",
+			*(str + index)) == NULL)
 	{
 		ptr_buffer = NULL;
 		if (str[index] == '\"')
