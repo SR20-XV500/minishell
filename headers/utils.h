@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/13 01:59:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/15 00:27:15 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 # define UTILS_H
 
 # include "ft_parsing.h"
-# include <readline/readline.h>
+# include <fcntl.h>
 # include <readline/history.h>
+# include <readline/readline.h>
 # include <signal.h>
+# include <sys/stat.h>
+# include <unistd.h>
 
 # define SIGNAL_HANDLING 0
 # define SIGNAL_CRASH 1
@@ -33,5 +36,8 @@ void	ft_pwd_change_content(char *str);
 
 char	*ft_path_parser(const char *path, const char *change_path);
 char	*ft_path_tab_to_str(char **pwd);
+
+int		ft_is_file(const char *path);
+int		ft_is_directory(const char *path);
 
 #endif
