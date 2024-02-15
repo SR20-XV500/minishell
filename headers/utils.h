@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/15 14:16:01 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:32:04 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ft_pwd_change_content(char *str);
 
 char	*ft_path_parser(const char *path, const char *change_path);
 char	*ft_path_tab_to_str(char **pwd);
+char	*ft_path_multiple_file(const char *multie_path, const char *dest);
+char	*ft_path_multiple_directory(const char *multie_path, const char *dest);
 
 int		ft_is_file(const char *path);
 int		ft_is_directory(const char *path);
