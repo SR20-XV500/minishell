@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_get.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:57:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/14 22:19:36 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/17 00:44:43 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_env_get_pos(t_env env, const char *name)
 	return (ft_env_tab_get_pos(env.envp, name));
 }
 
-static char	*ft_env_embigous_variable(t_env env, const char *name)
+static char	*ft_env_ambiguous_variable(t_env env, const char *name)
 {
 	char	*content;
 
@@ -43,7 +43,7 @@ char	*ft_env_get_content(t_env env, const char *name)
 
 	buffer = NULL;
 	if (ft_env_get_pos(env, name) == -1)
-		buffer = ft_env_embigous_variable(env, name);
+		buffer = ft_env_ambiguous_variable(env, name);
 	else
 		buffer = ft_env_tab_get_content(env.envp, name);
 	return (buffer);
