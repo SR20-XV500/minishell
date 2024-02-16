@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_expansion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 16:14:15 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/16 17:19:17 by tlassere         ###   ########.fr       */
+/*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
+/*   Updated: 2024/02/16 17:25:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_parser(t_data *data, const char *str)
+int	ft_expansion(t_data *data)
 {
-	int	ret;
+	int	status;
 
-	ret = BAD_PARAMETER;
-	if (data && str)
+	status = BAD_PARAMETER;
+	if (data)
 	{
-		ret = ft_parser_use_line(data, str);
-		if (ret == SUCCESS)
-			ret = ft_check_lst(data);
-		if (ret == SUCCESS)
-			ret = ft_type_set_path(data);
-		if (ret == SUCCESS)
-			ret = ft_expansion(data);
-		if (ret == SUCCESS)
-			ret = ft_type_set_cmd(data);
 	}
-	return (ret);
+	return (status);
 }

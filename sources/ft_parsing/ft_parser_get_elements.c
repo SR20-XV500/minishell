@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser_get_elements.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:17:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/14 15:54:34 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:12:24 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static size_t	ft_parser_get_index(const char *str)
 	size_t	index;
 
 	index = 0;
-	while (str && *(str + index) && ft_strchr("|<> \t\v\f",
+	while (str && *(str + index) && ft_strchr("|<> \r\t\v\f",
 			*(str + index)) == NULL)
 	{
 		ptr_buffer = NULL;
@@ -117,7 +117,7 @@ int	ft_parser_use_line(t_data *data, const char *str)
 	i = 0;
 	while (str[i] && ret == SUCCESS)
 	{
-		while (str[i] && ft_strchr(" \t\v\f", str[i]))
+		while (str[i] && ft_strchr(" \t\v\f\r", str[i]))
 			i++;
 		buffer = ft_parser_add_delimiter(data, str + i, &i);
 		if (buffer != MALLOC_FAIL)
