@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/11 14:39:36 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:49:38 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	ft_pwd_is_arg(char **argv)
 	return (ret);
 }
 
+// TODO: Define error message
+
 int	ft_pwd(char **argv, char **envp)
 {
 	int	ret;
@@ -33,7 +35,7 @@ int	ft_pwd(char **argv, char **envp)
 	ret = 0;
 	if (ft_pwd_is_arg(argv) == IS_ARG)
 	{
-		ft_fprintf(2, "minishell: pwd: not accept option");
+		ft_fprintf(2, "minishell: pwd: does not accept options");
 		ret = 2;
 	}
 	else
