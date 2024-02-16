@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/16 17:49:38 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:27:57 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static int	ft_pwd_is_arg(char **argv)
 	}
 	return (ret);
 }
-
-// TODO: Define error message
 
 int	ft_pwd(char **argv, char **envp)
 {
