@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/16 16:19:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:47:15 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # define PARSER_NO_WORD 13
 # define PARSER_ERR_OP_NEWLINE 1
 # define PARSER_NEAR_PIPE 2
+# define PARSER_EXPANSION_VAR_CHANGE 14
+# define PARSER_EXPANSION_VAR_NO_CHANGE 15
+# define PARSER_
 
 enum e_delimiter
 {
