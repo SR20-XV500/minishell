@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/16 19:17:05 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:42:24 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,41 @@ int	ft_expansion_is_word(const char *str)
 	return (status);
 }
 
+char	*ft_expansion_get_str(const char *str)
+{
+	char	*new_str;
+	size_t	i;
+
+	new_str = NULL;
+	i = 0;
+	if (str)
+	{
+		
+	}
+	return (new_str);
+}
+
 int	ft_expansion_str(const char *str, char **new_str)
 {
 	int		status;
 	char	*curent_card;
 
 	status = BAD_PARAMETER;
-	curent_card = (char *)str;
 	if (str && new_str)
 	{
-		status = PARSER_EXPANSION_VAR_NO_CHANGE;
-		curent_card = ft_strchr(curent_card, '$');
-		while (curent_card)
+		status = MALLOC_FAIL;
+		curent_card = ft_expansion_get_str(str);
+		if (curent_card == NULL)
 		{
-			if (ft_expansion_is_word(curent_card) == SUCCESS)
+			status = PARSER_EXPANSION_VAR_NO_CHANGE;
+			if (curent_card && (ft_strlen(str) != ft_strlen(curent_card)
+				|| ft_strcmp_s2(curent_card, str) != CMP_EGAL))
 			{
-
-				status = PARSER_EXPANSION_VAR_CHANGE;
+				*new_str = curent_card;
+				status = PARSER_EXPANSION_VAR_CHANGE; 
 			}
-			curent_card++;
-			while (*curent_card == '$')
-				curent_card++;
-			curent_card = ft_strchr(curent_card, '$');
+			else
+				free(curent_card);
 		}
 	}
 	return (status);

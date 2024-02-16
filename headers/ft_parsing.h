@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/16 18:47:15 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:32:01 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ int		ft_type_set_path(t_data *data);
 int		ft_type_set_cmd(t_data *data);
 
 int		ft_expansion(t_data *data);
+int		ft_expansion_str(const char *str, char **new_str);
+int		ft_expansion_is_word(const char *str);
 
 #endif
