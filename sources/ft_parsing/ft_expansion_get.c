@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:06:42 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/17 12:41:14 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/17 13:43:37 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,22 @@ static int	ft_expansion_get_content(t_data *data, const char *str,
 	return (status);
 }
 
+static int	ft_expansion_join(const char *str, char **buffer)
+{
+	int		status;
+	char	*new_str;
+
+	status = MALLOC_FAIL;
+	ft_printf("%s\n", str);
+	new_str = ft_strjoin(*buffer, str);
+	if (new_str)
+	{
+		status = SUCCESS;
+		*buffer = new_str;
+	}
+	return (status);
+}
+
 static int	ft_expansion_join_var(t_data *data,
 	const char *str, char **buffer, size_t *i)
 {
@@ -102,15 +118,15 @@ static int	ft_expansion_join_var(t_data *data,
 	if (str && data && i && buffer)
 	{
 		status = ft_expansion_get_content(data, str, &content_name, i);
-		if (status == SUCCESS && content_name)
+		if (status == SUCCESS && content_name && *buffer)
+			status = ft_expansion_join(content_name, buffer);
+		else if (status == SUCCESS && content_name)
 		{
-			status = MALLOC_FAIL;
-			new_str = ft_strjoin(*buffer, content_name);
+			new_str = ft_strdup(content_name);
 			if (new_str)
-			{
-				status = SUCCESS;
 				*buffer = new_str;
-			}
+			else
+				status = MALLOC_FAIL;
 		}
 		free(content_name);
 	}
@@ -140,6 +156,11 @@ char	*ft_expansion_get_str(t_data *data, const char *str)
 				free(new_str);
 			new_str = buffer;
 			i++;
+		}
+		if (status != SUCCESS)
+		{
+			free(new_str);
+			new_str = NULL;
 		}
 	}
 	return (new_str);
