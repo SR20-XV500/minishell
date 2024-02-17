@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/16 23:51:57 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/17 21:23:58 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define SIGNAL_HANDLING 0
 # define SIGNAL_CRASH 1
+// TODO: Check if still used
 # define NON_NULL_MEMORY (void *)-1
 
 void	ft_check_args_main(int argc);
