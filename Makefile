@@ -18,7 +18,7 @@ T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage \
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_PARSING	::= ft_data ft_word ft_parser ft_parser_get_elements \
 					ft_check_lst ft_type_set ft_expansion \
-					ft_expansion_get
+					ft_expansion_get ft_expansion_var_join
 FT_PARSING		::= $(foreach buffer, $(T_FT_PARSING), \
 						$(SOURCES)ft_parsing/$(buffer).c)
 T_FT_BUILTIN	::= ft_env ft_env_tab_get ft_env_get ft_env_iter \
