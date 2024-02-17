@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:06:42 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/17 18:55:11 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:05:05 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,19 @@ static int	ft_expansion_quote(const char *str, const char *current_car)
 	return (status);
 }
 
+static int	ft_expantion_get_while(t_data *data,
+	const char *str, size_t *i, char **buffer)
+{
+	int	status;
+
+	if (ft_expansion_is_word(str + *i) == SUCCESS
+		&& ft_expansion_quote(str, str + *i) == SUCCESS)
+		status = ft_expansion_join_var(data, str + *i, buffer, i);
+	else
+		status = ft_expansion_add_car(*buffer, str[*i], buffer);
+	return (status);
+}
+
 char	*ft_expansion_get_str(t_data *data, const char *str)
 {
 	char	*new_str;
@@ -80,21 +93,16 @@ char	*ft_expansion_get_str(t_data *data, const char *str)
 	{
 		while (str[i] && status == SUCCESS)
 		{
-			if (ft_expansion_is_word(str + i) == SUCCESS
-				&& ft_expansion_quote(str, str + i) == SUCCESS)
-				status = ft_expansion_join_var(data, str + i, &buffer, &i);
-			else
-				status = ft_expansion_add_car(buffer, str[i], &buffer);
+			status = ft_expantion_get_while(data, str, &i, &buffer);
 			if (new_str != buffer)
 				free(new_str);
 			new_str = buffer;
 			i++;
 		}
 		if (status != SUCCESS)
-		{
 			free(new_str);
+		if (status != SUCCESS)
 			new_str = NULL;
-		}
 	}
 	return (new_str);
 }
