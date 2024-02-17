@@ -6,7 +6,7 @@
 #    By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 02:19:35 by tlassere          #+#    #+#              #
-#    Updated: 2024/02/13 18:46:07 by bcheronn         ###   ########.fr        #
+#    Updated: 2024/02/17 22:44:07 by bcheronn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ T_FT_PARSING	::= ft_data ft_word ft_parser ft_parser_get_elements \
 FT_PARSING		::= $(foreach buffer, $(T_FT_PARSING), \
 						$(SOURCES)ft_parsing/$(buffer).c)
 T_FT_BUILTIN	::= ft_env ft_env_tab_get ft_env_get ft_env_iter \
-					ft_env_initial ft_env_initial_shlvl ft_echo ft_pwd ft_cd
+					ft_env_initial ft_env_initial_shlvl ft_echo ft_pwd ft_cd \
+					ft_unset
 FT_BUILTIN		::= $(foreach buffer, $(T_FT_BUILTIN), \
 						$(SOURCES)ft_builtin/$(buffer).c)
 SOURCES			::= $(SOURCES)main.c $(UTILS) $(FT_PARSING) $(FT_BUILTIN)
