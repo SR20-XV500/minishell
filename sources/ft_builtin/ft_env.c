@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/11 14:40:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/17 21:50:11 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,15 @@ int	ft_env_check(t_env *env)
 			buffer = ENV_SUCCESS;
 	}
 	return (buffer);
+}
+
+int	ft_env(char **envp)
+{
+	int	ret;
+
+	ret = FAIL;
+	if (envp && *envp)
+		if (ft_printf("%w\n", envp))
+			ret = SUCCESS;
+	return (ret);
 }
