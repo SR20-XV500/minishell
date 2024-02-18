@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/17 13:09:16 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:05:31 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,17 @@ int	ft_expansion_is_word(const char *str)
 	return (status);
 }
 
-int	ft_expansion_str(t_data *data, const char *str, char **new_str)
-{
-	int	status;
-
-	status = BAD_PARAMETER;
-	if (str && new_str)
-	{
-		status = PARSER_EXPANSION_VAR_NO_CHANGE;
-		if (ft_strchr(str, '$'))
-		{
-			status = PARSER_EXPANSION_VAR_CHANGE;
-			*new_str = ft_expansion_get_str(data, str);
-		}
-	}
-	return (status);
-}
-
-static int	ft_expansion_replace_word_content(t_data *data, t_word *word)
+static int	ft_expansion_replace_word_content(t_data *data, t_list *lst)
 {
 	int		status;
 	char	*new_str;
+	t_word	*word;
 
 	status = BAD_PARAMETER;
 	new_str = NULL;
-	if (word && word->word)
+	if (lst && lst->content && ((t_word *)lst->content)->word && data)
 	{
+		word = lst->content;
 		status = SUCCESS;
 		if (word->type == D_NOT_SET)
 		{
@@ -69,7 +54,26 @@ static int	ft_expansion_replace_word_content(t_data *data, t_word *word)
 	return (status);
 }
 
-static int	ft_expansion_replace_word(t_data *data)
+static int	ft_expansion_split_node(t_data *data, t_list *lst)
+{
+	int		status;
+	t_list	*lst_split;
+
+	status = BAD_PARAMETER;
+	if (data && lst && lst->content)
+	{
+		status = SUCCESS;
+		if (ft_expansion_is_multie_arg(((t_word *)lst->content)->word)
+			== SUCCESS)
+		{
+			lst_split = ft_expansion_split_node_content(
+					((t_word *)lst->content)->word);
+		}
+	}
+	return (status);
+}
+
+static int	ft_expansion_put_lst(t_data *data, int (*f)(t_data *, t_list *))
 {
 	int		status;
 	t_list	*lst;
@@ -81,7 +85,7 @@ static int	ft_expansion_replace_word(t_data *data)
 		status = SUCCESS;
 		while (lst && status == SUCCESS)
 		{
-			status = ft_expansion_replace_word_content(data, lst->content);
+			status = (*f)(data, lst);
 			lst = lst->next;
 		}
 	}
@@ -95,7 +99,9 @@ int	ft_expansion(t_data *data)
 	status = BAD_PARAMETER;
 	if (data)
 	{
-		status = ft_expansion_replace_word(data);
+		status = ft_expansion_put_lst(data, &ft_expansion_replace_word_content);
+		if (status == SUCCESS)
+			status = ft_expansion_put_lst(data, &ft_expansion_split_node);
 	}
 	return (status);
 }

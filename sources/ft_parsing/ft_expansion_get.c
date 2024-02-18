@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:06:42 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/17 19:05:05 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:19:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,21 @@ char	*ft_expansion_get_str(t_data *data, const char *str)
 			new_str = NULL;
 	}
 	return (new_str);
+}
+
+int	ft_expansion_str(t_data *data, const char *str, char **new_str)
+{
+	int	status;
+
+	status = BAD_PARAMETER;
+	if (str && new_str)
+	{
+		status = PARSER_EXPANSION_VAR_NO_CHANGE;
+		if (ft_strchr(str, '$'))
+		{
+			status = PARSER_EXPANSION_VAR_CHANGE;
+			*new_str = ft_expansion_get_str(data, str);
+		}
+	}
+	return (status);
 }
