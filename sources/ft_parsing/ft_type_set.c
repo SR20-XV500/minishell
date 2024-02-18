@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:29:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/16 14:37:16 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:14:37 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	ft_type_set(t_data *data, void (*f)(t_list *))
 	int	status;
 
 	status = BAD_PARAMETER;
-	if (data)
+	if (data && f)
 	{
 		status = SUCCESS;
 		(*f)(data->words);

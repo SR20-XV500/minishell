@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 20:20:14 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:46:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define PARSER_EXPANSION_VAR_NO_CHANGE 15
 # define PARSER_GOOD_QUOTE 0
 # define PARSER_BAD_QUOTE 1
+# define NO_CHANGE_LST 26
 
 enum e_delimiter
 {
