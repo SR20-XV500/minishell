@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:51:18 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/11 17:33:02 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/18 20:52:16 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,19 @@ static t_word	*ft_word_make(const char *str, int type)
 	char	*dump;
 
 	word = NULL;
+	dump = NULL;
 	if (str)
-	{
 		dump = ft_strdup(str);
-		if (dump)
+	if (dump || (str == NULL && dump == NULL))
+	{
+		word = malloc(sizeof(t_word));
+		if (word)
 		{
-			word = malloc(sizeof(t_word));
-			if (word)
-			{
-				word->type = type;
-				word->word = dump;
-			}
-			else
-				free(dump);
+			word->type = type;
+			word->word = dump;
 		}
+		else if (str)
+			free(dump);
 	}
 	return (word);
 }
@@ -42,15 +41,12 @@ t_list	*ft_word_lst_make(const char *str, int type)
 	t_word	*word;
 
 	lst = NULL;
-	if (str)
+	word = ft_word_make(str, type);
+	if (word)
 	{
-		word = ft_word_make(str, type);
-		if (word)
-		{
-			lst = ft_lstnew(word);
-			if (lst == NULL)
-				ft_word_free(word);
-		}
+		lst = ft_lstnew(word);
+		if (lst == NULL)
+			ft_word_free(word);
 	}
 	return (lst);
 }
