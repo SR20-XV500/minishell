@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:39:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 20:17:36 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/18 20:41:57 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_list	*ft_expansion_get_current_node(char **str)
 	node = NULL;
 	if (str && *str)
 	{
-		while (ft_strchr(" \t\v\f\r\n", **str))
+		while (**str && ft_strchr(" \t\v\f\r\n", **str))
 			(*str)++;
 		if (**str)
 		{
@@ -97,7 +97,7 @@ int	ft_expansion_is_multie_arg(const char *str)
 				cpy_ptr = ft_strchr(cpy_ptr + 1, '\"');
 			if (*cpy_ptr == '\'' && ft_strchr(cpy_ptr + 1, '\''))
 				cpy_ptr = ft_strchr(cpy_ptr + 1, '\'');
-			if (ft_strchr(" \t\v\r\n\f", *cpy_ptr))
+			if (*cpy_ptr && ft_strchr(" \t\v\r\n\f", *cpy_ptr))
 				status = SUCCESS;
 			cpy_ptr++;
 		}
