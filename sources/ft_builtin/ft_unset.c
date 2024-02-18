@@ -1,43 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 11:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/16 22:27:57 by bcheronn         ###   ########.fr       */
+/*   Created: 2024/02/17 22:39:18 by bcheronn          #+#    #+#             */
+/*   Updated: 2024/02/17 23:02:32 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_pwd_is_arg(char **argv)
+int	ft_unset(t_env *env, const char *name)
 {
 	int	ret;
 
-	ret = IS_NOT_ARG;
-	if (argv && *argv)
-	{
-		argv++;
-		if (argv && (*argv)[0] == '-' && (*argv)[1] != '\0')
-			ret = IS_ARG;
-	}
-	return (ret);
-}
-
-int	ft_pwd(char **argv, char **envp)
-{
-	int	ret;
-
-	ret = 0;
-	if (ft_pwd_is_arg(argv) == IS_ARG)
-	{
-		ft_fprintf(2, "minishell: pwd: does not accept options");
-		ret = 2;
-	}
-	else
-		ft_printf("%s\n", ft_pwd_get());
-	(void)envp;
+	ret = ENV_BAD_PARAMETER;
+	if (env && name && *name)
+		ret = ft_env_del(env, name);
 	return (ret);
 }
