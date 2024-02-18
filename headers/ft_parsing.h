@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 15:01:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/18 20:20:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ int		ft_expansion_join_var(t_data *data,
 			const char *str, char **buffer, size_t *i);
 t_list	*ft_expansion_split_node_content(const char *str);
 int		ft_expansion_is_multie_arg(const char *str);
+int		ft_expansion_split_node(t_data *data, t_list **lst, t_list *last);
 #endif

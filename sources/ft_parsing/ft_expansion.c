@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 15:05:31 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/18 20:19:53 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_expansion_is_word(const char *str)
 	return (status);
 }
 
-static int	ft_expansion_replace_word_content(t_data *data, t_list *lst)
+static int	ft_expansion_replace_word_content(t_data *data,
+	t_list **lst, t_list *last)
 {
 	int		status;
 	char	*new_str;
@@ -35,9 +36,10 @@ static int	ft_expansion_replace_word_content(t_data *data, t_list *lst)
 
 	status = BAD_PARAMETER;
 	new_str = NULL;
-	if (lst && lst->content && ((t_word *)lst->content)->word && data)
+	if (lst && *lst && (*lst)->content
+		&& ((t_word *)(*lst)->content)->word && data)
 	{
-		word = lst->content;
+		word = (*lst)->content;
 		status = SUCCESS;
 		if (word->type == D_NOT_SET)
 		{
@@ -51,41 +53,27 @@ static int	ft_expansion_replace_word_content(t_data *data, t_list *lst)
 		if (status != MALLOC_FAIL)
 			status = SUCCESS;
 	}
+	(void)last;
 	return (status);
 }
 
-static int	ft_expansion_split_node(t_data *data, t_list *lst)
-{
-	int		status;
-	t_list	*lst_split;
-
-	status = BAD_PARAMETER;
-	if (data && lst && lst->content)
-	{
-		status = SUCCESS;
-		if (ft_expansion_is_multie_arg(((t_word *)lst->content)->word)
-			== SUCCESS)
-		{
-			lst_split = ft_expansion_split_node_content(
-					((t_word *)lst->content)->word);
-		}
-	}
-	return (status);
-}
-
-static int	ft_expansion_put_lst(t_data *data, int (*f)(t_data *, t_list *))
+static int	ft_expansion_put_lst(t_data *data,
+	int (*f)(t_data *, t_list **, t_list *))
 {
 	int		status;
 	t_list	*lst;
+	t_list	*last;
 
 	status = BAD_PARAMETER;
 	lst = data->words;
+	last = NULL;
 	if (lst)
 	{
 		status = SUCCESS;
 		while (lst && status == SUCCESS)
 		{
-			status = (*f)(data, lst);
+			status = (*f)(data, &lst, last);
+			last = lst;
 			lst = lst->next;
 		}
 	}
