@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:47:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/17 21:52:07 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/17 23:50:29 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ int					ft_env_init_shlvl(t_env *env);
 t_env				*ft_env_init(const char **envp);
 
 int					ft_env(char **envp);
+
+int					ft_unset(t_env *env, const char *name);
 
 #endif
