@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/19 22:01:37 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:04:29 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ int	ft_env(char **envp)
 	int	ret;
 
 	ret = FAIL;
-	if (envp && *envp)
-		if (ft_printf("%w\n", envp))
-			ret = SUCCESS;
+	if (envp && *envp && ft_printf("%w\n", envp) > 0)
+		ret = SUCCESS;
 	return (ret);
 }
