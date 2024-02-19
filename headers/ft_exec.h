@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/19 14:35:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:44:44 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,9 @@
 
 # include "ft_parsing.h"
 # define REDIRECT_AMBIGUOUS_REDIRECT 26
+# define ERR_SUCH_FILE "minishell: %s: No such file or directory\n"
+# define ERR_AMBIGUOUS_REDIRECT "minishell: %s: ambiguous redirect\n"
+
+char	*ft_redirect_get_path(t_data *data, const char *str);
 
 #endif
