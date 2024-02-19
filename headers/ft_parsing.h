@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 21:46:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:47:28 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,17 @@ int		ft_check_lst(t_data *data);
 int		ft_type_set_path(t_data *data);
 int		ft_type_set_cmd(t_data *data);
 
+char	*ft_expansion_get_str(t_data *data, const char *str);
 int		ft_expansion(t_data *data);
 int		ft_expansion_str(t_data *data, const char *str, char **new_str);
 int		ft_expansion_is_word(const char *str);
-char	*ft_expansion_get_str(t_data *data, const char *str);
 int		ft_expansion_join_var(t_data *data,
 			const char *str, char **buffer, size_t *i);
 t_list	*ft_expansion_split_node_content(const char *str);
 int		ft_expansion_is_multie_arg(const char *str);
 int		ft_expansion_split_node(t_data *data, t_list **lst, t_list *last);
+
+void	ft_quotes_remove(char *str);
+int		ft_quotes_rm_rf(t_data *data);
+
 #endif
