@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/01 23:01:44 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:10:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,27 +86,37 @@ int	ft_env_add(t_env *env, const char *all_str)
 	return (ret);
 }
 
-int	ft_env_del(t_env *env, const char *name)
+int	ft_env_tab_del(char ***envp, const char *name)
 {
 	char	**buffer;
 	int		ret;
 	int		pos;
 
 	ret = ENV_BAD_PARAMETER;
-	if (env && name)
+	if (envp && name)
 	{
 		ret = ENV_NOT_EXISTING_VARIABLE;
-		pos = ft_env_get_pos(*env, name);
+		pos = ft_env_tab_get_pos(*envp, name);
 		if (pos != -1)
 		{
 			ret = MALLOC_FAIL;
-			buffer = ft_tab_del(env->envp, pos);
+			buffer = ft_tab_del(*envp, pos);
 			if (buffer)
 			{
 				ret = ENV_SUCCESS;
-				env->envp = buffer;
+				*envp = buffer;
 			}
 		}
 	}
 	return (ret);
+}
+
+int	ft_env_del(t_env *env, const char *name)
+{
+	int	status;
+
+	status = BAD_PARAMETER;
+	if (env && name)
+		status = ft_env_tab_del(&(env->envp), name);
+	return (status);
 }
