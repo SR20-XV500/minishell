@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:47:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/19 17:21:23 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:11:00 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char				*ft_env_get_name(const char *all_str);
 char				*ft_env_tab_get_content(char **envp, const char *name);
 int					ft_env_tab_get_pos(char **envp, const char *name);
 int					ft_env_get_pos(t_env env, const char *name);
+int					ft_env_tab_del(char ***envp, const char *name);
 
 int					ft_env_check(t_env *env);
 int					ft_env_update(t_env *env, const char *name,
