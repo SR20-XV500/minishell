@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/17 21:50:11 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:35:34 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ft_env_free(t_env *env)
 	{
 		if (env->envp)
 			ft_tab_free(env->envp);
+		if (env->export)
+			ft_tab_free(env->export);
 		if (env->path)
 			free(env->path);
 		if (env->pwd)
