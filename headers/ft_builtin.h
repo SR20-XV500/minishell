@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtin.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/10 12:54:10 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/18 22:35:39 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@
 # define CD_INVALID_PATH -1
 # define CD_VALID_PATH 1
 
-int		ft_echo(char **argv, char **envp);
+int	ft_echo(char **argv, char **envp);
 
-int		ft_pwd(char **argv, char **envp);
+int	ft_pwd(char **argv, char **envp);
 
-int		ft_echo(char **argv, char **envp);
+int	ft_cd(char **argv, char **envp);
 
-int		ft_cd(char **argv, char **envp);
+int	ft_unset(t_env *env, const char *name);
+
+int	ft_export(char **argv, char **envp);
 
 #endif
