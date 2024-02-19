@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/01 23:01:44 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:36:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,66 +47,26 @@ int	ft_env_update(t_env *env, const char *name, const char *all_str)
 	return (ret);
 }
 
-static int	ft_env_add_content(t_env *env, const char *all_str)
-{
-	int		ret;
-	char	**table;
-
-	ret = MALLOC_FAIL;
-	table = ft_tab_join(env->envp, all_str);
-	if (table)
-	{
-		ret = ENV_SUCCESS;
-		env->envp = table;
-	}
-	return (ret);
-}
-
 /**
  * @param env environement variable
  * @param all_str dump to add in table
  */
 int	ft_env_add(t_env *env, const char *all_str)
 {
-	int		ret;
-	char	*name;
+	int	status;
 
-	ret = ENV_BAD_PARAMETER;
+	status = BAD_PARAMETER;
 	if (env && all_str)
-	{
-		name = ft_env_get_name(all_str);
-		if (name && ft_env_get_pos(*env, name) == -1)
-			ret = ft_env_add_content(env, all_str);
-		else if (name == NULL)
-			ret = MALLOC_FAIL;
-		else
-			ret = ENV_EXISTING_VARIABLE;
-		free(name);
-	}
-	return (ret);
+		status = ft_env_tab_add(&env->envp, all_str);
+	return (status);
 }
 
 int	ft_env_del(t_env *env, const char *name)
 {
-	char	**buffer;
-	int		ret;
-	int		pos;
+	int	status;
 
-	ret = ENV_BAD_PARAMETER;
+	status = BAD_PARAMETER;
 	if (env && name)
-	{
-		ret = ENV_NOT_EXISTING_VARIABLE;
-		pos = ft_env_get_pos(*env, name);
-		if (pos != -1)
-		{
-			ret = MALLOC_FAIL;
-			buffer = ft_tab_del(env->envp, pos);
-			if (buffer)
-			{
-				ret = ENV_SUCCESS;
-				env->envp = buffer;
-			}
-		}
-	}
-	return (ret);
+		status = ft_env_tab_del(&(env->envp), name);
+	return (status);
 }
