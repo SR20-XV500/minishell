@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/11 17:32:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 00:43:16 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	ft_data_free(t_data **data)
 		}
 		if ((*data)->words)
 			ft_word_lst_clear(*data);
+		if ((*data)->input_fd > 2)
+			close((*data)->input_fd);
+		if ((*data)->output_fd > 2)
+			close((*data)->output_fd);
 		free(*data);
 		*data = NULL;
 	}
@@ -45,6 +49,15 @@ static t_data	*ft_data_make(const char **envp)
 	return (data);
 }
 
+static void	ft_data_set_redirect(t_data *data)
+{
+	if (data)
+	{
+		data->input_fd = -2;
+		data->output_fd = -2;
+	}
+}
+
 t_data	*ft_data_get(const char **envp)
 {
 	t_data	*data;
@@ -53,6 +66,7 @@ t_data	*ft_data_get(const char **envp)
 	if (envp)
 	{
 		data = ft_data_make(envp);
+		ft_data_set_redirect(data);
 	}
 	return (data);
 }

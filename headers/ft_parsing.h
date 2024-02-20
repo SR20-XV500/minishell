@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/19 13:47:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 00:14:35 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_data
 {
 	t_env	*env;
 	t_list	*words;
+	int		output_fd;
+	int		input_fd;
 }	t_data;
 
 t_data	*ft_data_get(const char **envp);

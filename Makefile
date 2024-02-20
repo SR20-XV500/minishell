@@ -16,7 +16,7 @@ T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage \
 					ft_path_parser_join ft_path_parser ft_file_checks \
 					ft_path_multie
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
-T_FT_EXEC		::= ft_redirect_path
+T_FT_EXEC		::= ft_redirect_path ft_exec ft_exec_fd
 FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
 T_FT_PARSING	::= ft_data ft_word ft_parser ft_parser_get_elements \

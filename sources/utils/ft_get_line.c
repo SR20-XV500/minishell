@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/13 14:55:27 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:59:53 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static void	ft_use_current_line(char **lines, t_data *data)
 	{
 		add_history(lines[i]);
 		if (ft_parser(data, lines[i]) == SUCCESS)
-			ft_print_word(data->words);
+		{
+			if (ft_exec(data) == SUCCESS)
+				ft_print_word(data->words);
+		}
 		ft_word_lst_clear(data);
 		i++;
 	}
