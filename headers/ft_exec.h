@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 22:02:47 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:47:46 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ int		ft_exec_redirect_fd(t_data *data, int type,
 			const char *path, const char *err_str);
 int		ft_exec_redirect(t_data *data, t_list *lst);
 char	*ft_exec_cmd_get_path(t_data *data, const char *cmd_name);
+int		ft_exec_cmd(t_data *data, t_list *lst);
+
 #endif
