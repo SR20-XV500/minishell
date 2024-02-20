@@ -6,12 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:20:14 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 02:20:35 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 02:27:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// TODO: get the same error messages as in bash
 static int	ft_exec_redirect_fd_err(int fd, const char *err_str)
 {
 	int	status;
@@ -25,6 +26,8 @@ static int	ft_exec_redirect_fd_err(int fd, const char *err_str)
 	}
 	return (status);
 }
+
+// TODO: FIX BUG WITH OPEN FILE
 
 int	ft_exec_redirect_fd(t_data *data, int type,
 	const char *path, const char *err_str)
