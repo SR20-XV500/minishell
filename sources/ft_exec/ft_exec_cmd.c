@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:46:19 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 22:47:26 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:58:50 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static unsigned int	ft_exec_cmd_arg_get_len(t_list *lst)
 	}
 	return (len);
 }
+
+// TODO: add path used in first argument in garv
 
 static char	**ft_exec_cmd_set_argv(t_list *lst,
 	char **argv, unsigned int len)

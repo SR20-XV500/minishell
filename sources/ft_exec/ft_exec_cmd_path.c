@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exex_cmd_path.c                                 :+:      :+:    :+:   */
+/*   ft_exec_cmd_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:01:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 22:02:34 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:56:56 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	ft_is_builtin(const char *cmd)
 	return (status);
 }
 
+// TODO: Display command not found if path is null
+
 static char	*ft_exec_cmd_path_parser(t_data *data, const char *cmd_name,
 	const char *path)
 {
@@ -42,11 +44,11 @@ static char	*ft_exec_cmd_path_parser(t_data *data, const char *cmd_name,
 		cmd = ft_strdup(cmd_name);
 	else
 	{
-		if (ft_strncmp("./", cmd_name, 2) != CMP_EGAL
-			&& ft_strncmp("../", cmd_name, 3) != CMP_EGAL)
-			cmd = ft_path_multiple_file(path, cmd_name);
-		if (cmd == NULL)
+		if (ft_strncmp("./", cmd_name, 2) == CMP_EGAL
+			|| ft_strncmp("../", cmd_name, 3) == CMP_EGAL)
 			cmd = ft_path_parser(data->env->pwd, cmd_name);
+		else
+			cmd = ft_path_multiple_file(path, cmd_name);
 	}
 	return (cmd);
 }
