@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:16:24 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 17:00:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:08:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ static void	ft_check_error(int err)
 		ft_fprintf(STDERR, "`%s'\n", print);
 	}
 }
-
-// TODO: change exit status code 
 
 int	ft_check_lst(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 16:42:07 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:11:28 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ static int	ft_exec_iter_lst(t_data *data, int (*f)(t_data *, t_list *))
 	return (status);
 }
 
+static int	ft_exec_cmd(t_data *data, t_list *lst)
+{
+	int	status;
+
+	status = BAD_PARAMETER;
+	if (data && lst)
+	{
+		status = SUCCESS;
+	}
+	return (status);
+}
+
 int	ft_exec(t_data *data)
 {
 	int	status;
@@ -41,8 +53,8 @@ int	ft_exec(t_data *data)
 	if (data)
 	{
 		status = ft_exec_iter_lst(data, &ft_exec_redirect);
-		//if (status == SUCCESS)
-		//	status = ft_exec_cmd();
+		if (status == SUCCESS)
+			status = ft_exec_iter_lst(data, &ft_exec_cmd);
 	}
 	return (status);
 }
