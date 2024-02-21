@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 22:35:39 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:55:57 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_pwd(char **argv, char **envp);
 
 int	ft_cd(char **argv, char **envp);
 
-int	ft_unset(t_env *env, const char *name);
+int	ft_unset(char **argv, t_env *env);
 
 int	ft_export(char **argv, char **envp);
 
