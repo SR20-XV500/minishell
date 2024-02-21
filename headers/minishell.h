@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 02:16:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/19 14:15:12 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/21 23:55:53 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-# include "utils.h"
-# include "ft_parsing.h"
 # include "ft_env.h"
-# include "ft_builtin.h"
+# include "ft_builtins.h"
 # include "ft_exec.h"
+# include "ft_parsing.h"
+# include "utils.h"
 # include <stdio.h>
 
 #endif
