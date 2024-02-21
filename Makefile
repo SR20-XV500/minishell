@@ -17,7 +17,7 @@ T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage \
 					ft_path_multie
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_EXEC		::= ft_redirect_path ft_exec ft_exec_fd ft_exec_cmd_path \
-					ft_exec_cmd ft_exec_cmd_free
+					ft_exec_cmd ft_exec_cmd_free ft_exec_cmd_true
 FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
 T_FT_PARSING	::= ft_data ft_word ft_parser ft_parser_get_elements \

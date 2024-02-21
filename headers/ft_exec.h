@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 19:06:52 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:03:44 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char	*ft_exec_cmd_get_path(t_data *data, const char *cmd_name);
 int		ft_exec_cmd(t_data *data, t_list *lst);
 int		ft_is_builtin(const char *cmd);
 void	ft_exec_cmd_free(t_cmd_content cmd_content);
+int		ft_exec_cmd_true(t_data *data, const t_cmd_content cmd);
 
 #endif
