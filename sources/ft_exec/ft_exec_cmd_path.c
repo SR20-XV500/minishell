@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:01:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 22:56:56 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:01:41 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ static int	ft_is_builtin(const char *cmd)
 	return (status);
 }
 
-// TODO: Display command not found if path is null
+static void	ft_exec_cmd_error(t_data *data, const char *path, const char *cmd)
+{
+	if (data && path == NULL && cmd)
+	{
+		ft_fprintf(STDERR, "minishell: %s: command not found\n", cmd);
+		data->env->exit_status = 127;
+	}
+}
 
 static char	*ft_exec_cmd_path_parser(t_data *data, const char *cmd_name,
 	const char *path)
@@ -71,6 +78,7 @@ char	*ft_exec_cmd_get_path(t_data *data, const char *cmd_name)
 				new_path = ft_exec_cmd_path_parser(data, cmd_name, path);
 			free(path);
 		}
+		ft_exec_cmd_error(data, new_path, cmd_name);
 	}
 	return (new_path);
 }
