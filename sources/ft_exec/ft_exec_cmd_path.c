@@ -6,13 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:01:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 14:01:41 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:11:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_is_builtin(const char *cmd)
+int	ft_is_builtin(const char *cmd)
 {
 	int	status;
 

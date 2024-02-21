@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 22:47:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:06:52 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # define ERR_SUCH_FILE "minishell: %s: No such file or directory\n"
 # define ERR_AMBIGUOUS_REDIRECT "minishell: %s: ambiguous redirect\n"
 
+typedef struct s_cmd_content
+{
+	char	**argv;
+	char	**envp;
+	char	*path;
+}	t_cmd_content;
+
 char	*ft_redirect_get_path(t_data *data, const char *str);
 int		ft_exec(t_data *data);
 int		ft_exec_redirect_fd(t_data *data, int type,
@@ -25,5 +32,7 @@ int		ft_exec_redirect_fd(t_data *data, int type,
 int		ft_exec_redirect(t_data *data, t_list *lst);
 char	*ft_exec_cmd_get_path(t_data *data, const char *cmd_name);
 int		ft_exec_cmd(t_data *data, t_list *lst);
+int		ft_is_builtin(const char *cmd);
+void	ft_exec_cmd_free(t_cmd_content cmd_content);
 
 #endif
