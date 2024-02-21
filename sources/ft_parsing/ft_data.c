@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 00:43:16 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:31:37 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static void	ft_data_set_redirect(t_data *data)
 {
 	if (data)
 	{
-		data->input_fd = -2;
-		data->output_fd = -2;
+		data->input_fd = STDIN;
+		data->output_fd = STDOUT;
 	}
 }
 
