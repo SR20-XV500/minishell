@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:47:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/19 22:35:36 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:51:06 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ int					ft_env_init_value(t_env *env);
 int					ft_env_init_shlvl(t_env *env);
 t_env				*ft_env_init(const char **envp);
 
-int					ft_env(char **envp);
+int					ft_env(const char **envp);
 
 #endif
