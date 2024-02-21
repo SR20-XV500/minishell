@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:46:19 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 22:58:50 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:46:53 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static unsigned int	ft_exec_cmd_arg_get_len(t_list *lst)
 	len = 0;
 	if (lst)
 	{
-		len = 1;
+		len = 2;
 		while (lst && ((t_word *)lst->content)->type != D_PIPE)
 		{
 			if (((t_word *)lst->content)->type == TY_ARG)
@@ -30,15 +30,13 @@ static unsigned int	ft_exec_cmd_arg_get_len(t_list *lst)
 	return (len);
 }
 
-// TODO: add path used in first argument in garv
-
 static char	**ft_exec_cmd_set_argv(t_list *lst,
 	char **argv, unsigned int len)
 {
 	unsigned int	index;
 
-	index = 0;
-	if (lst && len)
+	index = 1;
+	if (lst && len > 1 && argv && *argv)
 	{
 		len--;
 		while (lst && ((t_word *)lst->content)->type != D_PIPE
@@ -60,6 +58,21 @@ static char	**ft_exec_cmd_set_argv(t_list *lst,
 	return (argv);
 }
 
+static char	**ft_exec_cmd_set_first_arg(t_list *lst,
+	char **argv, unsigned int len)
+{
+	if (lst && len > 1 && ((t_word *)lst->content)->type == TY_CMD)
+	{
+		argv[0] = ft_strdup(((t_word *)lst->content)->word);
+		if (argv[0] == NULL)
+		{
+			ft_tab_free(argv);
+			argv = NULL;
+		}
+	}
+	return (argv);
+}
+
 static char	**ft_exec_cmd_get_argv(t_list *lst)
 {
 	char			**argv;
@@ -75,6 +88,7 @@ static char	**ft_exec_cmd_get_argv(t_list *lst)
 			if (argv)
 			{
 				ft_bzero(argv, len * sizeof(char **));
+				argv = ft_exec_cmd_set_first_arg(lst, argv, len);
 				argv = ft_exec_cmd_set_argv(lst, argv, len);
 			}
 		}
