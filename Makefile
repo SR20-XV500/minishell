@@ -26,18 +26,18 @@ T_FT_PARSING	::= ft_data ft_word ft_parser ft_parser_get_elements \
 					ft_expansion_split_main ft_rm_rf_quotes
 FT_PARSING		::= $(foreach buffer, $(T_FT_PARSING), \
 						$(SOURCES)ft_parsing/$(buffer).c)
-T_FT_BUILTIN	::= ft_env ft_env_tab_get ft_env_get ft_env_iter \
+T_FT_BUILTINS	::= ft_env ft_env_tab_get ft_env_get ft_env_iter \
 					ft_env_initial ft_env_initial_shlvl ft_echo ft_pwd ft_cd \
 					ft_unset ft_export
-FT_BUILTIN		::= $(foreach buffer, $(T_FT_BUILTIN), \
-						$(SOURCES)ft_builtin/$(buffer).c)
-SOURCES			::= $(SOURCES)main.c $(UTILS) $(FT_PARSING) $(FT_BUILTIN) \
+FT_BUILTINS		::= $(foreach buffer, $(T_FT_BUILTINS), \
+						$(SOURCES)ft_builtins/$(buffer).c)
+SOURCES			::= $(SOURCES)main.c $(UTILS) $(FT_PARSING) $(FT_BUILTINS) \
 					$(FT_EXEC)
 OBJS			::= $(SOURCES:.c=.o)
 HEADERS			::= headers/
 HEADERS_CONTENT	::= $(HEADERS)minishell.h $(HEADERS)utils.h \
 					$(HEADERS)ft_parsing.h $(HEADERS)ft_env.h \
-					$(HEADERS)ft_builtin.h $(HEADERS)ft_exec.h
+					$(HEADERS)ft_builtins.h $(HEADERS)ft_exec.h
 LIBFT			::= libft/libft.a
 CFLAGS			::= -Wall -Wextra -Werror
 LDFLAGS			::= $(CFLAGS) -lreadline
