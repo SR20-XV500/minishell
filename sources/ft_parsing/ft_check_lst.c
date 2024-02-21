@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:16:24 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/13 01:55:15 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:08:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ static void	ft_check_operator(t_list *prev, t_list *lst_cur, int *status)
 			*status = PARSER_ERR_OP_NEWLINE;
 			if (next == NULL)
 				*status |= D_NEW_LINE << 5;
-			else
+			else if (((t_word *)lst_cur->content)->type != D_PIPE)
 				*status |= ((t_word *)next->content)->type << 5;
+			else
+				*status = SUCCESS;
 		}
-		else
+		if (*status == SUCCESS)
 			ft_check_operator(lst_cur, next, status);
 	}
 }
@@ -61,8 +63,6 @@ static void	ft_check_error(int err)
 		ft_fprintf(STDERR, "`%s'\n", print);
 	}
 }
-
-// TODO: change exit status code 
 
 int	ft_check_lst(t_data *data)
 {

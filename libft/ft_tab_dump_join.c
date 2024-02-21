@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 19:51:45 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/01 19:52:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:29:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	**ft_tab_make(char *const *tab)
 
 	len = ft_tab_len((char **)tab);
 	new_tab = malloc((len + 2) * sizeof(char **));
-	ft_memset(new_tab, MEMORY_SET_BECAUSE_NO_MENORY_FRESH,
+	ft_memset(new_tab, MEMORY_SET_BECAUSE_NO_MEMORY_FRESH,
 		(len + 2) * sizeof(char **));
 	if (new_tab)
 		new_tab[len + 1] = NULL;
