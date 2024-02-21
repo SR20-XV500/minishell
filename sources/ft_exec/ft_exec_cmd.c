@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:46:19 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 19:38:58 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:55:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ static char	**ft_exec_cmd_get_argv(t_list *lst)
 	return (argv);
 }
 
+//printf("hello le path : %s\n", cmd_content.path);
+//ft_printf("argument:\n-----\n%w-----\n", cmd_content.argv);
+//ft_printf("environement:\n-----\n%w-----\n", cmd_content.envp);
+
 int	ft_exec_cmd(t_data *data, t_list *lst)
 {
 	int				status;
@@ -113,9 +117,6 @@ int	ft_exec_cmd(t_data *data, t_list *lst)
 			cmd_content.argv = ft_exec_cmd_get_argv(lst);
 			cmd_content.envp = ft_tab_dump(data->env->envp);
 			status = ft_exec_cmd_true(data, cmd_content);
-			printf("hello le path : %s\n", cmd_content.path);
-			ft_printf("argument:\n-----\n%w-----\n", cmd_content.argv);
-			ft_printf("environement:\n-----\n%w-----\n", cmd_content.envp);
 		}
 		else if (((t_word *)lst->content)->type == D_PIPE)
 			status = D_PIPE;
@@ -123,4 +124,3 @@ int	ft_exec_cmd(t_data *data, t_list *lst)
 	}
 	return (status);
 }
-
