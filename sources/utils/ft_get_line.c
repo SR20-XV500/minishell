@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 17:59:08 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 01:50:07 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ static void	ft_use_current_line(char **lines, t_data *data)
 	size_t	i;
 
 	i = 0;
+	(void)ft_print_word;
 	while (lines[i])
 	{
 		add_history(lines[i]);
 		if (ft_parser(data, lines[i]) == SUCCESS)
 		{
 			if (ft_exec(data) == SUCCESS)
-				ft_print_word(data->words);
+			{
+			}
 		}
 		ft_word_lst_clear(data);
 		i++;
