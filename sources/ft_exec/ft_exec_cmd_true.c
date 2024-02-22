@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 21:09:50 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 22:26:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	ft_exec_cmd_true(t_data *data, const t_cmd_content cmd, const char *name)
 	status = BAD_PARAMETER;
 	if (data && cmd.argv && *(cmd.argv) && cmd.envp && cmd.path)
 	{
-		ft_exec_dupbass(data);
 		status = SUCCESS;
 		if (ft_is_builtin(cmd.path) == SUCCESS)
 			status = ft_exec_cmd_builtin(data, cmd);

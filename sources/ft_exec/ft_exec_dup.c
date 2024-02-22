@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:08:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 22:02:15 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 22:29:27 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ int	ft_exec_dup_close(t_data *data)
 		status = SUCCESS;
 		if (data->dup_std[STDIN] > 2)
 		{
-			if (dup2(data->input_fd, data->dup_std[STDIN]) == EXEC_DUP_FAIL)
+			ft_printf("A badacord in\n");
+			if (dup2(data->dup_std[STDIN], STDIN) == EXEC_DUP_FAIL)
 				status = FAIL;
 			close(data->dup_std[STDIN]);
 			data->dup_std[STDIN] = 0;
 		}
 		if (data->dup_std[STDOUT] > 2)
 		{
-			ft_printf("A badacord\n");
+			ft_printf("A badacord out\n");
 			if (dup2(data->dup_std[STDOUT], STDOUT) == EXEC_DUP_FAIL)
 				status = FAIL;
 			close(data->dup_std[STDOUT]);
