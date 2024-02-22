@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_builtin.h                                       :+:      :+:    :+:   */
+/*   ft_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 21:55:57 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:02:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_BUILTIN_H
-# define FT_BUILTIN_H
+#ifndef FT_BUILTINS_H
+# define FT_BUILTINS_H
 
 # define IS_ARG 0
 # define IS_NOT_ARG 1
