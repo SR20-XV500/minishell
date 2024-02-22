@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 13:27:33 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:06:09 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define OPEN_WR_R_R 0644
 # define FD_FAIL_OPEN -1
 # define MAX_OPEN_PRE_OPEN 2
+# define EXEC_DUP_FAIL -1
 
 typedef struct s_cmd_content
 {
@@ -47,5 +48,7 @@ int		ft_is_builtin(const char *cmd);
 void	ft_exec_cmd_free(const t_cmd_content cmd_content);
 int		ft_exec_cmd_true(t_data *data, const t_cmd_content cmd,
 			const char *name);
+int		ft_exec_dupbass(t_data *data);
+int		ft_exec_dup_close(t_data *data);
 
 #endif

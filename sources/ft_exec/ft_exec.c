@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 22:46:05 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 22:26:39 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ int	ft_exec(t_data *data)
 	{
 		status = ft_exec_iter_lst(data, &ft_exec_redirect);
 		if (status == SUCCESS)
+			status = ft_exec_dupbass(data);
+		if (status == SUCCESS)
 			status = ft_exec_iter_lst(data, &ft_exec_cmd);
+		if (ft_exec_dup_close(data) == FAIL)
+			status = FAIL;
 	}
 	return (status);
 }
