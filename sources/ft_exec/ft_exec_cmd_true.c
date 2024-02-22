@@ -6,16 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 20:54:52 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:17:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//else if (ft_strncmp("export", cmd.path, 7) == CMP_EGAL)
 //else if (ft_strncmp("exit", cmd.path, 5) == CMP_EGAL)
-//else if (ft_strncmp("env", cmd.path, 4) == CMP_EGAL)
-//else if (ft_strncmp("unset", cmd.path, 6) == CMP_EGAL)
 
 static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 {
@@ -28,12 +25,43 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 		status = ft_echo(cmd.argv, cmd.envp);
 	else if (ft_strncmp("pwd", cmd.path, 4) == CMP_EGAL)
 		status = ft_pwd(cmd.argv, cmd.envp);
-	ft_printf("%s\n", ft_pwd_get());
-	(void)data;
+	else if (ft_strncmp("export", cmd.path, 7) == CMP_EGAL)
+		status = ft_export(cmd.argv, cmd.envp);
+	else if (ft_strncmp("unset", cmd.path, 6) == CMP_EGAL)
+		status = ft_unset(cmd.argv, data->env);
+	else if (ft_strncmp("env", cmd.path, 4) == CMP_EGAL)
+		status = ft_env((const char **)cmd.envp);
 	return (status);
 }
 
-int	ft_exec_cmd_true(t_data *data, const t_cmd_content cmd)
+static void	ft_exec_cmd_system_for_kids(const t_cmd_content cmd,
+	const char *name)
+{
+	if (execve(cmd.path, cmd.argv, cmd.envp))
+	{
+		ft_fprintf(STDERR, "minishell: ");
+		perror(name);
+	}
+	exit(EXEC_CMD_NOT_FOUND);
+}
+
+static int	ft_exec_cmd_system(const t_cmd_content cmd, const char *name)
+{
+	pid_t	fork_pid;
+	int		status;
+
+	fork_pid = fork();
+	status = SUCCESS;
+	if (fork_pid == CHILDREN)
+		ft_exec_cmd_system_for_kids(cmd, name);
+	else if (fork_pid > CHILDREN)
+		waitpid(fork_pid, &status, NO_OPTION);
+	if (fork_pid == CHILDREN_FAIL)
+		perror("minishell: ");
+	return (status);
+}
+
+int	ft_exec_cmd_true(t_data *data, const t_cmd_content cmd, const char *name)
 {
 	int	status;
 
@@ -42,7 +70,10 @@ int	ft_exec_cmd_true(t_data *data, const t_cmd_content cmd)
 	{
 		status = SUCCESS;
 		if (ft_is_builtin(cmd.path) == SUCCESS)
-			ft_exec_cmd_builtin(data, cmd);
+			status = ft_exec_cmd_builtin(data, cmd);
+		else
+			status = ft_exec_cmd_system(cmd, name);
+		data->env->exit_status = status % EXIT_MODE;
 	}
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:46:19 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 20:55:20 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 01:47:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ static char	**ft_exec_cmd_get_argv(t_list *lst)
 int	ft_exec_cmd(t_data *data, t_list *lst)
 {
 	int				status;
+	char			*name;
 	t_cmd_content	cmd_content;
 
 	status = BAD_PARAMETER;
@@ -110,13 +111,13 @@ int	ft_exec_cmd(t_data *data, t_list *lst)
 	if (data && lst && lst->content)
 	{
 		status = SUCCESS;
+		name = ((t_word *)lst->content)->word;
 		if (((t_word *)lst->content)->type == TY_CMD)
 		{
-			cmd_content.path = ft_exec_cmd_get_path(data,
-					((t_word *)lst->content)->word);
+			cmd_content.path = ft_exec_cmd_get_path(data, name);
 			cmd_content.argv = ft_exec_cmd_get_argv(lst);
 			cmd_content.envp = ft_tab_dump(data->env->envp);
-			status = ft_exec_cmd_true(data, cmd_content);
+			status = ft_exec_cmd_true(data, cmd_content, name);
 		}
 		else if (((t_word *)lst->content)->type == D_PIPE)
 			status = D_PIPE;

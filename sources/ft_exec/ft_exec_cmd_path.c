@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:01:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 18:11:14 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:17:47 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_exec_cmd_error(t_data *data, const char *path, const char *cmd)
 	if (data && path == NULL && cmd)
 	{
 		ft_fprintf(STDERR, "minishell: %s: command not found\n", cmd);
-		data->env->exit_status = 127;
+		data->env->exit_status = EXEC_CMD_NOT_FOUND;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:21:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/19 23:21:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:23:49 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_redirect_display_error(t_data *data,
 	const char *error, char **path, int status)
 {
 	if (status == REDIRECT_AMBIGUOUS_REDIRECT || (*path && **path == '\0'))
-		data->env->exit_status = 1;
+		data->env->exit_status = REDIRECT_FAIL;
 	if (*path && **path == '\0')
 	{
 		ft_fprintf(STDERR, ERR_SUCH_FILE, *path);
