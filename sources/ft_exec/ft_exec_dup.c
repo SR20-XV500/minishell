@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:08:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 22:37:01 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 22:53:49 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ static int	ft_exec_dup(t_data *data, int *used_fd, int std_used)
 	return (status);
 }
 
+static int	ft_exec_dup_close_content(t_data *data, int *used_fd, int std_used)
+{
+	int	status;
+
+	status = SUCCESS;
+	if (data->dup_std[std_used] > 2)
+	{
+		if (dup2(data->dup_std[std_used], std_used) == EXEC_DUP_FAIL)
+			status = FAIL;
+		close(data->dup_std[std_used]);
+		data->dup_std[std_used] = 0;
+		close(*used_fd);
+		*used_fd = 0;
+	}
+	return (status);
+}
+
 int	ft_exec_dup_close(t_data *data)
 {
 	int	status;
@@ -41,24 +58,10 @@ int	ft_exec_dup_close(t_data *data)
 	if (data)
 	{
 		status = SUCCESS;
-		if (data->dup_std[STDIN] > 2)
-		{
-			if (dup2(data->dup_std[STDIN], STDIN) == EXEC_DUP_FAIL)
-				status = FAIL;
-			close(data->dup_std[STDIN]);
-			data->dup_std[STDIN] = 0;
-			close(data->input_fd);
-			data->input_fd = 0;
-		}
-		if (data->dup_std[STDOUT] > 2)
-		{
-			if (dup2(data->dup_std[STDOUT], STDOUT) == EXEC_DUP_FAIL)
-				status = FAIL;
-			close(data->dup_std[STDOUT]);
-			data->dup_std[STDOUT] = 0;
-			close(data->output_fd);
-			data->output_fd = 0;
-		}
+		if (ft_exec_dup_close_content(data, &data->input_fd, STDIN) == FAIL)
+			status = FAIL;
+		if (ft_exec_dup_close_content(data, &data->output_fd, STDOUT) == FAIL)
+			status = FAIL;
 	}
 	return (status);
 }
