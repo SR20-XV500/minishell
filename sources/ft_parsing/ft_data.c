@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 21:31:37 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:58:33 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	ft_data_free(t_data **data)
 			close((*data)->input_fd);
 		if ((*data)->output_fd > 2)
 			close((*data)->output_fd);
+		if ((*data)->dup_std[STDIN] > 2)
+			close((*data)->dup_std[STDIN]);
+		if ((*data)->dup_std[STDOUT] > 2)
+			close((*data)->dup_std[STDOUT]);
 		free(*data);
 		*data = NULL;
 	}
