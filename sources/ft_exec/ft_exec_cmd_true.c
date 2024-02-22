@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 01:59:31 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:05:07 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,18 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 	return (status);
 }
 
-static int	ft_exec_cmd_system_for_kids(t_data *data, const t_cmd_content cmd,
+static void	ft_exec_cmd_system_for_kids(const t_cmd_content cmd,
 	const char *name)
 {
-	int	status;
-
-	status = execve(cmd.path, cmd.argv, cmd.envp);
-	if (status == -1)
+	if (execve(cmd.path, cmd.argv, cmd.envp))
 	{
 		ft_fprintf(STDERR, "minishell: ");
 		perror(name);
-		data->env->exit_status = 127;
 	}
-	return (status);
+	exit(127);
 }
 
-static int	ft_exec_cmd_system(t_data *data,
-	const t_cmd_content cmd, const char *name)
+static int	ft_exec_cmd_system(const t_cmd_content cmd, const char *name)
 {
 	pid_t	fork_pid;
 	int		status;
@@ -58,8 +53,8 @@ static int	ft_exec_cmd_system(t_data *data,
 	fork_pid = fork();
 	status = SUCCESS;
 	if (fork_pid == 0)
-		ft_exec_cmd_system_for_kids(data, cmd, name);
-	else if (fork_pid != -1)
+		ft_exec_cmd_system_for_kids(cmd, name);
+	else
 		waitpid(fork_pid, &status, 0);
 	if (fork_pid == -1)
 		perror("minishell: ");
@@ -77,8 +72,10 @@ int	ft_exec_cmd_true(t_data *data, const t_cmd_content cmd, const char *name)
 		if (ft_is_builtin(cmd.path) == SUCCESS)
 			status = ft_exec_cmd_builtin(data, cmd);
 		else
-			status = ft_exec_cmd_system(data, cmd, name);
-		data->env->exit_status = status;
+			status = ft_exec_cmd_system(cmd, name);
+		(void)ft_exec_cmd_system;
+		(void)name;
+		data->env->exit_status = status % 255;
 	}
 	return (status);
 }
