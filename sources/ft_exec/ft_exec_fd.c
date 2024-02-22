@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:20:14 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 16:41:44 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:27:22 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ static int	ft_exec_redirect_fd_err(t_data *data, int fd,
 	int	status;
 
 	status = SUCCESS;
-	if (fd == -1)
+	if (fd == FD_FAIL_OPEN)
 	{
 		status = FAIL;
 		ft_fprintf(STDERR, "minishell: ");
 		perror(err_str);
-		data->env->exit_status = 1;
+		data->env->exit_status = REDIRECT_FAIL;
 	}
 	else if (ft_is_directory(path) == SUCCESS)
 	{
 		status = FAIL;
 		ft_fprintf(STDERR, "minishell: %s: Is a directory\n", err_str);
-		data->env->exit_status = 1;
+		data->env->exit_status = REDIRECT_FAIL;
 	}
 	return (status);
 }
@@ -62,12 +62,12 @@ int	ft_exec_redirect_fd(t_data *data, int type,
 		if (type == D_INPUT)
 			open_fd = open(path, O_RDONLY);
 		else if (type == D_OUTPUT_NEW)
-			open_fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			open_fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, OPEN_WR_R_R);
 		else
-			open_fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			open_fd = open(path, O_WRONLY | O_CREAT | O_APPEND, OPEN_WR_R_R);
 		if (open_fd)
 		{
-			if (*change_fd > 2)
+			if (*change_fd > MAX_OPEN_PRE_OPEN)
 				close(*change_fd);
 			*change_fd = open_fd;
 		}

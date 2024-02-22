@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 13:05:07 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:17:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	ft_exec_cmd_system_for_kids(const t_cmd_content cmd,
 		ft_fprintf(STDERR, "minishell: ");
 		perror(name);
 	}
-	exit(127);
+	exit(EXEC_CMD_NOT_FOUND);
 }
 
 static int	ft_exec_cmd_system(const t_cmd_content cmd, const char *name)
@@ -52,11 +52,11 @@ static int	ft_exec_cmd_system(const t_cmd_content cmd, const char *name)
 
 	fork_pid = fork();
 	status = SUCCESS;
-	if (fork_pid == 0)
+	if (fork_pid == CHILDREN)
 		ft_exec_cmd_system_for_kids(cmd, name);
-	else
-		waitpid(fork_pid, &status, 0);
-	if (fork_pid == -1)
+	else if (fork_pid > CHILDREN)
+		waitpid(fork_pid, &status, NO_OPTION);
+	if (fork_pid == CHILDREN_FAIL)
 		perror("minishell: ");
 	return (status);
 }
@@ -73,9 +73,7 @@ int	ft_exec_cmd_true(t_data *data, const t_cmd_content cmd, const char *name)
 			status = ft_exec_cmd_builtin(data, cmd);
 		else
 			status = ft_exec_cmd_system(cmd, name);
-		(void)ft_exec_cmd_system;
-		(void)name;
-		data->env->exit_status = status % 255;
+		data->env->exit_status = status % EXIT_MODE;
 	}
 	return (status);
 }

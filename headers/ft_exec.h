@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 13:12:06 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:27:33 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # define ERR_SUCH_FILE "minishell: %s: No such file or directory\n"
 # define ERR_AMBIGUOUS_REDIRECT "minishell: %s: ambiguous redirect\n"
 # define CHILDREN 0
+# define EXIT_MODE 255
+# define NO_OPTION 0
+# define CHILDREN_FAIL -1
+# define EXEC_CMD_NOT_FOUND 127
+# define REDIRECT_FAIL 1
+# define OPEN_WR_R_R 0644
+# define FD_FAIL_OPEN -1
+# define MAX_OPEN_PRE_OPEN 2
 
 typedef struct s_cmd_content
 {
