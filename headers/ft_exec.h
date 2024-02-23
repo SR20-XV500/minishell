@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 21:06:09 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/23 22:42:06 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,10 @@ int		ft_exec_cmd_true(t_data *data, const t_cmd_content cmd,
 			const char *name);
 int		ft_exec_dupbass(t_data *data);
 int		ft_exec_dup_close(t_data *data);
+int		ft_exec_basic(t_data *data, t_list *lst_start);
+int		ft_crazy_children(t_data *data, int *fds, int len, pid_t *children);
+void	ft_wait_children(t_data *data, pid_t *children, int len);
+int		ft_exec_pipe(t_data *data);
+int		ft_word_count(t_list *lst, int type);
 
 #endif
