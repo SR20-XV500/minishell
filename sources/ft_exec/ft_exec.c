@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/23 13:30:17 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:53:00 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,23 @@ static int	ft_set_pipe(int *fd, int len)
 	return (FAIL);
 }
 
+static int	ft_pipe_make_children(t_data *data, int *fds, int len)
+{
+	
+}
+
+static void	ft_close_pipe(int *fds, int len)
+{
+	while (len)
+	{
+		len--;
+		close(fd + len * 2);
+		close(fd + (len * 2) + 1);
+		*(fd + len * 2) = 0;
+		*(fd + (len * 2) + 1) = 0;
+	}
+}
+
 static int	ft_exec_pipe(t_data *data)
 {
 	int	status;
@@ -110,8 +127,10 @@ static int	ft_exec_pipe(t_data *data)
 			status = ft_set_pipe(pipe_fd, len);
 			if (status == SUCCESS)
 			{
-				
+				status = ft_pipe_make_children(data, pipe_fd, len);
+				ft_close_pipe(pipe_fd, len);
 			}
+			free(pipe_fd);
 		}
 	}
 	return (status);
