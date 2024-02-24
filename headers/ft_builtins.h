@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 14:04:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:40:32 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	ft_cd(char **argv, char **envp);
 
 int	ft_unset(char **argv, t_env *env);
 
-int	ft_export(char **argv, char **envp);
+int	ft_export(char **argv, t_env *env);
 
 #endif
