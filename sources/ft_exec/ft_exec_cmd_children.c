@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 19:18:48 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 20:15:52 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/24 21:08:17 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static void	ft_exec_children_cmd(t_data *data, int *fds, int pos, int len)
 			ft_exec_basic(data, ft_exec_get_cmd(data, pos));
 		exit_status = data->env->exit_status;
 	}
+	ft_data_free(&data);
+	free(fds);
 	exit(exit_status);
 }
 
