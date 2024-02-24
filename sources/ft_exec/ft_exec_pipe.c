@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 22:39:39 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 19:31:11 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/24 21:13:26 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ static int	ft_pipe_make_children(t_data *data, int *fds, int len)
 		if (children)
 		{
 			ft_bzero(children, sizeof(pid_t) * len);
+			data->children = children;
 			status = ft_crazy_children(data, fds, len, children);
 			free(children);
+			data->children = NULL;
 		}
 	}
 	return (status);

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 19:52:15 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/24 21:10:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_data
 	int		dup_std[2];
 	int		output_fd;
 	int		input_fd;
+	pid_t	*children;
 }	t_data;
 
 t_data	*ft_data_get(const char **envp);
