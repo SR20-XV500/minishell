@@ -32,7 +32,7 @@ FT_PARSING		::= $(foreach buffer, $(T_FT_PARSING), \
 						$(SOURCES)ft_parsing/$(buffer).c)
 T_FT_BUILTINS	::= ft_env ft_env_tab_get ft_env_get ft_env_iter \
 					ft_env_initial ft_env_initial_shlvl ft_echo ft_pwd ft_cd \
-					ft_unset ft_export
+					ft_unset ft_export ft_export_print
 FT_BUILTINS		::= $(foreach buffer, $(T_FT_BUILTINS), \
 						$(SOURCES)ft_builtins/$(buffer).c)
 SOURCES			::= $(SOURCES)main.c $(UTILS) $(FT_PARSING) $(FT_BUILTINS) \
