@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/23 22:42:06 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:24:02 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int		ft_crazy_children(t_data *data, int *fds, int len, pid_t *children);
 void	ft_wait_children(t_data *data, pid_t *children, int len);
 int		ft_exec_pipe(t_data *data);
 int		ft_word_count(t_list *lst, int type);
+void	ft_close_pipe(int *fds, int len);
 
 #endif

@@ -6,23 +6,29 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 22:39:39 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/23 22:43:49 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:59:56 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_close_pipe(int *fds, int len)
+void	ft_close_pipe(int *fds, int len)
 {
 	if (fds && len > 0)
 	{
 		while (len)
 		{
 			len--;
-			close(*(fds + len * 2));
-			close(*(fds + (len * 2) + 1));
-			*(fds + len * 2) = 0;
-			*(fds + (len * 2) + 1) = 0;
+			if (*(fds + len) > 2)
+			{
+				close(*(fds + len * 2));
+				*(fds + len * 2) = 0;
+			}
+			if (*(fds + len + 1) > 2)
+			{
+				close(*(fds + (len * 2) + 1));
+				*(fds + (len * 2) + 1) = 0;
+			}
 		}
 	}
 }

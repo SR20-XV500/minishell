@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 19:18:48 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/23 22:43:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:05:51 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,16 @@ static int	ft_exec_dup_pipe(int *fds, int pos, int len)
 		status = SUCCESS;
 		std[STDIN] = STDIN;
 		std[STDOUT] = STDOUT;
-		if (pos != 0)
+		if (pos == 1)
+		{
 			std[STDIN] = *(fds + 0);
-		if (pos != len - 1)
+			close(*(fds + 1));
+		}
+		if (pos == 0)
+		{
 			std[STDOUT] = *(fds + 1);
+			close(*(fds));
+		}
 		if (dup2(std[STDIN], STDIN) == EXEC_DUP_FAIL
 			|| dup2(std[STDOUT], STDOUT) == EXEC_DUP_FAIL)
 			status = FAIL;
@@ -101,6 +107,7 @@ int	ft_crazy_children(t_data *data, int *fds, int len, pid_t *children)
 				status = FAIL;
 			index++;
 		}
+		ft_close_pipe(fds, len - 1);
 		if (status == FAIL)
 			ft_kill_children(children, index);
 		else
