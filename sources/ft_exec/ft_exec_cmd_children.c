@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 19:18:48 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 13:05:51 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/24 14:48:01 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ static void	ft_kill_children(pid_t *children, int len)
 	}
 }
 
+static void ft_close_pipe_no_used(int *fds, int std[2], int len)
+{
+	len *= 2;
+	while (len)
+	{
+		len--;
+		if (*(fds + len) != std[STDIN] && *(fds+ len) != std[STDOUT]
+			&& *(fds + len) > 2)
+		{
+			close(*(fds + len));
+			*(fds + len) = 0;
+		}
+	}
+}
+
 static int	ft_exec_dup_pipe(int *fds, int pos, int len)
 {
 	int	status;
@@ -35,16 +50,25 @@ static int	ft_exec_dup_pipe(int *fds, int pos, int len)
 		status = SUCCESS;
 		std[STDIN] = STDIN;
 		std[STDOUT] = STDOUT;
-		if (pos == 1)
+		if (pos != 0)
 		{
-			std[STDIN] = *(fds + 0);
-			close(*(fds + 1));
+			std[STDIN] = *(fds + pos / 2 + STDIN);
 		}
-		if (pos == 0)
+		if (pos != len -1)
 		{
-			std[STDOUT] = *(fds + 1);
-			close(*(fds));
+			std[STDOUT] = *(fds + pos / 2 + STDOUT);
 		}
+		//if (pos == 0)
+		//{
+		//	std[STDOUT] = *(fds + 1);
+		//	//close(*fds);
+		//}
+		//if (pos == 1)
+		//{
+		//	std[STDIN] = *(fds + 0);
+		//	//close(*(fds + 1));
+		//}
+		ft_close_pipe_no_used(fds, std, len - 1);
 		if (dup2(std[STDIN], STDIN) == EXEC_DUP_FAIL
 			|| dup2(std[STDOUT], STDOUT) == EXEC_DUP_FAIL)
 			status = FAIL;
