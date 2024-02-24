@@ -6,24 +6,29 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 19:18:48 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 18:53:55 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/24 20:15:52 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_close_pipe_no_used(int *fds, int std[2], int len)
+static int	ft_close_pipe_no_used(int *fds, int std[2], int len)
 {
+	int	status;
+
+	status = SUCCESS;
 	len *= 2;
-	while (len)
+	while (len && status == SUCCESS)
 	{
 		len--;
-		if (*(fds + len) != std[STDIN] && *(fds + len) != std[STDOUT])
+		if (fds[len] != std[STDIN] && fds[len] != std[STDOUT])
 		{
-			close(*(fds + len));
+			if (close(*(fds + len)) == -1)
+				status = FAIL;
 			*(fds + len) = 0;
 		}
 	}
+	return (status);
 }
 
 static int	ft_exec_dup_pipe(int *fds, int pos, int len)
@@ -41,9 +46,9 @@ static int	ft_exec_dup_pipe(int *fds, int pos, int len)
 			std[STDIN] = *(fds + (pos - 1) * 2 + STDIN);
 		if (pos != len -1)
 			std[STDOUT] = *(fds + pos * 2 + STDOUT);
-		ft_close_pipe_no_used(fds, std, len - 1);
-		if (dup2(std[STDIN], STDIN) == EXEC_DUP_FAIL
-			|| dup2(std[STDOUT], STDOUT) == EXEC_DUP_FAIL)
+		status = ft_close_pipe_no_used(fds, std, len - 1);
+		if (status == SUCCESS && (dup2(std[STDIN], STDIN) == EXEC_DUP_FAIL
+				|| dup2(std[STDOUT], STDOUT) == EXEC_DUP_FAIL))
 			status = FAIL;
 	}
 	return (status);
