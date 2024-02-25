@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 20:15:36 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:00:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,24 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 	return (status);
 }
 
-static void	ft_exec_cmd_system_for_kids(const t_cmd_content cmd,
+static void	ft_exec_cmd_system_for_kids(t_data *data, const t_cmd_content cmd,
 	const char *name)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+	ft_data_free(&data);
 	if (execve(cmd.path, cmd.argv, cmd.envp))
 	{
 		ft_fprintf(STDERR, "minishell: ");
 		perror(name);
 	}
+	ft_tab_free(cmd.argv);
+	ft_tab_free(cmd.envp);
+	free(cmd.path);
 	exit(EXEC_CMD_NOT_FOUND);
 }
 
-static int	ft_exec_cmd_system(const t_cmd_content cmd, const char *name)
+static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd, const char *name)
 {
 	pid_t	fork_pid;
 	int		status;
@@ -55,7 +59,7 @@ static int	ft_exec_cmd_system(const t_cmd_content cmd, const char *name)
 	fork_pid = fork();
 	status = SUCCESS;
 	if (fork_pid == CHILDREN)
-		ft_exec_cmd_system_for_kids(cmd, name);
+		ft_exec_cmd_system_for_kids(data, cmd, name);
 	else if (fork_pid > CHILDREN)
 		waitpid(fork_pid, &status, NO_OPTION);
 	if (fork_pid == CHILDREN_FAIL)
@@ -74,7 +78,7 @@ int	ft_exec_cmd_true(t_data *data, const t_cmd_content cmd, const char *name)
 		if (ft_is_builtin(cmd.path) == SUCCESS)
 			status = ft_exec_cmd_builtin(data, cmd);
 		else
-			status = ft_exec_cmd_system(cmd, name);
+			status = ft_exec_cmd_system(data, cmd, name);
 		data->env->exit_status = status % EXIT_MODE;
 	}
 	return (status);
