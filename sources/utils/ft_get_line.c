@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 01:50:07 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 20:18:11 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	ft_use_current_line(char **lines, t_data *data)
 	(void)ft_print_word;
 	while (lines[i])
 	{
+		data->line_count += 1;
 		add_history(lines[i]);
 		if (ft_parser(data, lines[i]) == SUCCESS)
 		{
