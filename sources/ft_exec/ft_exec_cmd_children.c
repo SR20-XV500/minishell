@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 19:18:48 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 21:08:17 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:05:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,14 @@ static int	ft_close_pipe_no_used(int *fds, int std[2], int len)
 	return (status);
 }
 
-static int	ft_exec_dup_pipe(int *fds, int pos, int len)
+static int	ft_exec_dup_pipe(int *fds, int pos, int len, int std[2])
 {
 	int	status;
-	int	std[2];
 
 	status = BAD_PARAMETER;
-	if (fds && pos >= 0 && len > 0)
+	if (fds && pos >= 0 && len > 0 && std)
 	{
 		status = SUCCESS;
-		std[STDIN] = STDIN;
-		std[STDOUT] = STDOUT;
 		if (pos != 0)
 			std[STDIN] = *(fds + (pos - 1) * 2 + STDIN);
 		if (pos != len -1)
@@ -79,16 +76,25 @@ static t_list	*ft_exec_get_cmd(t_data *data, int pos)
 static void	ft_exec_children_cmd(t_data *data, int *fds, int pos, int len)
 {
 	int	exit_status;
+	int	buffer[2];
 
+	buffer[STDIN] = STDIN;
+	buffer[STDOUT] = STDOUT;
 	exit_status = 0;
 	if (data && fds && len)
 	{
-		if (ft_exec_dup_pipe(fds, pos, len) == SUCCESS)
+		if (ft_exec_dup_pipe(fds, pos, len, buffer) == SUCCESS)
+		{
+			free(fds);
 			ft_exec_basic(data, ft_exec_get_cmd(data, pos));
+		}
 		exit_status = data->env->exit_status;
 	}
+	if (buffer[STDIN] > 2)
+		close(buffer[STDIN]);
+	if (buffer[STDOUT] > 2)
+		close(buffer[STDOUT]);
 	ft_data_free(&data);
-	free(fds);
 	exit(exit_status);
 }
 

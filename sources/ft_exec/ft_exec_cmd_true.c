@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 17:00:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:09:50 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	ft_exec_cmd_system_for_kids(t_data *data, const t_cmd_content cmd,
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	ft_data_free(&data);
+	clear_history();
 	if (execve(cmd.path, cmd.argv, cmd.envp))
 	{
 		ft_fprintf(STDERR, "minishell: ");
@@ -51,7 +52,8 @@ static void	ft_exec_cmd_system_for_kids(t_data *data, const t_cmd_content cmd,
 	exit(EXEC_CMD_NOT_FOUND);
 }
 
-static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd, const char *name)
+static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
+	const char *name)
 {
 	pid_t	fork_pid;
 	int		status;
