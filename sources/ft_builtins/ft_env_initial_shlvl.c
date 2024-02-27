@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_initial_shlvl.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 19:11:17 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/03 17:25:13 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:49:55 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static long long	ft_env_shlvl_succes(const char *buffer)
 		value = 1;
 	else if (value >= 999 && value < INT_MAX)
 	{
-		ft_fprintf(2, W_SH, value);
+		ft_fprintf(STDERR, W_SH, value);
 		value = 1;
 	}
 	else if (value < 0)
@@ -101,10 +101,10 @@ static int	ft_env_init_shlvl_update(t_env *env)
 
 int	ft_env_init_shlvl(t_env *env)
 {
-	int		ret;
+	int	ret;
 
 	ret = MALLOC_FAIL;
-	if (ft_env_get_pos(*env, "SHLVL") != -1)
+	if (ft_env_get_pos(*env, "SHLVL") != ENV_NOT_SET)
 		ret = ft_env_init_shlvl_update(env);
 	else
 	{

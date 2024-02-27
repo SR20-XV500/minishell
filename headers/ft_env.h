@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:47:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 21:51:06 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:45:09 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ENV_EXISTING_VARIABLE 3
 # define ENV_NOT_EXISTING_VARIABLE 4
 # define ENV_BAD_PARAMETER 5
+# define ENV_NOT_SET -1
 
 typedef struct s_env
 {

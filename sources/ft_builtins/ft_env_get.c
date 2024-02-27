@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:57:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/17 00:44:43 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:49:52 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_env_get_content(t_env env, const char *name)
 	char	*buffer;
 
 	buffer = NULL;
-	if (ft_env_get_pos(env, name) == -1)
+	if (ft_env_get_pos(env, name) == ENV_NOT_SET)
 		buffer = ft_env_ambiguous_variable(env, name);
 	else
 		buffer = ft_env_tab_get_content(env.envp, name);
