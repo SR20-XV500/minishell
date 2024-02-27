@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/02/25 00:32:31 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/26 23:46:45 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_export_print(t_env *env)
 	int		exit_code;
 	char	**export;
 
-	exit_code = FAIL;
+	exit_code = MALLOC_FAIL;
 	if (env)
 	{
 		export = ft_tabjoin(env->envp, env->export);

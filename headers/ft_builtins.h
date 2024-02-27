@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 00:31:59 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/27 01:52:44 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define CD_OLDPWD_NOT_SET 5
 # define CD_INVALID_PATH -1
 # define CD_VALID_PATH 1
+# define FALSE 0
+# define TRUE 1
 
 int	ft_echo(char **argv, char **envp);
 
