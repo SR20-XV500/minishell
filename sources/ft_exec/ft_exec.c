@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/23 22:41:33 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:20:05 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_exec_basic(t_data *data, t_list *lst_start)
 	{
 		status = ft_exec_iter_lst(data, lst_start, &ft_exec_redirect);
 		if (status == SUCCESS)
-			status = ft_exec_dupbass(data);
+			status = ft_exec_dupbass(data, lst_start);
 		if (status == SUCCESS)
 			status = ft_exec_iter_lst(data, lst_start, &ft_exec_cmd);
 		if (ft_exec_dup_close(data) == FAIL)

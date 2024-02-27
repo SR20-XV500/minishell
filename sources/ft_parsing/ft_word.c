@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:51:18 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 20:52:16 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:11:32 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,10 @@ void	ft_word_lst_clear(t_data *data)
 
 int	ft_word_add(t_data *data, const char *str, int type)
 {
-	t_list	*lst;
 	int		ret;
 
 	ret = BAD_PARAMETER;
 	if (data && str)
-	{
-		ret = MALLOC_FAIL;
-		lst = ft_word_lst_make(str, type);
-		if (lst)
-		{
-			ret = SUCCESS;
-			ft_lstadd_back(&data->words, lst);
-		}
-	}
+		ret = ft_word_add_lst(&data->words, str, type);
 	return (ret);
 }

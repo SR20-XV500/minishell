@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 20:47:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:12:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	ft_word_lst_clear(t_data *data);
 void	ft_word_free(void *data);
 int		ft_word_add(t_data *data, const char *str, int type);
 t_list	*ft_word_lst_make(const char *str, int type);
+int		ft_word_add_lst(t_list **lst_el, const char *str, int type);
 
 int		ft_parser(t_data *data, const char *str);
 int		ft_parser_use_line(t_data *data, const char *str);

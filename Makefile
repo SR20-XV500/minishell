@@ -18,13 +18,14 @@ T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage \
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_EXEC		::= ft_redirect_path ft_exec ft_exec_fd ft_exec_cmd_path \
 					ft_exec_cmd ft_exec_cmd_free ft_exec_cmd_true ft_exec_dup \
-					ft_exec_cmd_children ft_exec_cmd_children_2 ft_exec_pipe
+					ft_exec_cmd_children ft_exec_cmd_children_2 ft_exec_pipe \
+					ft_exec_here_doc
 FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
 T_FT_PARSING	::= ft_data ft_word ft_parser ft_parser_get_elements \
 					ft_check_lst ft_type_set ft_expansion \
 					ft_expansion_get ft_expansion_var_join ft_expansion_split \
-					ft_expansion_split_main ft_rm_rf_quotes
+					ft_expansion_split_main ft_rm_rf_quotes ft_word_lst
 FT_PARSING		::= $(foreach buffer, $(T_FT_PARSING), \
 						$(SOURCES)ft_parsing/$(buffer).c)
 T_FT_BUILTINS	::= ft_env ft_env_tab_get ft_env_get ft_env_iter \

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:08:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 22:53:49 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:20:43 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,16 @@ int	ft_exec_dup_close(t_data *data)
 	return (status);
 }
 
-int	ft_exec_dupbass(t_data *data)
+int	ft_exec_dupbass(t_data *data, t_list *lst_start)
 {
 	int	status;
 
 	status = BAD_PARAMETER;
 	if (data)
 	{
-		status = ft_exec_dup(data, &data->input_fd, STDIN);
+		status = SUCCESS;
+		if (ft_redirect_priority(lst_start) == PRIORITY_INPUT)
+			status = ft_exec_dup(data, &data->input_fd, STDIN);
 		if (status == SUCCESS)
 			status = ft_exec_dup(data, &data->output_fd, STDOUT);
 	}
