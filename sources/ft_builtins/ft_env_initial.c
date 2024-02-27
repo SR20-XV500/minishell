@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_initial.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 19:28:56 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/08 14:23:58 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:49:59 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,32 @@ static int	ft_env_init_pwd(t_env *env)
 	return (ret);
 }
 
+static int	ft_env_init_export(t_env *env)
+{
+	int		ret;
+	char	**export;
+
+	ret = MALLOC_FAIL;
+	export = malloc(sizeof(char *));
+	if (export)
+	{
+		*export = NULL;
+		env->export = export;
+		ret = ENV_SUCCESS;
+	}
+	return (ret);
+}
+
 int	ft_env_init_value(t_env *env)
 {
 	int	ret;
 
 	ret = MALLOC_FAIL;
-	(void)ft_env_init_pwd;
 	if (env)
 	{
 		if (ft_env_init_shlvl(env) == ENV_SUCCESS
-			&& ft_env_init_pwd(env) == ENV_SUCCESS)
+			&& ft_env_init_pwd(env) == ENV_SUCCESS
+			&& ft_env_init_export(env) == ENV_SUCCESS)
 			ret = ENV_SUCCESS;
 	}
 	return (ret);
