@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 19:11:17 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 16:17:01 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:49:55 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	ft_env_init_shlvl(t_env *env)
 	int	ret;
 
 	ret = MALLOC_FAIL;
-	if (ft_env_get_pos(*env, "SHLVL") != -1)
+	if (ft_env_get_pos(*env, "SHLVL") != ENV_NOT_SET)
 		ret = ft_env_init_shlvl_update(env);
 	else
 	{
