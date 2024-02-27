@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_initial.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 19:28:56 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/08 14:23:58 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:20:55 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_env_init_value(t_env *env)
 	int	ret;
 
 	ret = MALLOC_FAIL;
-	(void)ft_env_init_pwd;
 	if (env)
 	{
 		if (ft_env_init_shlvl(env) == ENV_SUCCESS
