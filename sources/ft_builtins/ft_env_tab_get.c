@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_tab_get.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:18:17 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/19 22:36:08 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:50:11 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_env_tab_get_pos(char **envp, const char *name)
 	int				pos;
 	unsigned int	len;
 
-	pos = -1;
+	pos = ENV_NOT_SET;
 	if (envp && name)
 	{
 		pos = 0;
@@ -26,7 +26,7 @@ int	ft_env_tab_get_pos(char **envp, const char *name)
 				|| envp[pos][len] != '='))
 			pos++;
 		if (envp[pos] == NULL)
-			pos = -1;
+			pos = ENV_NOT_SET;
 	}
 	return (pos);
 }
@@ -38,7 +38,7 @@ char	*ft_env_tab_get_content(char **envp, const char *name)
 
 	content = NULL;
 	pos = ft_env_tab_get_pos(envp, name);
-	if (pos != -1)
+	if (pos != ENV_NOT_SET)
 	{
 		content = ft_substr(envp[pos], ft_strlen(name) + 1,
 				ft_strlen(envp[pos]));
@@ -59,7 +59,7 @@ int	ft_env_tab_del(char ***envp, const char *name)
 	{
 		ret = ENV_NOT_EXISTING_VARIABLE;
 		pos = ft_env_tab_get_pos(*envp, name);
-		if (pos != -1)
+		if (pos != ENV_NOT_SET)
 		{
 			ret = MALLOC_FAIL;
 			buffer = ft_tab_del(*envp, pos);
@@ -97,7 +97,7 @@ int	ft_env_tab_add(char ***envp, const char *all_str)
 	if (envp && *envp && all_str)
 	{
 		name = ft_env_get_name(all_str);
-		if (name && ft_env_tab_get_pos(*envp, name) == -1)
+		if (name && ft_env_tab_get_pos(*envp, name) == ENV_NOT_SET)
 			ret = ft_env_tab_add_content(envp, all_str);
 		else if (name == NULL)
 			ret = MALLOC_FAIL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion_var_join.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:47:04 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/17 18:51:15 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:50:13 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_expansion_get_content_var(t_data *data,
 	if (name && content && *name)
 	{
 		status = SUCCESS;
-		if (ft_env_get_pos(*(data->env), name + 1) != -1
+		if (ft_env_get_pos(*(data->env), name + 1) != ENV_NOT_SET
 			|| ft_strncmp(name, "$?", 3) == CMP_EGAL)
 		{
 			buffer = ft_env_get_content(*(data->env), name + 1);

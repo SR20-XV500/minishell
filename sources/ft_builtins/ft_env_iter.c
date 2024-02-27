@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_iter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/19 22:36:25 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:49:58 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,16 @@
  * @param env environement variable
  * @param name he used to get pos but no free
  * @param all_str full line of the path, this variable are dump
- * @return
- * MALLOC_FAIL;
+ * @return (* MALLOC_FAIL);
  * ENV_UPDATE_FAIL -> if arguments is bad;
  * ENV_UPDATE_SUCCESS;
  * ENV_UPDATE_NONE -> if variable don't existe
-*/
+ */
 int	ft_env_update(t_env *env, const char *name, const char *all_str)
 {
 	int		ret;
 	int		pos;
-	char	*new_str;	
+	char	*new_str;
 
 	ret = ENV_UPDATE_FAIL;
 	if (name && all_str)
@@ -36,7 +35,7 @@ int	ft_env_update(t_env *env, const char *name, const char *all_str)
 		new_str = ft_strdup(all_str);
 		if (new_str == NULL)
 			ret = MALLOC_FAIL;
-		else if (pos != -1)
+		else if (pos != ENV_NOT_SET)
 		{
 			free(env->envp[pos]);
 			env->envp[pos] = new_str;
