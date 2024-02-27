@@ -6,23 +6,27 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 20:53:05 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:58:48 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_free_here_doc(t_list **here_doc)
+void	ft_free_here_doc(t_list ***here_doc)
 {
 	size_t	index;
 
 	index = 0;
-	while (here_doc[index])
+	if (here_doc && *here_doc)
 	{
-		ft_lstclear(here_doc + index, &ft_word_free);
-		index++;
+		while ((*here_doc)[index])
+		{
+			ft_lstclear(*here_doc + index, &ft_word_free);
+			index++;
+		}
+		free(*here_doc);
+		*here_doc = NULL;
 	}
-	free(here_doc);
 }
 
 void	ft_data_free(t_data **data)
@@ -47,7 +51,7 @@ void	ft_data_free(t_data **data)
 		if ((*data)->children)
 			free((*data)->children);
 		if ((*data)->here_doc)
-			ft_free_here_doc((*data)->here_doc);
+			ft_free_here_doc(&(*data)->here_doc);
 		free(*data);
 		*data = NULL;
 	}

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 16:20:05 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:13:48 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,14 @@ int	ft_exec(t_data *data)
 	status = BAD_PARAMETER;
 	if (data)
 	{
-		if (ft_word_count(data->words, D_PIPE))
-			status = ft_exec_pipe(data);
-		else
-			status = ft_exec_basic(data, data->words);
+		status = ft_exec_here_doc(data);
+		if (status == SUCCESS)
+		{
+			if (ft_word_count(data->words, D_PIPE))
+				status = ft_exec_pipe(data);
+			else
+				status = ft_exec_basic(data, data->words);
+		}
 	}
 	return (status);
 }

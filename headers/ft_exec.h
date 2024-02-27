@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 16:22:49 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:11:58 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		ft_exec_cmd_true(t_data *data, const t_cmd_content cmd,
 int		ft_exec_dupbass(t_data *data, t_list *lst_start);
 int		ft_exec_dup_close(t_data *data);
 int		ft_exec_basic(t_data *data, t_list *lst_start);
+int		ft_exec_here_doc(t_data *data);
 
 void	ft_wait_children(t_data *data, pid_t *children, int len);
 void	ft_close_pipe(int *fds, int len);

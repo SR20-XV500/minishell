@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:35:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 18:29:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:16:39 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_redirect_priority(t_list *lst)
 	return (priority);
 }
 
-int	ft_count_here_doc(t_data *data)
+static int	ft_count_here_doc(t_data *data)
 {
 	int		count;
 	int		buffer;
@@ -54,4 +54,42 @@ int	ft_count_here_doc(t_data *data)
 		}
 	}
 	return (count);
+}
+
+static int	ft_make_here_doc(t_data *data)
+{
+	int	status;
+	int	len;
+
+	status = BAD_PARAMETER;
+	if (data)
+	{
+		status = SUCCESS;
+		len = ft_count_here_doc(data);
+		if (len > 1)
+		{
+			data->here_doc = malloc(sizeof(t_list **) * len);
+			if (data->here_doc)
+				ft_bzero(data->here_doc, sizeof(t_list **) * len);
+			else
+				status = MALLOC_FAIL;
+		}
+	}
+	return (status);
+}
+
+//int	ft_here_doc_add_content(t_data *data)
+//{
+//}
+
+int	ft_exec_here_doc(t_data *data)
+{
+	int	status;
+
+	status = BAD_PARAMETER;
+	if (data)
+	{
+		status = ft_make_here_doc(data);
+	}
+	return (status);
 }
