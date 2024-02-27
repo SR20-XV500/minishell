@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 19:28:56 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 00:20:55 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:41:53 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,25 @@ static int	ft_env_init_pwd(t_env *env)
 	return (ret);
 }
 
+static int	ft_env_init_export(t_env *env)
+{
+	int		ret;
+	char	**export;
+
+	ret = MALLOC_FAIL;
+	export = malloc(sizeof(*export));
+	if (export)
+	{
+		*export = ft_strdup("");
+		if (*export)
+		{
+			env->export = export;
+			ret = ENV_SUCCESS;
+		}
+	}
+	return (ret);
+}
+
 int	ft_env_init_value(t_env *env)
 {
 	int	ret;
@@ -35,7 +54,8 @@ int	ft_env_init_value(t_env *env)
 	if (env)
 	{
 		if (ft_env_init_shlvl(env) == ENV_SUCCESS
-			&& ft_env_init_pwd(env) == ENV_SUCCESS)
+			&& ft_env_init_pwd(env) == ENV_SUCCESS
+			&& ft_env_init_export(env) == ENV_SUCCESS)
 			ret = ENV_SUCCESS;
 	}
 	return (ret);
