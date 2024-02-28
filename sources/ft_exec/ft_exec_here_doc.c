@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:35:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 00:07:07 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:05:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,33 @@ static int	ft_make_here_doc(t_data *data)
 	return (status);
 }
 
-//int	ft_here_doc_add_content(t_data *data)
-//{
-//}
+static int	ft_here_doc_add_content(t_data *data)
+{
+	int		status;
+	t_list	*current;
+	t_list	**buffer;
+
+	status = SUCCESS;
+	current = data->words;
+	buffer = data->here_doc;
+	while (status == SUCCESS && current)
+	{
+		if (((t_word *)current->content)->type == TY_DELIM_HEREDOC)
+		{
+			*buffer = ft_here_doc_delimitor(data,
+					((t_word *)current->content)->word);
+			if (*buffer == NULL)
+				status = MALLOC_FAIL;
+		}
+		if (*buffer && ((t_word *)current->content)->type == D_PIPE
+			&& status == SUCCESS)
+			buffer++;
+		current = current->next;
+	}
+	if (status == MALLOC_FAIL)
+		ft_free_here_doc(&data->here_doc);
+	return (status);
+}
 
 int	ft_exec_here_doc(t_data *data)
 {
@@ -90,6 +114,8 @@ int	ft_exec_here_doc(t_data *data)
 	if (data)
 	{
 		status = ft_make_here_doc(data);
+		if (status == SUCCESS && data->here_doc)
+			status = ft_here_doc_add_content(data);
 	}
 	return (status);
 }

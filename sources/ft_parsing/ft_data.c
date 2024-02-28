@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 18:58:48 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:19:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_data_free(t_data **data)
 		if ((*data)->children)
 			free((*data)->children);
 		if ((*data)->here_doc)
-			ft_free_here_doc(&(*data)->here_doc);
+			ft_free_here_doc(&((*data)->here_doc));
 		free(*data);
 		*data = NULL;
 	}
