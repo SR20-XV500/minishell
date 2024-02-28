@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 01:43:36 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 02:47:28 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define NO_PRIORITY 1
 # define PRIORITY_HERE_DOC 2
 # define PRIORITY_INPUT 3
+# define ERR_HERE_DOC "minishell: warning: here-document at line %d "
+# define ERR_HERE_DOC_2 "delimited by end-of-file (wanted `%s')\n"
 
 typedef struct s_cmd_content
 {
