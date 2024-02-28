@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/02/28 00:57:06 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:02:44 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	ft_export_process(char *arg, t_env *env)
 
 	(void)env;
 	ret = FAIL;
-	if (ft_export_is_valid(arg))
+	if (ft_export_is_valid(ft_env_get_name(arg)))
 	{
 		if (ft_strchr(arg, '='))
 			ret = SUCCESS;
