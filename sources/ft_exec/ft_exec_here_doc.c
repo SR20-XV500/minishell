@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:35:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 21:05:18 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:27:46 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static int	ft_here_doc_add_content(t_data *data)
 	{
 		if (((t_word *)current->content)->type == TY_DELIM_HEREDOC)
 		{
+			ft_lstclear(buffer, &ft_word_free);
 			*buffer = ft_here_doc_delimitor(data,
 					((t_word *)current->content)->word);
 			if (*buffer == NULL)
