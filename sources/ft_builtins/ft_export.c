@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/02/27 01:55:18 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:57:06 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,12 @@ static int	ft_export_is_valid(const char *name)
 	return (ret);
 }
 
-// TODO: bash: export: `1toto': not a valid identifier
-// TODO: refactor ft_display_prompt?
-
+// TODO: allocate *export to NULL at init
 // TODO: export VAR:
-// Check if var is a valid name
 // Check if var contains an =
 // * If not check if it is in **envp
 // ** If not add it to **export
+// ** If yes do nothing
 // * If yes check if it exist in **export
 // ** If yes remove it from **export and add it to **envp
 // ** If not check if it exists in **envp
@@ -54,7 +52,19 @@ static int	ft_export_process(char *arg, t_env *env)
 	(void)env;
 	ret = FAIL;
 	if (ft_export_is_valid(arg))
-		ret = SUCCESS;
+	{
+		if (ft_strchr(arg, '='))
+			ret = SUCCESS;
+		else
+		{
+			if (ft_env_tab_get_pos(env->envp, arg) == -1)
+				ret = ft_env_tab_add(&env->export, arg);
+			ret = SUCCESS;
+		}
+	}
+	else
+		ft_fprintf(STDERR, "minishell: export: `%s': not a valid identifier\n",
+			arg);
 	return (ret);
 }
 
