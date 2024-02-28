@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:35:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 19:16:39 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 00:07:07 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ static int	ft_make_here_doc(t_data *data)
 		len = ft_count_here_doc(data);
 		if (len > 1)
 		{
-			data->here_doc = malloc(sizeof(t_list **) * len);
+			data->here_doc = malloc(sizeof(t_list *) * len);
 			if (data->here_doc)
-				ft_bzero(data->here_doc, sizeof(t_list **) * len);
+				ft_bzero(data->here_doc, sizeof(t_list *) * len);
 			else
 				status = MALLOC_FAIL;
 		}

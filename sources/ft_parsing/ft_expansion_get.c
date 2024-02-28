@@ -6,13 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:06:42 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 14:19:42 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:35:33 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_expansion_add_car(char *str, int car, char **buffer)
+int	ft_expansion_add_car(char *str, int car, char **buffer)
 {
 	char	*new_str;
 	size_t	size;
@@ -65,7 +65,7 @@ static int	ft_expansion_quote(const char *str, const char *current_car)
 	return (status);
 }
 
-static int	ft_expantion_get_while(t_data *data,
+int	ft_expantion_get_while(t_data *data,
 	const char *str, size_t *i, char **buffer)
 {
 	int	status;
@@ -76,35 +76,6 @@ static int	ft_expantion_get_while(t_data *data,
 	else
 		status = ft_expansion_add_car(*buffer, str[*i], buffer);
 	return (status);
-}
-
-char	*ft_expansion_get_str(t_data *data, const char *str)
-{
-	char	*new_str;
-	char	*buffer;
-	int		status;
-	size_t	i;
-
-	new_str = NULL;
-	buffer = NULL;
-	status = SUCCESS;
-	i = 0;
-	if (str && data)
-	{
-		while (str[i] && status == SUCCESS)
-		{
-			status = ft_expantion_get_while(data, str, &i, &buffer);
-			if (new_str != buffer)
-				free(new_str);
-			new_str = buffer;
-			i++;
-		}
-		if (status != SUCCESS)
-			free(new_str);
-		if (status != SUCCESS)
-			new_str = NULL;
-	}
-	return (new_str);
 }
 
 int	ft_expansion_str(t_data *data, const char *str, char **new_str)
