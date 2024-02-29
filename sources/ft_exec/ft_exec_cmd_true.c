@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd_true.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/29 20:59:06 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:22:47 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//else if (ft_strncmp("exit", cmd.path, 5) == CMP_EGAL)
+// else if (ft_strncmp("exit", cmd.path, 5) == CMP_EGAL)
 
 static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 {
@@ -26,7 +26,7 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 	else if (ft_strncmp("pwd", cmd.path, 4) == CMP_EGAL)
 		status = ft_pwd(cmd.argv, cmd.envp);
 	else if (ft_strncmp("export", cmd.path, 7) == CMP_EGAL)
-		status = ft_export(cmd.argv, cmd.envp);
+		status = ft_export(cmd.argv, data->env);
 	else if (ft_strncmp("unset", cmd.path, 6) == CMP_EGAL)
 		status = ft_unset(cmd.argv, data->env);
 	else if (ft_strncmp("env", cmd.path, 4) == CMP_EGAL)
@@ -35,7 +35,7 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 }
 
 static void	ft_exec_cmd_system_for_kids(t_data *data, const t_cmd_content cmd,
-	const char *name)
+		const char *name)
 {
 	char	*buffer_name;
 
@@ -57,7 +57,7 @@ static void	ft_exec_cmd_system_for_kids(t_data *data, const t_cmd_content cmd,
 }
 
 static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
-	const char *name)
+		const char *name)
 {
 	pid_t	fork_pid;
 	int		status;
