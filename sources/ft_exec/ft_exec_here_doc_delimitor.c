@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:04:49 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 21:05:50 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/29 01:27:03 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_list	*ft_here_doc_delimitor(t_data *data, char *str)
 		if (lst && expand == SUCCESS)
 			ft_here_doc_expansion(data, &lst);
 		if (lst && ((t_word *)ft_lstlast(lst)->content)->word == NULL
-			&& (ft_fprintf(STDERR, ERR_HERE_DOC, (int)data->line_count) < 0
+			&& (ft_fprintf(STDERR, ERR_HERE_DOC, (int)data->line_count) == -1
 				|| ft_fprintf(STDERR, ERR_HERE_DOC_2, str) == -1))
 			ft_lstclear(&lst, &ft_word_free);
 		data->line_count += line_count;

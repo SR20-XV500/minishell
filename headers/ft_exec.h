@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 02:47:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/29 02:15:37 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define PRIORITY_INPUT 3
 # define ERR_HERE_DOC "minishell: warning: here-document at line %d "
 # define ERR_HERE_DOC_2 "delimited by end-of-file (wanted `%s')\n"
+# define ERR_PIPE_FAIL -16
 
 typedef struct s_cmd_content
 {
@@ -53,11 +54,12 @@ int		ft_is_builtin(const char *cmd);
 void	ft_exec_cmd_free(const t_cmd_content cmd_content);
 int		ft_exec_cmd_true(t_data *data, const t_cmd_content cmd,
 			const char *name);
-int		ft_exec_dupbass(t_data *data, t_list *lst_start);
+int		ft_exec_dupbass(t_data *data);
 int		ft_exec_dup_close(t_data *data);
 int		ft_exec_basic(t_data *data, t_list *lst_start);
 int		ft_exec_here_doc(t_data *data);
 t_list	*ft_here_doc_delimitor(t_data *data, char *str);
+int		ft_exec_here_doc_redirect(t_data *data, t_list *lst_start);
 
 void	ft_wait_children(t_data *data, pid_t *children, int len);
 void	ft_close_pipe(int *fds, int len);

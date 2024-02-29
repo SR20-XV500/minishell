@@ -19,7 +19,8 @@ UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_EXEC		::= ft_redirect_path ft_exec ft_exec_fd ft_exec_cmd_path \
 					ft_exec_cmd ft_exec_cmd_free ft_exec_cmd_true ft_exec_dup \
 					ft_exec_cmd_children ft_exec_cmd_children_2 ft_exec_pipe \
-					ft_exec_here_doc ft_exec_here_doc_delimitor
+					ft_exec_here_doc ft_exec_here_doc_delimitor \
+					ft_exec_here_doc_redirect
 FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
 T_FT_PARSING	::= ft_data ft_word ft_parser ft_parser_get_elements \
