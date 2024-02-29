@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 01:55:56 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/29 23:28:00 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_data
 	pid_t	*children;
 	size_t	line_count;
 	t_list	**here_doc;
+	char	**tabs_lines;
 }	t_data;
 
 t_data	*ft_data_get(const char **envp);

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 19:01:56 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/29 23:37:58 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ void	ft_use_line(t_data *data)
 	lines = ft_get_line();
 	while (lines)
 	{
+		data->tabs_lines = lines;
 		ft_use_current_line(lines, data);
 		ft_tab_free(lines);
+		data->tabs_lines = NULL;
 		lines = ft_get_line();
 	}
 	ft_printf("\n");
