@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/21 21:51:36 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:43:08 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,20 @@ t_env	*ft_env_init(const char **envp)
 {
 	t_env	*env;
 
-	env = NULL;
-	if (envp)
+	env = malloc(sizeof(t_env));
+	if (env)
 	{
-		env = malloc(sizeof(t_env));
-		if (env)
-		{
-			ft_bzero(env, sizeof(t_env));
+		ft_bzero(env, sizeof(t_env));
+		if (envp)
 			env->envp = ft_tab_dump((char **)envp);
-			env->path = ft_strdup(D_PATH);
-			if (ft_env_init_value(env) != ENV_SUCCESS
-				|| ft_env_check(env) == ENV_FAIL)
-			{
-				ft_env_free(env);
-				env = NULL;
-			}
+		else
+			env->envp = ft_init_table();
+		env->path = ft_strdup(D_PATH);
+		if (ft_env_init_value(env) != ENV_SUCCESS
+			|| ft_env_check(env) == ENV_FAIL)
+		{
+			ft_env_free(env);
+			env = NULL;
 		}
 	}
 	return (env);
