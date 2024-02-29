@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 19:09:50 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/29 20:59:06 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,19 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 static void	ft_exec_cmd_system_for_kids(t_data *data, const t_cmd_content cmd,
 	const char *name)
 {
+	char	*buffer_name;
+
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+	buffer_name = ft_strdup(name);
 	ft_data_free(&data);
 	clear_history();
-	if (execve(cmd.path, cmd.argv, cmd.envp))
+	if (buffer_name == NULL || execve(cmd.path, cmd.argv, cmd.envp))
 	{
 		ft_fprintf(STDERR, "minishell: ");
-		perror(name);
+		perror(buffer_name);
 	}
+	free(buffer_name);
 	ft_tab_free(cmd.argv);
 	ft_tab_free(cmd.envp);
 	free(cmd.path);
