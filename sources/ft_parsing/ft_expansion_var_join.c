@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:47:04 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 17:50:13 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/29 00:26:39 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ int	ft_expansion_join_var(t_data *data,
 	if (str && data && i && buffer)
 	{
 		status = ft_expansion_get_content(data, str, &content_name, i);
-		if (status == SUCCESS && content_name && *buffer)
+		if (status == SUCCESS && content_name && *content_name && *buffer)
 			status = ft_expansion_join(content_name, buffer);
-		else if (status == SUCCESS && content_name)
+		else if (status == SUCCESS && content_name && *content_name)
 		{
 			new_str = ft_strdup(content_name);
 			if (new_str)
