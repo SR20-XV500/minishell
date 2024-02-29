@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/02/29 21:17:16 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:37:36 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ static int	ft_export_update_env(char *arg, t_env *env)
 	ret = FAIL;
 	if (ft_env_tab_get_pos(env->envp, ft_env_get_name(arg)) == -1)
 		ret = ft_env_tab_add(&env->envp, arg);
-	else
-		;
 	return (ret);
 }
 // *** If yes update it in **envp
