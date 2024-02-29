@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_initial_shlvl.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 19:11:17 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 17:49:55 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:38:32 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,17 @@ int	ft_env_init_shlvl(t_env *env)
 {
 	int	ret;
 
-	ret = MALLOC_FAIL;
-	if (ft_env_get_pos(*env, "SHLVL") != ENV_NOT_SET)
-		ret = ft_env_init_shlvl_update(env);
-	else
+	ret = BAD_PARAMETER;
+	if (env && env->envp)
 	{
-		if (ft_env_add(env, "SHLVL=1") != MALLOC_FAIL)
-			ret = ENV_SUCCESS;
+		ret = MALLOC_FAIL;
+		if (ft_env_get_pos(*env, "SHLVL") != ENV_NOT_SET)
+			ret = ft_env_init_shlvl_update(env);
+		else
+		{
+			if (ft_env_add(env, "SHLVL=1") != MALLOC_FAIL)
+				ret = ENV_SUCCESS;
+		}
 	}
 	return (ret);
 }

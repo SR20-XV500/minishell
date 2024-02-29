@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_initial.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 19:28:56 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 00:49:59 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:13:58 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,25 @@ static int	ft_env_init_pwd(t_env *env)
 	return (ret);
 }
 
+char	**ft_init_table(void)
+{
+	char	**table;
+
+	table = malloc(sizeof(char *));
+	if (table)
+		*table = NULL;
+	return (table);
+}
+
 static int	ft_env_init_export(t_env *env)
 {
 	int		ret;
 	char	**export;
 
 	ret = MALLOC_FAIL;
-	export = malloc(sizeof(char *));
+	export = ft_init_table();
 	if (export)
 	{
-		*export = NULL;
 		env->export = export;
 		ret = ENV_SUCCESS;
 	}
