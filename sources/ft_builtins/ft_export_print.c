@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/02/26 23:46:45 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:38:35 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static char	**ft_tabjoin(char **t1, char **t2)
 	if (t2_len == -1)
 		t2_len = 0;
 	new_tab_len = t1_len + t2_len;
-	new_tab = malloc((new_tab_len + 1) * sizeof(*new_tab));
+	new_tab = malloc((new_tab_len + 1) * sizeof(char *));
 	if (new_tab)
 	{
-		ft_memmove(new_tab, t1, t1_len * sizeof(*t1));
-		ft_memmove(new_tab + t1_len, t2, t2_len * sizeof(*t2));
+		ft_memmove(new_tab, t1, t1_len * sizeof(char *));
+		ft_memmove(new_tab + t1_len, t2, t2_len * sizeof(char *));
 		new_tab[new_tab_len] = NULL;
 	}
 	return (new_tab);
