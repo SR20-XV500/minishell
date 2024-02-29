@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion_var_join.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:47:04 by tlassere          #+#    #+#             */
 /*   Updated: 2024/02/29 00:26:39 by tlassere         ###   ########.fr       */

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 21:10:25 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:55:56 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ enum e_type
 	TY_DELIM_HEREDOC
 };
 
+enum e_heredoc
+{
+	HER_STR = 90,
+	HER_EOF
+};
+
 typedef struct s_word
 {
 	char	*word;
@@ -61,15 +67,19 @@ typedef struct s_data
 	int		output_fd;
 	int		input_fd;
 	pid_t	*children;
+	size_t	line_count;
+	t_list	**here_doc;
 }	t_data;
 
 t_data	*ft_data_get(const char **envp);
 void	ft_data_free(t_data **data);
+void	ft_free_here_doc(t_list ***here_doc);
 
 void	ft_word_lst_clear(t_data *data);
 void	ft_word_free(void *data);
 int		ft_word_add(t_data *data, const char *str, int type);
 t_list	*ft_word_lst_make(const char *str, int type);
+int		ft_word_add_lst(t_list **lst_el, const char *str, int type);
 
 int		ft_parser(t_data *data, const char *str);
 int		ft_parser_use_line(t_data *data, const char *str);
@@ -88,6 +98,11 @@ int		ft_expansion_join_var(t_data *data,
 t_list	*ft_expansion_split_node_content(const char *str);
 int		ft_expansion_is_multie_arg(const char *str);
 int		ft_expansion_split_node(t_data *data, t_list **lst, t_list *last);
+int		ft_expantion_get_while(t_data *data,
+			const char *str, size_t *i, char **buffer);
+char	*ft_expansion_get_str_func(t_data *data, const char *str,
+			int (*get_while)(t_data *, const char *, size_t *, char **));
+int		ft_expansion_add_car(char *str, int car, char **buffer);
 
 void	ft_quotes_remove(char *str);
 int		ft_quotes_rm_rf(t_data *data);

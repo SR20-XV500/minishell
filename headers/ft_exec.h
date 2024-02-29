@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 18:54:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/29 02:15:37 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # define FD_FAIL_OPEN -1
 # define MAX_OPEN_PRE_OPEN 2
 # define EXEC_DUP_FAIL -1
+# define NO_PRIORITY 1
+# define PRIORITY_HERE_DOC 2
+# define PRIORITY_INPUT 3
+# define ERR_HERE_DOC "minishell: warning: here-document at line %d "
+# define ERR_HERE_DOC_2 "delimited by end-of-file (wanted `%s')\n"
+# define ERR_PIPE_FAIL -16
 
 typedef struct s_cmd_content
 {
@@ -51,11 +57,17 @@ int		ft_exec_cmd_true(t_data *data, const t_cmd_content cmd,
 int		ft_exec_dupbass(t_data *data);
 int		ft_exec_dup_close(t_data *data);
 int		ft_exec_basic(t_data *data, t_list *lst_start);
-int		ft_crazy_children(t_data *data, int *fds, int len, pid_t *children);
+int		ft_exec_here_doc(t_data *data);
+t_list	*ft_here_doc_delimitor(t_data *data, char *str);
+int		ft_exec_here_doc_redirect(t_data *data, t_list *lst_start);
+
 void	ft_wait_children(t_data *data, pid_t *children, int len);
-int		ft_exec_pipe(t_data *data);
-int		ft_word_count(t_list *lst, int type);
 void	ft_close_pipe(int *fds, int len);
 void	ft_kill_children(pid_t *children, int len);
+int		ft_crazy_children(t_data *data, int *fds, int len, pid_t *children);
+int		ft_exec_pipe(t_data *data);
+int		ft_word_count(t_list *lst, int type);
+
+int		ft_redirect_priority(t_list *lst);
 
 #endif

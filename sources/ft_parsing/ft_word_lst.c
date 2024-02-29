@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_word_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 02:16:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/29 02:02:10 by tlassere         ###   ########.fr       */
+/*   Created: 2024/02/27 18:11:04 by tlassere          #+#    #+#             */
+/*   Updated: 2024/02/28 00:10:23 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "../libft/libft.h"
-# include "ft_env.h"
-# include "ft_builtins.h"
-# include "ft_exec.h"
-# include "ft_parsing.h"
-# include "utils.h"
-# include <stdio.h>
+int	ft_word_add_lst(t_list **lst_el, const char *str, int type)
+{
+	t_list	*lst;
+	int		ret;
 
-# define ERR_WRITE_FAIL -39
-# define ERR_CLOSE_FAIL -59
-
-#endif
+	ret = BAD_PARAMETER;
+	if (lst_el)
+	{
+		ret = MALLOC_FAIL;
+		lst = ft_word_lst_make(str, type);
+		if (lst)
+		{
+			ret = SUCCESS;
+			ft_lstadd_back(lst_el, lst);
+		}
+	}
+	return (ret);
+}

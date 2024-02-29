@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/23 22:41:33 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/29 03:05:27 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int	ft_exec_basic(t_data *data, t_list *lst_start)
 	if (data)
 	{
 		status = ft_exec_iter_lst(data, lst_start, &ft_exec_redirect);
+		if (status == SUCCESS
+			&& ft_redirect_priority(lst_start) == PRIORITY_HERE_DOC)
+			status = ft_exec_here_doc_redirect(data, lst_start);
 		if (status == SUCCESS)
 			status = ft_exec_dupbass(data);
 		if (status == SUCCESS)
@@ -75,10 +78,14 @@ int	ft_exec(t_data *data)
 	status = BAD_PARAMETER;
 	if (data)
 	{
-		if (ft_word_count(data->words, D_PIPE))
-			status = ft_exec_pipe(data);
-		else
-			status = ft_exec_basic(data, data->words);
+		status = ft_exec_here_doc(data);
+		if (status == SUCCESS)
+		{
+			if (ft_word_count(data->words, D_PIPE))
+				status = ft_exec_pipe(data);
+			else
+				status = ft_exec_basic(data, data->words);
+		}
 	}
 	return (status);
 }

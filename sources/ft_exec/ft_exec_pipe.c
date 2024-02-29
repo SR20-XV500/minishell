@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 22:39:39 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 21:13:26 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/29 01:11:00 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_set_pipe(int *fd, int len)
 		i++;
 	}
 	if (status == FAIL)
-		ft_close_pipe(fd, i);
+		ft_close_pipe(fd, i - 1);
 	return (status);
 }
 

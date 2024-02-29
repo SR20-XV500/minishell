@@ -6,11 +6,28 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/24 21:11:17 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:19:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_free_here_doc(t_list ***here_doc)
+{
+	size_t	index;
+
+	index = 0;
+	if (here_doc && *here_doc)
+	{
+		while ((*here_doc)[index])
+		{
+			ft_lstclear(*here_doc + index, &ft_word_free);
+			index++;
+		}
+		free(*here_doc);
+		*here_doc = NULL;
+	}
+}
 
 void	ft_data_free(t_data **data)
 {
@@ -33,6 +50,8 @@ void	ft_data_free(t_data **data)
 			close((*data)->dup_std[STDOUT]);
 		if ((*data)->children)
 			free((*data)->children);
+		if ((*data)->here_doc)
+			ft_free_here_doc(&((*data)->here_doc));
 		free(*data);
 		*data = NULL;
 	}

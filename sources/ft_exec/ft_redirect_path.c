@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:21:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 13:23:49 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:19:59 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ char	*ft_redirect_get_path(t_data *data, const char *str)
 	int		status;
 
 	path = NULL;
-	status = REDIRECT_AMBIGUOUS_REDIRECT;
 	buffer = NULL;
+	status = REDIRECT_AMBIGUOUS_REDIRECT;
 	if (str)
 	{
 		buffer = ft_expansion_get_str(data, str);
