@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/29 23:28:00 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:27:36 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_data
 	size_t	line_count;
 	t_list	**here_doc;
 	char	**tabs_lines;
+	int		exit_program;
 }	t_data;
 
 t_data	*ft_data_get(const char **envp);

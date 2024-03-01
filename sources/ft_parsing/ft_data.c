@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/29 23:30:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:29:02 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static t_data	*ft_data_make(const char **envp)
 	if (data)
 	{
 		ft_bzero(data, sizeof(t_data));
+		data->exit_program = FAIL;
 		data->env = ft_env_init(envp);
 		if (data->env)
 			ft_pwd_init(&data->env->pwd);
