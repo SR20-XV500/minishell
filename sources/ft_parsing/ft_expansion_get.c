@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:06:42 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 01:35:33 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:21:24 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ft_expansion_quote(const char *str, const char *current_car)
 	if (str && current_car)
 	{
 		status = SUCCESS;
-		while (buffer < current_car && *buffer)
+		while (buffer <= current_car && *buffer)
 		{
 			status = SUCCESS;
 			if (*buffer == '\"' && ft_strchr(buffer + 1, '\"'))
