@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd_true.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/29 21:22:47 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/01 19:30:57 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// else if (ft_strncmp("exit", cmd.path, 5) == CMP_EGAL)
 
 static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 {
@@ -31,6 +30,8 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 		status = ft_unset(cmd.argv, data->env);
 	else if (ft_strncmp("env", cmd.path, 4) == CMP_EGAL)
 		status = ft_env((const char **)cmd.envp);
+	else if (ft_strncmp("exit", cmd.path, 5) == CMP_EGAL)
+		status = ft_exit(data, (const char **)cmd.argv);
 	return (status);
 }
 
