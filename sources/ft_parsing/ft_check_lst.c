@@ -6,30 +6,30 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:16:24 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/01 16:34:06 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:44:09 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_check_operator(t_list *prev, t_list *lst_cur,
-	t_list *next, int *status)
+static void	ft_check_operator(t_word *prev, t_word *lst_cur,
+	t_word *next, int *status)
 {
 	if (lst_cur)
 	{
-		if (prev == NULL && ((t_word *)lst_cur->content)->type == D_PIPE)
+		if (prev == NULL && lst_cur->type == D_PIPE)
 		{
 			*status = PARSER_NEAR_PIPE
-				| (((t_word *)lst_cur->content)->type << 5);
+				| (lst_cur->type << 5);
 		}
-		else if ((next == NULL || ((t_word *)next->content)->type > D_NOT_SET)
-			&& ((t_word *)lst_cur->content)->type > D_NOT_SET)
+		else if ((next == NULL || next->type > D_NOT_SET)
+			&& lst_cur->type > D_NOT_SET)
 		{
 			*status = PARSER_ERR_OP_NEWLINE;
 			if (next == NULL)
 				*status |= D_NEW_LINE << 5;
-			else if (((t_word *)lst_cur->content)->type != D_PIPE)
-				*status |= ((t_word *)next->content)->type << 5;
+			else if (lst_cur->type != D_PIPE)
+				*status |= next->type << 5;
 			else
 				*status = SUCCESS;
 		}
@@ -65,13 +65,22 @@ static void	ft_check_args(t_data *data, int *status)
 	t_list	*prev;
 	t_list	*next;
 	t_list	*current;
+	t_word	*w_prev;
+	t_word	*w_next;
 
 	current = data->words;
 	prev = NULL;
 	while (current && *status == SUCCESS)
 	{
 		next = current->next;
-		ft_check_operator(prev, current, next, status);
+		w_prev = NULL;
+		w_next = NULL;
+		if (next)
+			w_next = next->content;
+		if (prev)
+			w_prev = prev->content;
+		ft_check_operator(w_prev, current->content,
+			w_next, status);
 		prev = current;
 		current = current->next;
 	}
