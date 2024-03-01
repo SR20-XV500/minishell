@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:16:24 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/01 16:44:09 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:00:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ static void	ft_check_operator(t_word *prev, t_word *lst_cur,
 	if (lst_cur)
 	{
 		if (prev == NULL && lst_cur->type == D_PIPE)
-		{
-			*status = PARSER_NEAR_PIPE
-				| (lst_cur->type << 5);
-		}
+			*status = PARSER_NEAR_PIPE | (lst_cur->type << 5);
 		else if ((next == NULL || next->type > D_NOT_SET)
 			&& lst_cur->type > D_NOT_SET)
 		{
@@ -33,6 +30,15 @@ static void	ft_check_operator(t_word *prev, t_word *lst_cur,
 			else
 				*status = SUCCESS;
 		}
+	}
+}
+
+static void	ft_check_super_operator(t_word *curent, t_word *next, int *status)
+{
+	if (curent && next)
+	{
+		if (curent->type == D_PIPE && next->type == D_PIPE)
+			*status = PARSER_NEAR_PIPE | (curent->type << 5);
 	}
 }
 
@@ -81,6 +87,8 @@ static void	ft_check_args(t_data *data, int *status)
 			w_prev = prev->content;
 		ft_check_operator(w_prev, current->content,
 			w_next, status);
+		if (*status == SUCCESS)
+			ft_check_super_operator(current->content, w_next, status);
 		prev = current;
 		current = current->next;
 	}
