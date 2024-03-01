@@ -6,19 +6,17 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:16:24 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/01 16:31:51 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:34:06 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_check_operator(t_list *prev, t_list *lst_cur, int *status)
+static void	ft_check_operator(t_list *prev, t_list *lst_cur,
+	t_list *next, int *status)
 {
-	t_list	*next;
-
 	if (lst_cur)
 	{
-		next = lst_cur->next;
 		if (prev == NULL && ((t_word *)lst_cur->content)->type == D_PIPE)
 		{
 			*status = PARSER_NEAR_PIPE
@@ -65,13 +63,15 @@ static void	ft_check_error(int err)
 static void	ft_check_args(t_data *data, int *status)
 {
 	t_list	*prev;
+	t_list	*next;
 	t_list	*current;
 
 	current = data->words;
 	prev = NULL;
 	while (current && *status == SUCCESS)
 	{
-		ft_check_operator(prev, current, status);
+		next = current->next;
+		ft_check_operator(prev, current, next, status);
 		prev = current;
 		current = current->next;
 	}
