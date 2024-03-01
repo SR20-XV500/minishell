@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 19:18:48 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 19:36:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:42:22 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static void	ft_exec_children_cmd(t_data *data, int *fds, int pos, int len)
 	if (buffer[STDOUT] > 2)
 		close(buffer[STDOUT]);
 	ft_data_free(&data);
+	rl_clear_history();
 	exit(exit_status);
 }
 

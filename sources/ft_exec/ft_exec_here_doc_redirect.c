@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:57:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/29 14:11:53 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:36:41 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_here_doc_get_pos(t_data *data, t_list *lst_start)
 		if (lst == lst_start)
 			is_view = SUCCESS;
 		if (((t_word *)lst->content)->type == D_HEREDOC
-			&& buffer == SUCCESS)
+			&& buffer == SUCCESS && is_view == FAIL)
 		{
 			buffer = FAIL;
 			pos++;
