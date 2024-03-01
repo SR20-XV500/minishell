@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:16:24 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 17:08:18 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:08:23by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static void	ft_check_operator(t_list *prev, t_list *lst_cur, int *status)
 			else
 				*status = SUCCESS;
 		}
-		if (*status == SUCCESS)
-			ft_check_operator(lst_cur, next, status);
 	}
 }
 
@@ -64,6 +62,21 @@ static void	ft_check_error(int err)
 	}
 }
 
+static void	ft_check_args(t_data *data, int *status)
+{
+	t_list	*prev;
+	t_list	*current;
+
+	current = data->words;
+	prev = NULL;
+	while (current && *status == SUCCESS)
+	{
+		ft_check_operator(prev, current, status);
+		prev = current;
+		current = current->next;
+	}
+}
+
 int	ft_check_lst(t_data *data)
 {
 	int	status;
@@ -72,7 +85,7 @@ int	ft_check_lst(t_data *data)
 	if (data)
 	{
 		status = SUCCESS;
-		ft_check_operator(NULL, data->words, &status);
+		ft_check_args(data, &status);
 		if (status != SUCCESS)
 		{
 			ft_check_error(status);
