@@ -16,11 +16,16 @@ T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage \
 					ft_path_parser_join ft_path_parser ft_file_checks \
 					ft_path_multie ft_quicksort
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
-T_FT_EXEC		::= ft_redirect_path ft_exec ft_exec_fd ft_exec_cmd_path \
-					ft_exec_cmd ft_exec_cmd_free ft_exec_cmd_true ft_exec_dup \
-					ft_exec_cmd_children ft_exec_cmd_children_2 ft_exec_pipe \
+T_FT_EXEC_PIPE	::= ft_exec_cmd_children ft_exec_cmd_children_2 ft_exec_pipe
+FT_EXEC_PIPE	::= $(foreach buffer, $(T_FT_EXEC_PIPE), \
+						ft_exec_pipe/$(buffer))
+T_FT_EXEC_RED	::= ft_redirect_path ft_exec_fd ft_exec_dup \
 					ft_exec_here_doc ft_exec_here_doc_delimitor \
 					ft_exec_here_doc_redirect
+FT_EXEC_RED		::= $(foreach buffer, $(T_FT_EXEC_RED), \
+						ft_exec_redirect/$(buffer))
+T_FT_EXEC		::= ft_exec ft_exec_cmd_path $(FT_EXEC_RED) $(FT_EXEC_PIPE) \
+					ft_exec_cmd ft_exec_cmd_free ft_exec_cmd_true
 FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
 T_FT_PARSING_EX	::= ft_expansion_get ft_expansion_var_join ft_expansion_split \
