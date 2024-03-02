@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/02 17:34:50 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:41:11 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	ft_export(char **argv, t_env *env)
 			exit_code = SUCCESS;
 			while (argv[0] && exit_code != MALLOC_FAIL)
 			{
-				exit_code = ft_export_process(argv[0]++, env);
+				exit_code = ft_export_process(argv++[0], env);
 				if (exit_code != SUCCESS)
 					success = FAIL;
 			}
