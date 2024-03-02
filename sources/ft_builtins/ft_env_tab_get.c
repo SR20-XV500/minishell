@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_tab_get.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:18:17 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 17:50:11 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 02:44:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_env_tab_get_pos(char **envp, const char *name)
 		pos = 0;
 		len = ft_strlen(name);
 		while (envp[pos] && (ft_strcmp_s2(envp[pos], name)
-				|| envp[pos][len] != '='))
+				|| (envp[pos][len] != '=' && envp[pos][len] != '\0')))
 			pos++;
 		if (envp[pos] == NULL)
 			pos = ENV_NOT_SET;
