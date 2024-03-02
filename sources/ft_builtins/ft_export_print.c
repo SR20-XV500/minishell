@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/02 18:01:16 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 20:18:58 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,31 @@ static char	**ft_tabjoin(char **t1, char **t2)
 	return (new_tab);
 }
 
-// TODO: Print the tab
-// while (*env->envp)
-// {
-// 	ft_printf("declare -x %s=\"%s\"\n", ft_env_get_name(*env->envp),
-// 		ft_env_get_content(*env, ft_env_get_name(*env->envp)));
-// 	++env->envp;
-// }
+static int	ft_export_print_line(char **export, const char *var)
+{
+	int		ret;
+	char	*name;
+	char	*value;
+
+	ret = FAIL;
+	name = ft_env_get_name(var);
+	value = ft_env_tab_get_content(export, name);
+	if (ft_strchr(var, '='))
+		ret = ft_printf("declare -x %s=\"%s\"\n", name, value);
+	else
+		ret = ft_printf("declare -x %s\n", name);
+	if (name)
+		free(name);
+	if (value)
+		free(value);
+	return (ret);
+}
+
 int	ft_export_print(t_env *env)
 {
 	int		exit_code;
 	char	**export;
+	char	**tmp;
 
 	exit_code = MALLOC_FAIL;
 	if (env)
@@ -54,8 +68,11 @@ int	ft_export_print(t_env *env)
 		export = ft_tabjoin(env->envp, env->export);
 		if (export)
 		{
+			exit_code = SUCCESS;
 			ft_strings_quicksort(export, 0, ft_tab_len(export) - 1);
-			exit_code = ft_env((const char **)export);
+			tmp = export;
+			while (*tmp && exit_code != MALLOC_FAIL)
+				exit_code = ft_export_print_line(export, *tmp++);
 			free(export);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/02 17:55:10 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:09:10 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	ft_partition(char **array, int lower_index, int higher_index)
 
 void	ft_strings_quicksort(char **array, int lower_index, int higher_index)
 {
-	int pivot;
+	int	pivot;
 
 	if (lower_index < higher_index)
 	{
