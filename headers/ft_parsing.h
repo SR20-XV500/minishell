@@ -6,14 +6,12 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/01 17:27:36 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/02 02:51:13 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PARSING_H
 # define FT_PARSING_H
-
-# include "ft_env.h"
 
 # define PARSER_WORD 12
 # define PARSER_NO_WORD 13
