@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion_var_join.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:47:04 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/29 00:26:39 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:34:28 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	ft_expansion_is_ambiguous(t_env *env, const char *name)
+{
+	int	status;
+
+	status = FAIL;
+	if (env)
+	{
+		if (ft_strncmp(name, "$?", 3) == CMP_EGAL)
+			status = SUCCESS;
+		else if (ft_strncmp(name, "$PATH", 6) == CMP_EGAL && env->path)
+			status = SUCCESS;
+	}
+	return (status);
+}
 
 static int	ft_expansion_get_content_var(t_data *data,
 	const char *name, char **content)
@@ -24,7 +39,7 @@ static int	ft_expansion_get_content_var(t_data *data,
 	{
 		status = SUCCESS;
 		if (ft_env_get_pos(*(data->env), name + 1) != ENV_NOT_SET
-			|| ft_strncmp(name, "$?", 3) == CMP_EGAL)
+			|| ft_expansion_is_ambiguous(data->env, name) == SUCCESS)
 		{
 			buffer = ft_env_get_content(*(data->env), name + 1);
 			if (buffer == NULL)
