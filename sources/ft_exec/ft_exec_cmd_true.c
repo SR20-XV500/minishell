@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/02 02:09:12 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/03 00:37:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,30 @@ static void	ft_exec_cmd_system_for_kids(t_data *data, const t_cmd_content cmd,
 		const char *name)
 {
 	char	*buffer_name;
+	int		status;
 
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+	status = EXEC_CMD_NOT_FOUND;
 	buffer_name = ft_strdup(name);
 	ft_data_free(&data);
 	clear_history();
 	if (buffer_name == NULL || execve(cmd.path, cmd.argv, cmd.envp))
 	{
-		ft_fprintf(STDERR, "minishell: ");
-		perror(buffer_name);
+		if (ft_is_directory(cmd.path) != SUCCESS)
+		{
+			ft_fprintf(STDERR, "minishell: ");
+			perror(buffer_name);
+		}
+		else
+		{
+			ft_fprintf(STDERR, "minishell: %s: Is a directory\n", buffer_name);
+			status = EXEC_CMD_NOT_FOUND_DIR;
+		}
 	}
 	free(buffer_name);
-	ft_tab_free(cmd.argv);
-	ft_tab_free(cmd.envp);
-	free(cmd.path);
-	exit(EXEC_CMD_NOT_FOUND);
+	ft_exec_cmd_free(cmd);
+	exit(status);
 }
 
 static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
