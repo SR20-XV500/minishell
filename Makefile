@@ -14,7 +14,7 @@ NAME			::= minishell
 SOURCES 		::= sources/
 T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage \
 					ft_path_parser_join ft_path_parser ft_file_checks \
-					ft_path_multie
+					ft_path_multie ft_quicksort
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_EXEC		::= ft_redirect_path ft_exec ft_exec_fd ft_exec_cmd_path \
 					ft_exec_cmd ft_exec_cmd_free ft_exec_cmd_true ft_exec_dup \

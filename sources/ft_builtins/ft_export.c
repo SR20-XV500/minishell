@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/02/29 22:37:36 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 23:22:05 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,69 +36,89 @@ static int	ft_export_is_valid(const char *name)
 
 static int	ft_export_to_env(char *arg, t_env *env)
 {
-	int	ret;
+	int		ret;
+	char	*name;
 
-	ret = FAIL;
-	ret = ft_env_tab_del(&env->export, ft_env_get_name(arg));
-	ret = ft_env_tab_add(&env->envp, arg);
+	name = ft_env_get_name(arg);
+	if (name)
+	{
+		ret = ft_env_tab_del(&env->export, name);
+		if (ret != MALLOC_FAIL)
+			ret = ft_env_add(env, arg);
+		free(name);
+	}
+	else
+		ret = MALLOC_FAIL;
 	return (ret);
 }
 
+// Update an existing variable or add it to **envp
 static int	ft_export_update_env(char *arg, t_env *env)
 {
-	int	ret;
+	int		ret;
+	char	*name;
 
 	ret = FAIL;
-	if (ft_env_tab_get_pos(env->envp, ft_env_get_name(arg)) == -1)
-		ret = ft_env_tab_add(&env->envp, arg);
+	name = ft_env_get_name(arg);
+	if (name)
+	{
+		if (ft_env_tab_get_pos(env->envp, name) == ENV_NOT_SET)
+			ret = ft_env_add(env, arg);
+		else
+			ret = ft_env_update(env, name, arg);
+		free(name);
+	}
 	return (ret);
 }
-// *** If yes update it in **envp
 
-// TODO: export VAR:
 static int	ft_export_process(char *arg, t_env *env)
 {
-	int	ret;
+	int		ret;
+	char	*name;
 
 	ret = FAIL;
-	if (ft_export_is_valid(ft_env_get_name(arg)))
+	name = ft_env_get_name(arg);
+	if (ft_export_is_valid(name))
 	{
 		if (ft_strchr(arg, '='))
 		{
-			if (ft_env_tab_get_pos(env->export, ft_env_get_name(arg)) != -1)
+			if (ft_env_tab_get_pos(env->export, name) != ENV_NOT_SET)
 				ret = ft_export_to_env(arg, env);
 			else
 				ret = ft_export_update_env(arg, env);
 		}
-		else
-		{
-			if (ft_env_tab_get_pos(env->envp, arg) == -1)
-				ret = ft_env_tab_add(&env->export, arg);
-		}
+		else if (ft_env_tab_get_pos(env->envp, arg) == ENV_NOT_SET)
+			ret = ft_env_tab_add(&env->export, arg);
 	}
 	else
 		ft_fprintf(STDERR, "minishell: export: `%s': not a valid identifier\n",
 			arg);
+	if (name)
+		free(name);
 	return (ret);
 }
 
-// TODO: Check the various exit codes for ft_export_process
 int	ft_export(char **argv, t_env *env)
 {
 	int	exit_code;
+	int	success;
 
 	exit_code = FAIL;
+	success = TRUE;
 	if (env)
 	{
 		if (argv && argv[0] && argv[1])
 		{
 			argv++;
 			exit_code = SUCCESS;
-			while (argv[0])
+			while (argv[0] && exit_code != MALLOC_FAIL)
 			{
-				exit_code = ft_export_process(argv[0], env);
-				argv++;
+				exit_code = ft_export_process(argv++[0], env);
+				if (exit_code != SUCCESS)
+					success = FAIL;
 			}
+			if (exit_code != MALLOC_FAIL && success == FAIL)
+				exit_code = FAIL;
 		}
 		else
 			exit_code = ft_export_print(env);

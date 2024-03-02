@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/02/29 22:38:35 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 22:24:22 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,61 +36,35 @@ static char	**ft_tabjoin(char **t1, char **t2)
 	return (new_tab);
 }
 
-static void	ft_swap_strings(char **a, char **b)
+static int	ft_export_print_line(char **export, const char *var)
 {
-	char	*t;
+	int		ret;
+	char	*name;
+	char	*value;
 
-	t = *a;
-	*a = *b;
-	*b = t;
-}
-
-int	ft_partition(char **array, int lower_index, int higher_index)
-{
-	int	pivot;
-	int	i;
-	int	j;
-
-	pivot = higher_index;
-	i = lower_index - 1;
-	j = lower_index;
-	while (j < higher_index)
+	ret = FAIL;
+	name = ft_env_get_name(var);
+	if (name)
 	{
-		if (ft_strcmp_s2(array[j], array[pivot]) <= 0)
+		value = ft_env_tab_get_content(export, name);
+		if (value)
 		{
-			i++;
-			ft_swap_strings(&array[i], &array[j]);
+			if (ft_strchr(var, '='))
+				ret = ft_printf("declare -x %s=\"%s\"\n", name, value);
+			else
+				ret = ft_printf("declare -x %s\n", name);
+			free(value);
 		}
-		j++;
+		free(name);
 	}
-	ft_swap_strings(&array[i + 1], &array[higher_index]);
-	return (i + 1);
+	return (ret);
 }
 
-static void	ft_strings_quicksort(char **array, int lower_index,
-		int higher_index)
-{
-	int	pivot;
-
-	if (lower_index < higher_index)
-	{
-		pivot = ft_partition(array, lower_index, higher_index);
-		ft_strings_quicksort(array, lower_index, pivot - 1);
-		ft_strings_quicksort(array, pivot + 1, higher_index);
-	}
-}
-
-// TODO: Print the tab
-// while (*env->envp)
-// {
-// 	ft_printf("declare -x %s=\"%s\"\n", ft_env_get_name(*env->envp),
-// 		ft_env_get_content(*env, ft_env_get_name(*env->envp)));
-// 	++env->envp;
-// }
 int	ft_export_print(t_env *env)
 {
 	int		exit_code;
 	char	**export;
+	char	**tmp;
 
 	exit_code = MALLOC_FAIL;
 	if (env)
@@ -98,10 +72,12 @@ int	ft_export_print(t_env *env)
 		export = ft_tabjoin(env->envp, env->export);
 		if (export)
 		{
-			ft_strings_quicksort(export, 0, ft_tab_len(export) - 1);
-			ft_env((const char **)export);
-			free(export);
 			exit_code = SUCCESS;
+			ft_strings_quicksort(export, 0, ft_tab_len(export) - 1);
+			tmp = export;
+			while (*tmp && exit_code != MALLOC_FAIL)
+				exit_code = ft_export_print_line(export, *tmp++);
+			free(export);
 		}
 	}
 	return (exit_code);
