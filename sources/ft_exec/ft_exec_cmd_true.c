@@ -6,12 +6,11 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/01 19:30:57 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/02 02:09:12 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 {
