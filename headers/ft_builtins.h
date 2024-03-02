@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/02 01:17:09 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/02 02:50:15 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # define FALSE 0
 # define TRUE 1
 # define EXIT_ERR 2
-
-# include "ft_parsing.h"
 
 int	ft_echo(char **argv, char **envp);
 
