@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/02 02:26:36 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 16:20:25 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ static int	ft_export_is_valid(const char *name)
 
 static int	ft_export_to_env(char *arg, t_env *env)
 {
-	int	ret;
+	int		ret;
+	char	*name;
 
-	ret = ft_env_tab_del(&env->export, ft_env_get_name(arg));
-	ft_fprintf(STDERR, "export_to_env env_tab_del ret: %d\n", ret);
+	name = ft_env_get_name(arg);
+	ret = ft_env_tab_del(&env->export, name);
 	if (ret != MALLOC_FAIL)
 		ret = ft_env_add(env, arg);
+	if (name)
+		free(name);
 	return (ret);
 }
 
