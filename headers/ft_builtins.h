@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 01:52:44 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 02:50:15 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define CD_VALID_PATH 1
 # define FALSE 0
 # define TRUE 1
+# define EXIT_ERR 2
 
 int	ft_echo(char **argv, char **envp);
 
@@ -36,5 +37,7 @@ int	ft_unset(char **argv, t_env *env);
 
 int	ft_export(char **argv, t_env *env);
 int	ft_export_print(t_env *env);
+
+int	ft_exit(t_data *data, const char **argv);
 
 #endif

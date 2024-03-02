@@ -6,14 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/20 00:12:11 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/02 02:50:03 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "ft_parsing.h"
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
