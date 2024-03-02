@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/02 20:18:58 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 22:24:22 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,19 @@ static int	ft_export_print_line(char **export, const char *var)
 
 	ret = FAIL;
 	name = ft_env_get_name(var);
-	value = ft_env_tab_get_content(export, name);
-	if (ft_strchr(var, '='))
-		ret = ft_printf("declare -x %s=\"%s\"\n", name, value);
-	else
-		ret = ft_printf("declare -x %s\n", name);
 	if (name)
+	{
+		value = ft_env_tab_get_content(export, name);
+		if (value)
+		{
+			if (ft_strchr(var, '='))
+				ret = ft_printf("declare -x %s=\"%s\"\n", name, value);
+			else
+				ret = ft_printf("declare -x %s\n", name);
+			free(value);
+		}
 		free(name);
-	if (value)
-		free(value);
+	}
 	return (ret);
 }
 
