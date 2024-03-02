@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/02 22:30:58 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 23:22:05 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,12 @@ static int	ft_export_process(char *arg, t_env *env)
 	{
 		if (ft_strchr(arg, '='))
 		{
-			ret = ft_env_tab_get_pos(env->export, name);
 			if (ft_env_tab_get_pos(env->export, name) != ENV_NOT_SET)
 				ret = ft_export_to_env(arg, env);
 			else
 				ret = ft_export_update_env(arg, env);
 		}
-		else if (ft_env_tab_get_pos(env->envp, arg) == -1)
+		else if (ft_env_tab_get_pos(env->envp, arg) == ENV_NOT_SET)
 			ret = ft_env_tab_add(&env->export, arg);
 	}
 	else
