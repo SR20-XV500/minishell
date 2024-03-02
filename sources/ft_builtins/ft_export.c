@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/02/29 22:37:36 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 02:26:36 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,30 @@ static int	ft_export_to_env(char *arg, t_env *env)
 {
 	int	ret;
 
-	ret = FAIL;
 	ret = ft_env_tab_del(&env->export, ft_env_get_name(arg));
-	ret = ft_env_tab_add(&env->envp, arg);
+	ft_fprintf(STDERR, "export_to_env env_tab_del ret: %d\n", ret);
+	if (ret != MALLOC_FAIL)
+		ret = ft_env_add(env, arg);
 	return (ret);
 }
 
+// Update an existing variable or add it to **envp
 static int	ft_export_update_env(char *arg, t_env *env)
 {
 	int	ret;
 
 	ret = FAIL;
 	if (ft_env_tab_get_pos(env->envp, ft_env_get_name(arg)) == -1)
-		ret = ft_env_tab_add(&env->envp, arg);
+		ret = ft_env_add(env, arg);
+	else
+		ret = ft_env_update(env, ft_env_get_name(arg), arg);
+	ft_fprintf(STDERR, "export_update_env env_tab_del ret: %d\n", ret);
 	return (ret);
 }
-// *** If yes update it in **envp
 
 // TODO: export VAR:
+// TODO: What do we do when a ft_fprintf (ie. on STDERR) fails?
+// TODO: Kill all leaks (ft_env_get_name)
 static int	ft_export_process(char *arg, t_env *env)
 {
 	int	ret;
@@ -65,6 +71,8 @@ static int	ft_export_process(char *arg, t_env *env)
 	{
 		if (ft_strchr(arg, '='))
 		{
+			ret = ft_env_tab_get_pos(env->export, ft_env_get_name(arg));
+			ft_fprintf(STDERR, "export_process env_tab_del ret: %d\n", ret);
 			if (ft_env_tab_get_pos(env->export, ft_env_get_name(arg)) != -1)
 				ret = ft_export_to_env(arg, env);
 			else
@@ -82,7 +90,7 @@ static int	ft_export_process(char *arg, t_env *env)
 	return (ret);
 }
 
-// TODO: Check the various exit codes for ft_export_process
+// TODO: Check the various exit codes for ft_export_process (MALLOC_FAIL)
 int	ft_export(char **argv, t_env *env)
 {
 	int	exit_code;
@@ -94,7 +102,7 @@ int	ft_export(char **argv, t_env *env)
 		{
 			argv++;
 			exit_code = SUCCESS;
-			while (argv[0])
+			while (argv[0] && exit_code != MALLOC_FAIL)
 			{
 				exit_code = ft_export_process(argv[0], env);
 				argv++;

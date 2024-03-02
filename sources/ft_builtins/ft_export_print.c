@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/02/29 22:38:35 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 00:48:12 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_partition(char **array, int lower_index, int higher_index)
 	j = lower_index;
 	while (j < higher_index)
 	{
-		if (ft_strcmp_s2(array[j], array[pivot]) <= 0)
+		if (ft_strcmp_s2(array[j], array[pivot]) < 0)
 		{
 			i++;
 			ft_swap_strings(&array[i], &array[j]);
@@ -99,9 +99,8 @@ int	ft_export_print(t_env *env)
 		if (export)
 		{
 			ft_strings_quicksort(export, 0, ft_tab_len(export) - 1);
-			ft_env((const char **)export);
+			exit_code = ft_env((const char **)export);
 			free(export);
-			exit_code = SUCCESS;
 		}
 	}
 	return (exit_code);
