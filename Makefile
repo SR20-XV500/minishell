@@ -55,15 +55,16 @@ HEADERS			::= headers/
 HEADERS_CONTENT	::= $(HEADERS)minishell.h $(HEADERS)utils.h \
 					$(HEADERS)ft_parsing.h $(HEADERS)ft_env.h \
 					$(HEADERS)ft_builtins.h $(HEADERS)ft_exec.h \
-					$(HEADERS)ft_data.h
-LIBFT			::= libft/libft.a
+					$(HEADERS)ft_data.h 
+LIBFT_DIR		::= libft/
+LIBFT			::= $(LIBFT_DIR)libft.a
 CFLAGS			::= -Wall -Wextra -Werror
 LDFLAGS			::= $(CFLAGS) -lreadline
 
 all: $(NAME)
 
 .c.o :
-	$(CC) $(CFLAGS) -I $(HEADERS) -c -o $@ $<
+	$(CC) $(CFLAGS) -I$(HEADERS) -I$(LIBFT_DIR) -c -o $@ $<
 
 $(NAME): $(LIBFT) $(OBJS) $(HEADERS_CONTENT)
 	$(CC) $(LDFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
