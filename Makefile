@@ -23,11 +23,13 @@ T_FT_EXEC		::= ft_redirect_path ft_exec ft_exec_fd ft_exec_cmd_path \
 					ft_exec_here_doc_redirect
 FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
-T_FT_PARSING	::= ft_parser ft_parser_get_elements \
-					ft_check_lst ft_type_set ft_expansion \
-					ft_expansion_get ft_expansion_var_join ft_expansion_split \
-					ft_expansion_split_main ft_rm_rf_quotes \
-					ft_expention_get_str_func
+T_FT_PARSING_EX	::= ft_expansion_get ft_expansion_var_join ft_expansion_split \
+					ft_expansion_split_main ft_expansion \
+					ft_expantion_get_str_func 
+FT_PARSING_EX	::= $(foreach buffer, $(T_FT_PARSING_EX), \
+						ft_expansion/$(buffer))
+T_FT_PARSING	::= ft_parser ft_parser_get_elements ft_check_lst ft_type_set \
+					ft_rm_rf_quotes $(FT_PARSING_EX)
 FT_PARSING		::= $(foreach buffer, $(T_FT_PARSING), \
 						$(SOURCES)ft_parsing/$(buffer).c)
 T_FT_BUILTINS	::= ft_echo ft_pwd ft_cd ft_unset ft_export ft_export_print \
