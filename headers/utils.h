@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/02 02:50:03 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:55:49 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ char	*ft_path_multiple_directory(const char *multie_path, const char *dest);
 
 int		ft_is_file(const char *path);
 int		ft_is_directory(const char *path);
+
+void	ft_strings_quicksort(char **array, int lower_index, int higher_index);
 
 #endif
