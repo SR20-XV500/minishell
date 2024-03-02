@@ -6,7 +6,7 @@
 #    By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 02:19:35 by tlassere          #+#    #+#              #
-#    Updated: 2024/02/17 22:44:07 by bcheronn         ###   ########.fr        #
+#    Updated: 2024/03/02 23:49:27 by tlassere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			::= minishell
 SOURCES 		::= sources/
 T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage \
 					ft_path_parser_join ft_path_parser ft_file_checks \
-					ft_path_multie ft_quicksort
+					ft_quicksort ft_path_multi
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_EXEC_PIPE	::= ft_exec_cmd_children ft_exec_cmd_children_2 ft_exec_pipe
 FT_EXEC_PIPE	::= $(foreach buffer, $(T_FT_EXEC_PIPE), \
