@@ -6,14 +6,14 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 02:16:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/02 18:16:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/02 20:05:01 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include "ft_env.h"
 # include "ft_data.h"
 # include "ft_parsing.h"
