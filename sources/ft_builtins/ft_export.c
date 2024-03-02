@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/02 16:20:25 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:00:48 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,45 +51,45 @@ static int	ft_export_to_env(char *arg, t_env *env)
 // Update an existing variable or add it to **envp
 static int	ft_export_update_env(char *arg, t_env *env)
 {
-	int	ret;
+	int		ret;
+	char	*name;
 
 	ret = FAIL;
-	if (ft_env_tab_get_pos(env->envp, ft_env_get_name(arg)) == -1)
+	name = ft_env_get_name(arg);
+	if (ft_env_tab_get_pos(env->envp, name) == -1)
 		ret = ft_env_add(env, arg);
 	else
-		ret = ft_env_update(env, ft_env_get_name(arg), arg);
-	ft_fprintf(STDERR, "export_update_env env_tab_del ret: %d\n", ret);
+		ret = ft_env_update(env, name, arg);
+	if (name)
+		free(name);
 	return (ret);
 }
 
-// TODO: export VAR:
-// TODO: What do we do when a ft_fprintf (ie. on STDERR) fails?
-// TODO: Kill all leaks (ft_env_get_name)
 static int	ft_export_process(char *arg, t_env *env)
 {
-	int	ret;
+	int		ret;
+	char	*name;
 
 	ret = FAIL;
-	if (ft_export_is_valid(ft_env_get_name(arg)))
+	name = ft_env_get_name(arg);
+	if (ft_export_is_valid(name))
 	{
 		if (ft_strchr(arg, '='))
 		{
-			ret = ft_env_tab_get_pos(env->export, ft_env_get_name(arg));
-			ft_fprintf(STDERR, "export_process env_tab_del ret: %d\n", ret);
-			if (ft_env_tab_get_pos(env->export, ft_env_get_name(arg)) != -1)
+			ret = ft_env_tab_get_pos(env->export, name);
+			if (ft_env_tab_get_pos(env->export, name) != -1)
 				ret = ft_export_to_env(arg, env);
 			else
 				ret = ft_export_update_env(arg, env);
 		}
-		else
-		{
-			if (ft_env_tab_get_pos(env->envp, arg) == -1)
-				ret = ft_env_tab_add(&env->export, arg);
-		}
+		else if (ft_env_tab_get_pos(env->envp, arg) == -1)
+			ret = ft_env_tab_add(&env->export, arg);
 	}
 	else
 		ft_fprintf(STDERR, "minishell: export: `%s': not a valid identifier\n",
 			arg);
+	if (name)
+		free(name);
 	return (ret);
 }
 
