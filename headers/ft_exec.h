@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/03 00:36:42 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/03 01:57:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,18 @@ typedef struct s_cmd_content
 }	t_cmd_content;
 
 char	*ft_redirect_get_path(t_data *data, const char *str);
-int		ft_exec(t_data *data);
+char	*ft_trime_ambigus(char *str);
 int		ft_exec_redirect_fd(t_data *data, int type,
 			const char *path, const char *err_str);
-int		ft_exec_redirect(t_data *data, t_list *lst);
-char	*ft_exec_cmd_get_path(t_data *data, const char *cmd_name);
-int		ft_exec_cmd(t_data *data, t_list *lst);
-int		ft_is_builtin(const char *cmd);
-void	ft_exec_cmd_free(const t_cmd_content cmd_content);
-int		ft_exec_cmd_true(t_data *data, const t_cmd_content cmd,
-			const char *name);
+
+int		ft_exec_here_doc(t_data *data);
+int		ft_exec_here_doc_redirect(t_data *data, t_list *lst_start);
+t_list	*ft_here_doc_delimitor(t_data *data, char *str);
+
 int		ft_exec_dupbass(t_data *data);
 int		ft_exec_dup_close(t_data *data);
-int		ft_exec_basic(t_data *data, t_list *lst_start);
-int		ft_exec_here_doc(t_data *data);
-t_list	*ft_here_doc_delimitor(t_data *data, char *str);
-int		ft_exec_here_doc_redirect(t_data *data, t_list *lst_start);
+
+int		ft_redirect_priority(t_list *lst);
 
 void	ft_wait_children(t_data *data, pid_t *children, int len);
 void	ft_close_pipe(int *fds, int len);
@@ -69,6 +65,14 @@ int		ft_crazy_children(t_data *data, int *fds, int len, pid_t *children);
 int		ft_exec_pipe(t_data *data);
 int		ft_word_count(t_list *lst, int type);
 
-int		ft_redirect_priority(t_list *lst);
+void	ft_exec_cmd_free(const t_cmd_content cmd_content);
+char	*ft_exec_cmd_get_path(t_data *data, const char *cmd_name);
+int		ft_exec_cmd_true(t_data *data, const t_cmd_content cmd,
+			const char *name);
+int		ft_exec_basic(t_data *data, t_list *lst_start);
+int		ft_exec(t_data *data);
+int		ft_exec_cmd(t_data *data, t_list *lst);
+int		ft_is_builtin(const char *cmd);
+int		ft_exec_redirect(t_data *data, t_list *lst);
 
 #endif
