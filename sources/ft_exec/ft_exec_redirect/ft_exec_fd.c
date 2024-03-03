@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:20:14 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 13:27:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/03 02:07:53 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,28 @@
 static int	ft_exec_redirect_fd_err(t_data *data, int fd,
 	const char *err_str, const char *path)
 {
-	int	status;
+	int		status;
+	char	*expansion;
 
 	status = SUCCESS;
+	expansion = NULL;
 	if (fd == FD_FAIL_OPEN)
 	{
+		expansion = ft_trime_ambigus(ft_expansion_get_str(data, err_str));
 		status = FAIL;
 		ft_fprintf(STDERR, "minishell: ");
-		perror(err_str);
+		perror(expansion);
 		data->env->exit_status = REDIRECT_FAIL;
 	}
 	else if (ft_is_directory(path) == SUCCESS)
 	{
+		expansion = ft_trime_ambigus(ft_expansion_get_str(data, err_str));
 		status = FAIL;
-		ft_fprintf(STDERR, "minishell: %s: Is a directory\n", err_str);
+		ft_fprintf(STDERR, "minishell: %s: Is a directory\n", expansion);
 		data->env->exit_status = REDIRECT_FAIL;
 	}
+	if (expansion)
+		free(expansion);
 	return (status);
 }
 
