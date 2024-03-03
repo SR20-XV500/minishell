@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:21:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 15:19:59 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/03 01:58:07 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,56 @@ static void	ft_redirect_display_error(t_data *data,
 		ft_fprintf(STDERR, ERR_AMBIGUOUS_REDIRECT, error);
 }
 
+char	*ft_trime_ambigus(char *str)
+{
+	size_t	index;
+	int		buffer;
+
+	index = 0;
+	buffer = SUCCESS;
+	if (str)
+	{
+		while (str[index] && ft_strchr(" \t\v\f\r\n", str[index]))
+			index++;
+		ft_memmove(str, str + index, ft_strlen(str + index) + 1);
+		index = ft_strlen(str);
+		while (ft_strchr(" \t\v\f\r\n", str[index]) && buffer == SUCCESS)
+		{
+			str[index] = '\0';
+			if (index == 0)
+				buffer = FAIL;
+			else
+				index--;
+		}
+	}
+	return (str);
+}
+
 char	*ft_redirect_get_path(t_data *data, const char *str)
 {
 	char	*path;
-	char	*buffer;
+	char	*buff;
 	int		status;
 
 	path = NULL;
-	buffer = NULL;
+	buff = NULL;
 	status = REDIRECT_AMBIGUOUS_REDIRECT;
 	if (str)
 	{
-		buffer = ft_expansion_get_str(data, str);
-		if (buffer && ft_expansion_is_multie_arg(buffer) == FAIL)
+		buff = ft_trime_ambigus(ft_expansion_get_str(data, str));
+		if (buff && ft_expansion_is_multie_arg(buff) == FAIL && *buff)
 		{
 			status = MALLOC_FAIL;
-			ft_quotes_remove(buffer);
-			path = ft_redirect_get_path_parser(data, buffer);
+			ft_quotes_remove(buff);
+			path = ft_redirect_get_path_parser(data, buff);
 			if (path)
 				status = SUCCESS;
 		}
 	}
-	if (buffer && status != REDIRECT_AMBIGUOUS_REDIRECT)
-		ft_redirect_display_error(data, buffer, &path, status);
+	if (buff && status != REDIRECT_AMBIGUOUS_REDIRECT)
+		ft_redirect_display_error(data, buff, &path, status);
 	else
 		ft_redirect_display_error(data, str, &path, status);
-	free(buffer);
+	free(buff);
 	return (path);
 }
