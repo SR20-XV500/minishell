@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:01:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 13:17:47 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/03 16:33:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,22 @@ char	*ft_exec_cmd_get_path(t_data *data, const char *cmd_name)
 {
 	char	*new_path;
 	char	*path;
+	char	*path_used;
 
 	new_path = NULL;
 	path = NULL;
+	path_used = "./";
 	if (data && cmd_name)
 	{
-		path = ft_env_get_content(*(data->env), "PATH");
-		if (path)
-		{
-			if (*cmd_name == '/')
-				new_path = ft_strdup(cmd_name);
-			else
-				new_path = ft_exec_cmd_path_parser(data, cmd_name, path);
-			free(path);
-		}
+		if (*cmd_name != '/')
+			path = ft_env_get_content(*(data->env), "PATH");
+		if (path && *path)
+			path_used = path;
+		if (*cmd_name == '/')
+			new_path = ft_strdup(cmd_name);
+		else
+			new_path = ft_exec_cmd_path_parser(data, cmd_name, path_used);
+		free(path);
 		ft_exec_cmd_error(data, new_path, cmd_name);
 	}
 	return (new_path);
