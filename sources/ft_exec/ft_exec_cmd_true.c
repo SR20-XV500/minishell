@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd_true.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/03 00:37:42 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:55:08 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 	return (status);
 }
 
-static void	ft_exec_cmd_system_for_kids(t_data *data, const t_cmd_content cmd,
+static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
 		const char *name)
 {
 	char	*buffer_name;
@@ -73,7 +73,7 @@ static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
 	fork_pid = fork();
 	status = SUCCESS;
 	if (fork_pid == CHILDREN)
-		ft_exec_cmd_system_for_kids(data, cmd, name);
+		ft_exec_cmd_system_children(data, cmd, name);
 	else if (fork_pid > CHILDREN)
 		waitpid(fork_pid, &status, NO_OPTION);
 	if (fork_pid == CHILDREN_FAIL)

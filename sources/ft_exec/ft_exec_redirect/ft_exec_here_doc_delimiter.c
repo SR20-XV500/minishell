@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_here_doc_delimitor.c                       :+:      :+:    :+:   */
+/*   ft_exec_here_doc_delimiter.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:04:49 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 13:08:14 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:13:56 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_expantion_get_while_here_doc(t_data *data,
-	const char *str, size_t *i, char **buffer)
+static int	ft_expansion_get_while_here_doc(t_data *data, const char *str,
+		size_t *i, char **buffer)
 {
 	int	status;
 
@@ -67,7 +67,7 @@ static void	ft_here_doc_expansion(t_data *data, t_list **lst)
 		if (word->type == HER_STR && ft_strchr(word->word, '$'))
 		{
 			buffer = ft_expansion_get_str_func(data, word->word,
-					&ft_expantion_get_while_here_doc);
+					&ft_expansion_get_while_here_doc);
 			free(word->word);
 			word->word = buffer;
 		}

@@ -20,7 +20,7 @@ T_FT_EXEC_PIPE	::= ft_exec_cmd_children ft_exec_cmd_children_2 ft_exec_pipe
 FT_EXEC_PIPE	::= $(foreach buffer, $(T_FT_EXEC_PIPE), \
 						ft_exec_pipe/$(buffer))
 T_FT_EXEC_RED	::= ft_redirect_path ft_exec_fd ft_exec_dup \
-					ft_exec_here_doc ft_exec_here_doc_delimitor \
+					ft_exec_here_doc ft_exec_here_doc_delimiter \
 					ft_exec_here_doc_redirect
 FT_EXEC_RED		::= $(foreach buffer, $(T_FT_EXEC_RED), \
 						ft_exec_redirect/$(buffer))
@@ -30,7 +30,7 @@ FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
 T_FT_PARSING_EX	::= ft_expansion_get ft_expansion_var_join ft_expansion_split \
 					ft_expansion_split_main ft_expansion \
-					ft_expantion_get_str_func 
+					ft_expantion_get_str_func
 FT_PARSING_EX	::= $(foreach buffer, $(T_FT_PARSING_EX), \
 						ft_expansion/$(buffer))
 T_FT_PARSING	::= ft_parser ft_parser_get_elements ft_check_lst ft_type_set \
@@ -55,7 +55,7 @@ HEADERS			::= headers/
 HEADERS_CONTENT	::= $(HEADERS)minishell.h $(HEADERS)utils.h \
 					$(HEADERS)ft_parsing.h $(HEADERS)ft_env.h \
 					$(HEADERS)ft_builtins.h $(HEADERS)ft_exec.h \
-					$(HEADERS)ft_data.h 
+					$(HEADERS)ft_data.h
 LIBFT_DIR		::= libft/
 LIBFT			::= $(LIBFT_DIR)libft.a
 CFLAGS			::= -Wall -Wextra -Werror

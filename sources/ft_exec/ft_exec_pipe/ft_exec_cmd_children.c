@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd_children.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 19:18:48 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/01 15:42:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:42:28 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_close_pipe_no_used(int *fds, int std[2], int len)
+static int	ft_close_unused_pipe(int *fds, int std[2], int len)
 {
 	int	status;
 
@@ -41,9 +41,9 @@ static int	ft_exec_dup_pipe(int *fds, int pos, int len, int std[2])
 		status = SUCCESS;
 		if (pos != 0)
 			std[STDIN] = *(fds + (pos - 1) * 2 + STDIN);
-		if (pos != len -1)
+		if (pos != len - 1)
 			std[STDOUT] = *(fds + pos * 2 + STDOUT);
-		status = ft_close_pipe_no_used(fds, std, len - 1);
+		status = ft_close_unused_pipe(fds, std, len - 1);
 		if (status == SUCCESS && (dup2(std[STDIN], STDIN) == EXEC_DUP_FAIL
 				|| dup2(std[STDOUT], STDOUT) == EXEC_DUP_FAIL))
 			status = FAIL;

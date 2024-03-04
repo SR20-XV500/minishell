@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:36:22 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/02 02:10:20 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:27:08 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_exit_is_number(const char *str)
 	return (status);
 }
 
-static int	ft_exit_arg_is_valible(const char *str)
+static int	ft_exit_arg_is_valid(const char *str)
 {
 	int			status;
 	long long	nbr;
@@ -49,14 +49,14 @@ static int	ft_exit_get_status_arg(const char *str)
 	int	status;
 
 	status = SUCCESS;
-	if (ft_exit_arg_is_valible(str) == SUCCESS)
+	if (ft_exit_arg_is_valid(str) == SUCCESS)
 		status = (char)ft_atoll(str);
 	else
 	{
 		status = EXIT_ERR;
 		ft_fprintf(STDERR, "exit\n");
-		ft_fprintf(STDERR,
-			"minishell: exit: %s: numeric argument required\n", str);
+		ft_fprintf(STDERR, "minishell: exit: %s: numeric argument required\n",
+			str);
 	}
 	return (status);
 }
@@ -77,7 +77,7 @@ int	ft_exit(t_data *data, const char **argv)
 				status = data->env->exit_status;
 		}
 		else if (ft_tab_len((char **)argv) == 2
-			|| ft_exit_arg_is_valible(argv[1]) != SUCCESS)
+			|| ft_exit_arg_is_valid(argv[1]) != SUCCESS)
 			status = ft_exit_get_status_arg(argv[1]);
 		else
 		{
