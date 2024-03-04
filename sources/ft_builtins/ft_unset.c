@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:39:18 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/03 19:33:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:46:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,8 @@ static int	ft_unset_arg(const char *name, t_env *env)
 			status = ft_env_tab_del(&env->export, name);
 		else if (ft_env_tab_get_pos(env->envp, name) != ENV_NOT_SET)
 			status = ft_env_tab_del(&env->envp, name);
-		if (env->path && ft_strncmp("PATH", name, 5) == CMP_EGAL)
-		{
-			free(env->path);
-			env->path = NULL;
-		}
 	}
+	ft_unsetting_path(name, env);
 	if (status != SUCCESS)
 		status = FAIL;
 	return (status);

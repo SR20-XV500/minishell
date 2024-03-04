@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 11:51:09 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:48:15 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,19 @@
 # define TRUE 1
 # define EXIT_ERR 2
 
-int	ft_echo(char **argv, char **envp);
+int		ft_echo(char **argv, char **envp);
 
-int	ft_pwd(char **argv, char **envp);
+int		ft_pwd(char **argv, char **envp);
 
-int	ft_cd(char **argv, char **envp);
+int		ft_cd(char **argv, char **envp);
 
-int	ft_unset(char **argv, t_env *env);
+int		ft_unset(char **argv, t_env *env);
 
-int	ft_export(char **argv, t_env *env);
-int	ft_export_print(t_env *env);
+int		ft_export(char **argv, t_env *env);
+int		ft_export_print(t_env *env);
 
-int	ft_exit(t_data *data, const char **argv);
+int		ft_exit(t_data *data, const char **argv);
+
+void	ft_unsetting_path(const char *arg, t_env *env);
 
 #endif
