@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion_split_main.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 20:19:11 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 20:20:04 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:11:06 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_expansion_split_node(t_data *data, t_list **lst, t_list *last)
 	if (data && lst && *lst && (*lst)->content)
 	{
 		status = SUCCESS;
-		if (ft_expansion_is_multie_arg(((t_word *)(*lst)->content)->word)
+		if (ft_expansion_is_multi_arg(((t_word *)(*lst)->content)->word)
 			== SUCCESS)
 		{
 			lst_split = ft_expansion_split_node_content(

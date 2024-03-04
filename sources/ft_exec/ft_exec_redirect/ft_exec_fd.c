@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:20:14 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/03 02:07:53 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:48:52 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_exec_redirect_fd_err(t_data *data, int fd,
-	const char *err_str, const char *path)
+static int	ft_exec_redirect_fd_err(t_data *data, int fd, const char *err_str,
+		const char *path)
 {
 	int		status;
 	char	*expansion;
@@ -22,7 +22,7 @@ static int	ft_exec_redirect_fd_err(t_data *data, int fd,
 	expansion = NULL;
 	if (fd == FD_FAIL_OPEN)
 	{
-		expansion = ft_trime_ambigus(ft_expansion_get_str(data, err_str));
+		expansion = ft_trim_ambiguous(ft_expansion_get_str(data, err_str));
 		status = FAIL;
 		ft_fprintf(STDERR, "minishell: ");
 		perror(expansion);
@@ -30,7 +30,7 @@ static int	ft_exec_redirect_fd_err(t_data *data, int fd,
 	}
 	else if (ft_is_directory(path) == SUCCESS)
 	{
-		expansion = ft_trime_ambigus(ft_expansion_get_str(data, err_str));
+		expansion = ft_trim_ambiguous(ft_expansion_get_str(data, err_str));
 		status = FAIL;
 		ft_fprintf(STDERR, "minishell: %s: Is a directory\n", expansion);
 		data->env->exit_status = REDIRECT_FAIL;
@@ -41,19 +41,15 @@ static int	ft_exec_redirect_fd_err(t_data *data, int fd,
 }
 
 /**
- * in opens for redirection out, flags 0644 is specified.
- * its meaning is :
- * 0 : to indicate that it is a permision flag which changes
- *	the way the prgram includes the following numbers
- *
- * 6: to open the user's read and write functions
- *
- * 4: to open in read mode in the group
- *
- * 4: to open in read mode in the others
-*/
-int	ft_exec_redirect_fd(t_data *data, int type,
-	const char *path, const char *err_str)
+ * In open for stdout redirection, flags 0644 is specified.
+ * Its meaning is :
+ * * 0: permissions are set in octal
+ * * 6: to allow the user's read and write access
+ * * 4: to allow read mode for the group
+ * * 4: to allow read mode for others
+ */
+int	ft_exec_redirect_fd(t_data *data, int type, const char *path,
+		const char *err_str)
 {
 	int	status;
 	int	open_fd;

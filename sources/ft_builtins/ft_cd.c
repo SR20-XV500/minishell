@@ -6,17 +6,15 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:09:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 17:49:49 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:27:03 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO: use CDPATH
-
 static void	ft_display_prompt(int status, char *path)
 {
-	if (status == CD_TO_MANY_ARGS)
+	if (status == CD_TOO_MANY_ARGS)
 		ft_fprintf(STDERR, "minishell: cd: HOME not set\n");
 	if (status == CD_HOME_NOT_SET)
 		ft_fprintf(STDERR, "minishell: cd: too many arguments\n");
@@ -40,7 +38,7 @@ static int	ft_check_args(char **argv, char **envp, int *exit_code)
 		ret = SUCCESS;
 		arg_len = ft_tab_len(argv);
 		if (arg_len > 2)
-			ret = CD_TO_MANY_ARGS;
+			ret = CD_TOO_MANY_ARGS;
 		else if (arg_len == 1 && ft_env_tab_get_pos(envp,
 				"HOME") == ENV_NOT_SET)
 			ret = CD_HOME_NOT_SET;

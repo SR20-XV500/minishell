@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:46:19 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/22 01:47:42 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:56:31 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static unsigned int	ft_exec_cmd_arg_get_len(t_list *lst)
 	return (len);
 }
 
-static char	**ft_exec_cmd_set_argv(t_list *lst,
-	char **argv, unsigned int len)
+static char	**ft_exec_cmd_set_argv(t_list *lst, char **argv, unsigned int len)
 {
 	unsigned int	index;
 
@@ -39,8 +38,8 @@ static char	**ft_exec_cmd_set_argv(t_list *lst,
 	if (lst && len > 1 && argv && *argv)
 	{
 		len--;
-		while (lst && ((t_word *)lst->content)->type != D_PIPE
-			&& index < len && argv)
+		while (lst && ((t_word *)lst->content)->type != D_PIPE && index < len
+			&& argv)
 		{
 			if (((t_word *)lst->content)->type == TY_ARG)
 			{
@@ -58,8 +57,8 @@ static char	**ft_exec_cmd_set_argv(t_list *lst,
 	return (argv);
 }
 
-static char	**ft_exec_cmd_set_first_arg(t_list *lst,
-	char **argv, unsigned int len)
+static char	**ft_exec_cmd_set_first_arg(t_list *lst, char **argv,
+		unsigned int len)
 {
 	if (lst && len > 1 && ((t_word *)lst->content)->type == TY_CMD)
 	{
@@ -95,10 +94,6 @@ static char	**ft_exec_cmd_get_argv(t_list *lst)
 	}
 	return (argv);
 }
-
-//printf("hello le path : %s\n", cmd_content.path);
-//ft_printf("argument:\n-----\n%w-----\n", cmd_content.argv);
-//ft_printf("environement:\n-----\n%w-----\n", cmd_content.envp);
 
 int	ft_exec_cmd(t_data *data, t_list *lst)
 {
