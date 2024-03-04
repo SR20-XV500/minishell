@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/03 19:44:14 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:46:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int		ft_export_print(t_env *env);
 
 int		ft_exit(t_data *data, const char **argv);
 
-void	ft_unseting_path(const char *arg, t_env *env);
+void	ft_unsetting_path(const char *arg, t_env *env);
 
 #endif
