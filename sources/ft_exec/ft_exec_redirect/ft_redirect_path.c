@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirect_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:21:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/03 01:58:07 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:11:06 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static char	*ft_redirect_get_path_parser(t_data *data, const char *path)
 	return (path_created);
 }
 
-static void	ft_redirect_display_error(t_data *data,
-	const char *error, char **path, int status)
+static void	ft_redirect_display_error(t_data *data, const char *error,
+		char **path, int status)
 {
 	if (status == REDIRECT_AMBIGUOUS_REDIRECT || (*path && **path == '\0'))
 		data->env->exit_status = REDIRECT_FAIL;
@@ -42,7 +42,7 @@ static void	ft_redirect_display_error(t_data *data,
 		ft_fprintf(STDERR, ERR_AMBIGUOUS_REDIRECT, error);
 }
 
-char	*ft_trime_ambigus(char *str)
+char	*ft_trim_ambiguous(char *str)
 {
 	size_t	index;
 	int		buffer;
@@ -78,8 +78,8 @@ char	*ft_redirect_get_path(t_data *data, const char *str)
 	status = REDIRECT_AMBIGUOUS_REDIRECT;
 	if (str)
 	{
-		buff = ft_trime_ambigus(ft_expansion_get_str(data, str));
-		if (buff && ft_expansion_is_multie_arg(buff) == FAIL && *buff)
+		buff = ft_trim_ambiguous(ft_expansion_get_str(data, str));
+		if (buff && ft_expansion_is_multi_arg(buff) == FAIL && *buff)
 		{
 			status = MALLOC_FAIL;
 			ft_quotes_remove(buff);

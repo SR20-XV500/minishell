@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_here_doc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:35:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/28 21:27:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:08:14 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	ft_here_doc_add_content(t_data *data)
 		if (((t_word *)current->content)->type == TY_DELIM_HEREDOC)
 		{
 			ft_lstclear(buffer, &ft_word_free);
-			*buffer = ft_here_doc_delimitor(data,
+			*buffer = ft_here_doc_delimiter(data,
 					((t_word *)current->content)->word);
 			if (*buffer == NULL)
 				status = MALLOC_FAIL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:20:14 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/03 02:07:53 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:50:04 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_exec_redirect_fd_err(t_data *data, int fd,
 	expansion = NULL;
 	if (fd == FD_FAIL_OPEN)
 	{
-		expansion = ft_trime_ambigus(ft_expansion_get_str(data, err_str));
+		expansion = ft_trim_ambiguous(ft_expansion_get_str(data, err_str));
 		status = FAIL;
 		ft_fprintf(STDERR, "minishell: ");
 		perror(expansion);
@@ -30,7 +30,7 @@ static int	ft_exec_redirect_fd_err(t_data *data, int fd,
 	}
 	else if (ft_is_directory(path) == SUCCESS)
 	{
-		expansion = ft_trime_ambigus(ft_expansion_get_str(data, err_str));
+		expansion = ft_trim_ambiguous(ft_expansion_get_str(data, err_str));
 		status = FAIL;
 		ft_fprintf(STDERR, "minishell: %s: Is a directory\n", expansion);
 		data->env->exit_status = REDIRECT_FAIL;

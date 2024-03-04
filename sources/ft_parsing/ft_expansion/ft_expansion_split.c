@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion_split.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:39:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 20:41:57 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:11:06 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_list	*ft_expansion_split_node_content(const char *str)
 	return (lst_begin);
 }
 
-int	ft_expansion_is_multie_arg(const char *str)
+int	ft_expansion_is_multi_arg(const char *str)
 {
 	int		status;
 	char	*cpy_ptr;

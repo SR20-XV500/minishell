@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_word.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:51:18 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/27 18:11:32 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:03:34 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int	ft_word_add(t_data *data, const char *str, int type)
 
 	ret = BAD_PARAMETER;
 	if (data && str)
-		ret = ft_word_add_lst(&data->words, str, type);
+		ret = ft_word_lst_add(&data->words, str, type);
 	return (ret);
 }
