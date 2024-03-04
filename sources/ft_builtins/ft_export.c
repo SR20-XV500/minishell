@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/02 23:22:05 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/03 19:44:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int	ft_export_process(char *arg, t_env *env)
 	name = ft_env_get_name(arg);
 	if (ft_export_is_valid(name))
 	{
+		ft_unseting_path(arg, env);
 		if (ft_strchr(arg, '='))
 		{
 			if (ft_env_tab_get_pos(env->export, name) != ENV_NOT_SET)
