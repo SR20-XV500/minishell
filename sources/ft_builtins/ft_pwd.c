@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/05 23:56:13 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:59:23 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_pwd(char **argv, char **envp)
 {
 	int	ret;
 
-	ret = 0;
+	ret = SUCCESS;
 	if (argv && argv[0])
 		ret = ft_printf("%s\n", ft_pwd_get());
 	if (ret != WRITE_FAIL)
