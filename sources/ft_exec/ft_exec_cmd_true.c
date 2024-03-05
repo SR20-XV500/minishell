@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd_true.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 15:55:08 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/05 02:07:27 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 
 	status = FAIL;
 	if (ft_strncmp("cd", cmd.path, 3) == CMP_EGAL)
-		status = ft_cd(cmd.argv, cmd.envp);
+		status = ft_cd(cmd.argv, data->env);
 	else if (ft_strncmp("echo", cmd.path, 5) == CMP_EGAL)
 		status = ft_echo(cmd.argv, cmd.envp);
 	else if (ft_strncmp("pwd", cmd.path, 4) == CMP_EGAL)

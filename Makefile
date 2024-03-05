@@ -37,8 +37,8 @@ T_FT_PARSING	::= ft_parser ft_parser_get_elements ft_check_lst ft_type_set \
 					ft_rm_rf_quotes $(FT_PARSING_EX)
 FT_PARSING		::= $(foreach buffer, $(T_FT_PARSING), \
 						$(SOURCES)ft_parsing/$(buffer).c)
-T_FT_BUILTINS	::= ft_echo ft_pwd ft_cd ft_unset ft_export ft_export_print \
-					ft_exit ft_env ft_unset_path
+T_FT_BUILTINS	::= ft_echo ft_pwd ft_cd ft_cd_env ft_unset ft_export \
+					ft_export_print ft_exit ft_env ft_unset_path
 FT_BUILTINS		::= $(foreach buffer, $(T_FT_BUILTINS), \
 						$(SOURCES)ft_builtins/$(buffer).c)
 T_FT_ENV		::= ft_env_data ft_env_tab_get ft_env_get ft_env_iter \
