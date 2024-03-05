@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:01:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/03 16:33:14 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:36:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*ft_exec_cmd_path_parser(t_data *data, const char *cmd_name,
 			|| ft_strncmp("../", cmd_name, 3) == CMP_EGAL)
 			cmd = ft_path_parser(data->env->pwd, cmd_name);
 		else
-			cmd = ft_path_multiple_file(path, cmd_name);
+			cmd = ft_path_multiple_file(path, cmd_name, data->env);
 	}
 	return (cmd);
 }
