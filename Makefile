@@ -6,13 +6,13 @@
 #    By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 02:19:35 by tlassere          #+#    #+#              #
-#    Updated: 2024/03/03 00:05:23 by tlassere         ###   ########.fr        #
+#    Updated: 2024/03/06 00:25:59 by tlassere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			::= minishell
 SOURCES 		::= sources/
-T_UTILS			::= ft_check_args_main ft_get_line ft_signal ft_pwd_usage \
+T_UTILS			::= ft_check_args_main ft_get_line ft_signal \
 					ft_path_parser_join ft_path_parser ft_file_checks \
 					ft_quicksort ft_path_multi
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)

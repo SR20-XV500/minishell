@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/02 17:55:49 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:43:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ void	ft_use_line(t_data *data);
 int		ft_signal(void);
 
 void	ft_pwd_init(char **content);
-char	*ft_pwd_get(void);
-void	ft_pwd_change_content(char *str);
 
 char	*ft_path_parser(const char *path, const char *change_path);
 char	*ft_path_tab_to_str(char **pwd);
-char	*ft_path_multiple_file(const char *multie_path, const char *dest);
-char	*ft_path_multiple_directory(const char *multie_path, const char *dest);
+char	*ft_path_multiple_file(const char *multie_path, const char *dest,
+			t_env *env);
 
 int		ft_is_file(const char *path);
 int		ft_is_directory(const char *path);

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/01 17:29:02 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:23:46 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ static t_data	*ft_data_make(const char **envp)
 		ft_bzero(data, sizeof(t_data));
 		data->exit_program = FAIL;
 		data->env = ft_env_init(envp);
-		if (data->env)
-			ft_pwd_init(&data->env->pwd);
-		else
+		if (data->env == NULL)
 			ft_data_free(&data);
 	}
 	return (data);

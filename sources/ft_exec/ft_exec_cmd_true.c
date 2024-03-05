@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/05 02:07:27 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:21:06 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 	else if (ft_strncmp("echo", cmd.path, 5) == CMP_EGAL)
 		status = ft_echo(cmd.argv, cmd.envp);
 	else if (ft_strncmp("pwd", cmd.path, 4) == CMP_EGAL)
-		status = ft_pwd(cmd.argv, cmd.envp);
+		status = ft_pwd(cmd.argv, data->env);
 	else if (ft_strncmp("export", cmd.path, 7) == CMP_EGAL)
 		status = ft_export(cmd.argv, data->env);
 	else if (ft_strncmp("unset", cmd.path, 6) == CMP_EGAL)
