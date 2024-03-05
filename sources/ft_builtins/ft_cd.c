@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:09:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/05 17:49:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/05 22:54:29 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	ft_display_prompt(int status, char *path)
 {
 	if (status == CD_TOO_MANY_ARGS)
-		ft_fprintf(STDERR, "minishell: cd: HOME not set\n");
-	if (status == CD_HOME_NOT_SET)
 		ft_fprintf(STDERR, "minishell: cd: too many arguments\n");
+	if (status == CD_HOME_NOT_SET)
+		ft_fprintf(STDERR, "minishell: cd: HOME not set\n");
 	if (status == CD_OLDPWD_NOT_SET)
 		ft_fprintf(STDERR, "minishell: cd: OLDPWD not set\n");
 	if (status == CD_INVALID_PATH && path)
@@ -105,15 +105,18 @@ int	ft_cd(char **argv, t_env *env)
 	{
 		new_path = ft_get_path(argv, env, &used_path);
 		if (new_path)
+		{
 			exit_code = ft_exec_path(new_path);
-		if (exit_code == CD_INVALID_PATH)
-			ft_display_prompt(exit_code, used_path);
-		else if (exit_code == CD_VALID_PATH)
-			ft_cd_update_path(new_path, env);
+			if (exit_code == CD_INVALID_PATH)
+				ft_display_prompt(exit_code, used_path);
+			else if (exit_code == CD_VALID_PATH)
+				exit_code = ft_cd_update_path(new_path, env);
+			free(new_path);
+		}
 		if (used_path)
 			free(used_path);
-		if (new_path)
-			free(new_path);
 	}
+	if (exit_code != SUCCESS)
+		exit_code = FAIL;
 	return (exit_code);
 }
