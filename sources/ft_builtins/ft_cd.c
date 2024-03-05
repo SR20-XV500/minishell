@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:09:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/05 13:52:52 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:49:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*ft_get_path(char **argv, t_env *env, char **used_path)
 		if (using && using[0] == '/')
 			path = ft_path_trim(using);
 		else
-			path = ft_path_parser(env->pwd, using);
+			path = ft_get_true_path(using, env);
 		*used_path = ft_strdup(using);
 	}
 	free(using);

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 01:54:23 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/05 13:42:47 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:49:37 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,25 @@ char	*ft_path_trim(char *path)
 		str = ft_strdup(path);
 	}
 	return (str);
+}
+
+char	*ft_get_true_path(char *using_path, t_env *env)
+{
+	char	*path;
+	char	*buffer;
+
+	path = ft_path_parser(env->pwd, using_path);
+	if (ft_strncmp("//", env->pwd, 2) == CMP_EGAL && path)
+	{
+		buffer = malloc(sizeof(char) * ft_strlen(path) + 2);
+		if (buffer)
+		{
+			ft_memmove(buffer + 1, path, ft_strlen(path) + 1);
+			buffer[0] = '/';
+		}
+		free(path);
+	}
+	else
+		buffer = path;
+	return (buffer);
 }
