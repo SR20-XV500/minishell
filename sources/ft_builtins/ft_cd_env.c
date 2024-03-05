@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 01:54:23 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/05 02:52:19 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:42:47 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,21 @@ int	ft_cd_update_path(const char *new_path, t_env *env)
 		}
 	}
 	return (status);
+}
+
+char	*ft_path_trim(char *path)
+{
+	char	*str;
+
+	str = NULL;
+	if (path)
+	{
+		if (ft_strncmp("///", path, 3) == CMP_EGAL)
+		{
+			while (*(path + 1) == '/')
+				path++;
+		}
+		str = ft_strdup(path);
+	}
+	return (str);
 }

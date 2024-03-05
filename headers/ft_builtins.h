@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/05 01:59:26 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:42:59 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		ft_pwd(char **argv, char **envp);
 
 int		ft_cd(char **argv, t_env *env);
 int		ft_cd_update_path(const char *new_path, t_env *env);
+char	*ft_path_trim(char *path);
 
 int		ft_unset(char **argv, t_env *env);
 
