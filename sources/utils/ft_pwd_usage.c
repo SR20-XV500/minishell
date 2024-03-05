@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:58:59 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/07 21:01:44 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:17:52 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,4 @@ void	ft_pwd_init(char **content)
 {
 	if (content)
 		ft_pwd_usage(PWD_INIT, content, NULL);
-}
-
-void	ft_pwd_change_content(char *str)
-{
-	if (str)
-		ft_pwd_usage(PWD_CHANGE_CONTENT, NULL, str);
 }
