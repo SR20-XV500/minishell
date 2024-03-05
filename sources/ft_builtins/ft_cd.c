@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:09:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/05 13:42:40 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:52:52 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,7 @@ int	ft_cd(char **argv, t_env *env)
 		if (new_path)
 			exit_code = ft_exec_path(new_path);
 		if (exit_code == CD_INVALID_PATH)
-		{
 			ft_display_prompt(exit_code, used_path);
-			free(new_path);
-		}
 		else if (exit_code == CD_VALID_PATH)
 			ft_cd_update_path(new_path, env);
 		if (used_path)
