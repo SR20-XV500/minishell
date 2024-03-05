@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:09:37 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 15:27:03 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:49:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	ft_exec_path(char *path)
 	return (ret);
 }
 
-char	*ft_get_path(char **argv, char **envp, char **used_path)
+char	*ft_get_path(char **argv, t_env *env, char **used_path)
 {
 	char	*path;
 	char	*using;
@@ -73,26 +73,26 @@ char	*ft_get_path(char **argv, char **envp, char **used_path)
 	using = NULL;
 	if (ft_tab_len(argv) == 1)
 	{
-		path = ft_env_tab_get_content(envp, "HOME");
+		path = ft_env_tab_get_content(env->envp, "HOME");
 		*used_path = ft_strdup(path);
 	}
 	else
 	{
 		if (ft_strncmp(argv[1], "-", 2) == CMP_EGAL)
-			using = ft_env_tab_get_content(envp, "OLDPWD");
+			using = ft_env_tab_get_content(env->envp, "OLDPWD");
 		else
 			using = ft_strdup(argv[1]);
 		if (using && using[0] == '/')
-			path = ft_strdup(using);
+			path = ft_path_trim(using);
 		else
-			path = ft_path_parser(ft_pwd_get(), using);
+			path = ft_get_true_path(using, env);
 		*used_path = ft_strdup(using);
 	}
 	free(using);
 	return (path);
 }
 
-int	ft_cd(char **argv, char **envp)
+int	ft_cd(char **argv, t_env *env)
 {
 	int		exit_code;
 	char	*new_path;
@@ -101,20 +101,19 @@ int	ft_cd(char **argv, char **envp)
 	exit_code = MALLOC_FAIL;
 	new_path = NULL;
 	used_path = NULL;
-	if (ft_check_args(argv, envp, &exit_code) == SUCCESS)
+	if (ft_check_args(argv, env->envp, &exit_code) == SUCCESS)
 	{
-		new_path = ft_get_path(argv, envp, &used_path);
+		new_path = ft_get_path(argv, env, &used_path);
 		if (new_path)
 			exit_code = ft_exec_path(new_path);
 		if (exit_code == CD_INVALID_PATH)
-		{
 			ft_display_prompt(exit_code, used_path);
-			free(new_path);
-		}
-		else
-			ft_pwd_change_content(new_path);
+		else if (exit_code == CD_VALID_PATH)
+			ft_cd_update_path(new_path, env);
 		if (used_path)
 			free(used_path);
+		if (new_path)
+			free(new_path);
 	}
 	return (exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/04 17:46:21 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:45:33 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	ft_export_update_env(char *arg, t_env *env)
 	return (ret);
 }
 
-static int	ft_export_process(char *arg, t_env *env)
+int	ft_export_process(char *arg, t_env *env)
 {
 	int		ret;
 	char	*name;

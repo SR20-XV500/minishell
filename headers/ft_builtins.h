@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 18:48:15 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:49:58 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ int		ft_echo(char **argv, char **envp);
 
 int		ft_pwd(char **argv, char **envp);
 
-int		ft_cd(char **argv, char **envp);
+int		ft_cd(char **argv, t_env *env);
+int		ft_cd_update_path(const char *new_path, t_env *env);
+char	*ft_get_true_path(char *using_path, t_env *env);
+char	*ft_path_trim(char *path);
 
 int		ft_unset(char **argv, t_env *env);
 
 int		ft_export(char **argv, t_env *env);
+int		ft_export_process(char *arg, t_env *env);
 int		ft_export_print(t_env *env);
 
 int		ft_exit(t_data *data, const char **argv);
