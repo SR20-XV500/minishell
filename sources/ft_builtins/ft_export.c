@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/04 20:45:33 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:23:00 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ int	ft_export(char **argv, t_env *env)
 		{
 			argv++;
 			exit_code = SUCCESS;
-			while (argv[0] && exit_code != MALLOC_FAIL)
+			while (*argv && exit_code != MALLOC_FAIL)
 			{
-				exit_code = ft_export_process(argv++[0], env);
+				exit_code = ft_export_process(*argv++, env);
 				if (exit_code != SUCCESS)
 					success = FAIL;
 			}
