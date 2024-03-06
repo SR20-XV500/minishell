@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:36:22 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/06 19:43:43 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:52:51 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	ft_exit_get_status_arg(const char *str)
 	else
 	{
 		status = EXIT_ERR;
-		ft_fprintf(STDERR, "exit\n");
 		ft_fprintf(STDERR, "minishell: exit: %s: numeric argument required\n",
 			str);
 	}
