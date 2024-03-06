@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/06 00:43:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 00:00:11 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,16 @@
 # define SIGNAL_HANDLING 0
 # define SIGNAL_CRASH 1
 
+#define SIGINT_SIGNAL 130
+#define SIGQUIT_SIGNAL 131
+
+extern int	g_signal_handle;
+
 void	ft_check_args_main(int argc);
 
 void	ft_use_line(t_data *data);
 
-int		ft_signal(void);
+int		ft_signal_interactive(void);
 
 void	ft_pwd_init(char **content);
 
