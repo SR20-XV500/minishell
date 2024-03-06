@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/06 18:56:39 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:19:09 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static int	ft_export_update_env(char *arg, t_env *env)
 	return (ret);
 }
 
-// TODO: rename ft_unsetting_path
 int	ft_export_process(char *arg, t_env *env)
 {
 	int		ret;
@@ -82,7 +81,7 @@ int	ft_export_process(char *arg, t_env *env)
 	if (ft_export_is_valid(name))
 	{
 		ret = SUCCESS;
-		ft_unsetting_path(arg, env);
+		ft_unset_path(arg, env);
 		if (ft_strchr(arg, '='))
 		{
 			if (ft_env_tab_get_pos(env->export, name) != ENV_NOT_SET)
