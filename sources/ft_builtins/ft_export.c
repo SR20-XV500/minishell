@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/06 17:23:00 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:56:39 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static int	ft_export_update_env(char *arg, t_env *env)
 	return (ret);
 }
 
+// TODO: rename ft_unsetting_path
 int	ft_export_process(char *arg, t_env *env)
 {
 	int		ret;
@@ -80,6 +81,7 @@ int	ft_export_process(char *arg, t_env *env)
 	name = ft_env_get_name(arg);
 	if (ft_export_is_valid(name))
 	{
+		ret = SUCCESS;
 		ft_unsetting_path(arg, env);
 		if (ft_strchr(arg, '='))
 		{
@@ -88,12 +90,12 @@ int	ft_export_process(char *arg, t_env *env)
 			else
 				ret = ft_export_update_env(arg, env);
 		}
-		else if (ft_env_tab_get_pos(env->envp, arg) == ENV_NOT_SET)
+		else if (ft_env_tab_get_pos(env->envp, arg) == ENV_NOT_SET
+			&& ft_env_tab_get_pos(env->export, arg) == ENV_NOT_SET)
 			ret = ft_env_tab_add(&env->export, arg);
 	}
 	else
-		ft_fprintf(STDERR, "minishell: export: `%s': not a valid identifier\n",
-			arg);
+		ft_fprintf(STDERR, ERR_EXPORT_ID, arg);
 	if (name)
 		free(name);
 	return (ret);
@@ -116,9 +118,9 @@ int	ft_export(char **argv, t_env *env)
 			{
 				exit_code = ft_export_process(*argv++, env);
 				if (exit_code != SUCCESS)
-					success = FAIL;
+					success = FALSE;
 			}
-			if (exit_code != MALLOC_FAIL && success == FAIL)
+			if (exit_code != MALLOC_FAIL && success == FALSE)
 				exit_code = FAIL;
 		}
 		else
