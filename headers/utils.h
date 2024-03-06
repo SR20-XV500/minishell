@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 00:00:11 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 00:10:43 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define SIGNAL_HANDLING 0
 # define SIGNAL_CRASH 1
 
-#define SIGINT_SIGNAL 130
-#define SIGQUIT_SIGNAL 131
+# define SIGINT_SIGNAL 130
+# define SIGQUIT_SIGNAL 131
 
 extern int	g_signal_handle;
 

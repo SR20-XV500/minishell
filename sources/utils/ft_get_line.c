@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/02 02:07:03 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 00:09:01 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,19 @@ void	ft_use_line(t_data *data)
 	char	**lines;
 
 	lines = ft_get_line();
-	while (lines && data->exit_program == FAIL)
+	while (lines && data->exit_program == FAIL
+		&& ft_signal_interactive() == SUCCESS)
 	{
 		data->tabs_lines = lines;
 		ft_use_current_line(lines, data);
 		ft_tab_free(lines);
 		data->tabs_lines = NULL;
+		lines = NULL;
 		if (data->exit_program == FAIL)
 			lines = ft_get_line();
 	}
+	if (lines)
+		ft_tab_free(lines);
 	if (data->exit_program == FAIL)
 		ft_fprintf(STDERR, "exit\n");
 	rl_clear_history();
