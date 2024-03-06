@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/04 20:45:33 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:19:09 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	ft_export_process(char *arg, t_env *env)
 	name = ft_env_get_name(arg);
 	if (ft_export_is_valid(name))
 	{
-		ft_unsetting_path(arg, env);
+		ret = SUCCESS;
+		ft_unset_path(arg, env);
 		if (ft_strchr(arg, '='))
 		{
 			if (ft_env_tab_get_pos(env->export, name) != ENV_NOT_SET)
@@ -88,12 +89,12 @@ int	ft_export_process(char *arg, t_env *env)
 			else
 				ret = ft_export_update_env(arg, env);
 		}
-		else if (ft_env_tab_get_pos(env->envp, arg) == ENV_NOT_SET)
+		else if (ft_env_tab_get_pos(env->envp, arg) == ENV_NOT_SET
+			&& ft_env_tab_get_pos(env->export, arg) == ENV_NOT_SET)
 			ret = ft_env_tab_add(&env->export, arg);
 	}
 	else
-		ft_fprintf(STDERR, "minishell: export: `%s': not a valid identifier\n",
-			arg);
+		ft_fprintf(STDERR, ERR_EXPORT_ID, arg);
 	if (name)
 		free(name);
 	return (ret);
@@ -112,13 +113,13 @@ int	ft_export(char **argv, t_env *env)
 		{
 			argv++;
 			exit_code = SUCCESS;
-			while (argv[0] && exit_code != MALLOC_FAIL)
+			while (*argv && exit_code != MALLOC_FAIL)
 			{
-				exit_code = ft_export_process(argv++[0], env);
+				exit_code = ft_export_process(*argv++, env);
 				if (exit_code != SUCCESS)
-					success = FAIL;
+					success = FALSE;
 			}
-			if (exit_code != MALLOC_FAIL && success == FAIL)
+			if (exit_code != MALLOC_FAIL && success == FALSE)
 				exit_code = FAIL;
 		}
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:39:18 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/04 17:46:21 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:19:09 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_unset_arg(const char *name, t_env *env)
 		else if (ft_env_tab_get_pos(env->envp, name) != ENV_NOT_SET)
 			status = ft_env_tab_del(&env->envp, name);
 	}
-	ft_unsetting_path(name, env);
+	ft_unset_path(name, env);
 	if (status != SUCCESS)
 		status = FAIL;
 	return (status);

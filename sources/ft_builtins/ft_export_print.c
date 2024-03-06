@@ -6,7 +6,7 @@
 /*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/02 22:24:22 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:39:25 by bcheronn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ static int	ft_export_print_line(char **export, const char *var)
 				ret = ft_printf("declare -x %s=\"%s\"\n", name, value);
 			else
 				ret = ft_printf("declare -x %s\n", name);
+			if (ret == WRITE_FAIL)
+				ret = FAIL;
+			else
+				ret = SUCCESS;
 			free(value);
 		}
 		free(name);
