@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:36:22 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/06 19:29:48 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:43:43 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_exit(t_data *data, const char **argv)
 	if (data && argv)
 	{
 		data->exit_program = SUCCESS;
-		if (ft_fprintf(STDERR, "exit\n") == -1)
+		if (ft_fprintf(STDERR, "exit\n") == WRITE_FAIL)
 			status = EXIT_ERR;
 		if (ft_tab_len((char **)argv) == 1 && status != EXIT_ERR)
 			status = data->env->exit_status;
