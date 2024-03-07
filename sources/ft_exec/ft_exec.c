@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 18:49:20 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:33:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ int	ft_exec(t_data *data)
 		}
 		if (status == SUCCESS && g_signal_handle == SIGQUIT_SIGNAL)
 			ft_fprintf(STDERR, "Quit\n");
+		else if (g_signal_handle == SIGINT_SIGNAL)
+			ft_fprintf(STDERR, "\n");
+		data->env->exit_status += g_signal_handle;
 	}
 	return (status);
 }
