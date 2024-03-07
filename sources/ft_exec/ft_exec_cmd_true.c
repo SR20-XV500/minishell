@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 19:31:08 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 22:16:34 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
 	char	*buffer_name;
 	int		status;
 
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	status = EXEC_CMD_NOT_FOUND;
 	buffer_name = ft_strdup(name);
 	ft_data_free(&data);
