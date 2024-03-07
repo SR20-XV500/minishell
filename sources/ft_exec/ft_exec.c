@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/29 03:05:27 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 01:06:33 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ int	ft_exec(t_data *data)
 	if (data)
 	{
 		status = ft_exec_here_doc(data);
+		if (status == SUCCESS)
+		{
+			status = ft_signal_exec();
+		}
 		if (status == SUCCESS)
 		{
 			if (ft_word_count(data->words, D_PIPE))

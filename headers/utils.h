@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 00:10:43 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 00:13:31 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_check_args_main(int argc);
 void	ft_use_line(t_data *data);
 
 int		ft_signal_interactive(void);
+int		ft_signal_exec(void);
 
 void	ft_pwd_init(char **content);
 
