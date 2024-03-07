@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 01:06:33 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:49:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	ft_exec(t_data *data)
 			else
 				status = ft_exec_basic(data, data->words);
 		}
+		if (status == SUCCESS && g_signal_handle == SIGQUIT_SIGNAL)
+			ft_fprintf(STDERR, "Quit\n");
 	}
 	return (status);
 }

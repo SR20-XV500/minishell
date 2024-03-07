@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:40 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 01:23:09 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:48:01 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	ft_exec_handle(int signals, siginfo_t *info, void *ucontext)
 	}
 	if (signals == SIGQUIT)
 	{
-		ft_fprintf(STDERR, "Quit\n");
 		g_signal_handle = SIGQUIT_SIGNAL;
 	}
 	(void)ucontext;
