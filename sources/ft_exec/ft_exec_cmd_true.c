@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 22:16:34 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:19:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
 	buffer_name = ft_strdup(name);
 	ft_data_free(&data);
 	clear_history();
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (buffer_name == NULL || execve(cmd.path, cmd.argv, cmd.envp))
 	{
 		if (ft_is_directory(cmd.path) != SUCCESS)
@@ -68,12 +70,25 @@ static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
 	pid_t	fork_pid;
 	int		status;
 
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	fork_pid = fork();
 	status = SUCCESS;
 	if (fork_pid == CHILDREN)
 		ft_exec_cmd_system_children(data, cmd, name);
 	else if (fork_pid > CHILDREN)
+	{
 		waitpid(fork_pid, &status, NO_OPTION);
+		if (WIFSIGNALED(status) == TRUE)
+		{
+			if (WTERMSIG(status) == SIGINT)
+				g_signal_handle = SIGINT_SIGNAL;
+			if (WTERMSIG(status) == SIGQUIT)
+				g_signal_handle = SIGQUIT_SIGNAL;
+		}
+		if (g_signal_handle != 0)
+			status = 0;
+	}
 	if (fork_pid == CHILDREN_FAIL)
 		perror("minishell: ");
 	return (status);

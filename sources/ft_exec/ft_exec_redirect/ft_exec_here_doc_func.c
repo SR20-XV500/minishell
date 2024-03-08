@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:27:04 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 16:41:40 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:20:51 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ static int	ft_here_doc_add_content(t_data *data)
 		ft_free_here_doc(&data->here_doc);
 	return (status);
 }
-
 
 int	ft_exec_here_doc_func(t_data *data)
 {

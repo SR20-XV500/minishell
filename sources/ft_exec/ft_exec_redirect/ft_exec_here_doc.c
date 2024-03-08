@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:35:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 16:42:02 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:21:04 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_open_new(void)
 	int	status;
 	int	fd;
 
-	status = SUCCESS; 
+	status = SUCCESS;
 	fd = open("/dev/pts/0", O_WRONLY);
 	if (fd == FD_FAIL_OPEN || fd != STDIN)
 	{
