@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 18:19:25 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 22:46:08 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,33 +64,49 @@ static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
 	exit(status);
 }
 
+static void	ft_wait_children_execve(t_data *data, pid_t fork_pid)
+{
+	int	status;
+
+	waitpid(fork_pid, &status, NO_OPTION);
+	if (WIFSIGNALED(status) == TRUE)
+	{
+		if (WTERMSIG(status) == SIGINT)
+			g_signal_handle = SIGINT_SIGNAL;
+		if (WTERMSIG(status) == SIGQUIT)
+			g_signal_handle = SIGQUIT_SIGNAL;
+	}
+	data->env->exit_status = WEXITSTATUS(status);
+}
+
+int	ft_signal_ing(void)
+{
+	int	status;
+
+	status = SIGNAL_HANDLING;
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR ||
+		signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		status = SIGNAL_CRASH;
+	return (status);
+}
+
 static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
 		const char *name)
 {
 	pid_t	fork_pid;
 	int		status;
 
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
 	fork_pid = fork();
-	status = SUCCESS;
-	if (fork_pid == CHILDREN)
-		ft_exec_cmd_system_children(data, cmd, name);
-	else if (fork_pid > CHILDREN)
+	status = ft_signal_ing();
+	if (status == SIGNAL_HANDLING)
 	{
-		waitpid(fork_pid, &status, NO_OPTION);
-		if (WIFSIGNALED(status) == TRUE)
-		{
-			if (WTERMSIG(status) == SIGINT)
-				g_signal_handle = SIGINT_SIGNAL;
-			if (WTERMSIG(status) == SIGQUIT)
-				g_signal_handle = SIGQUIT_SIGNAL;
-		}
-		if (g_signal_handle != 0)
-			status = 0;
+		if (fork_pid == CHILDREN)
+			ft_exec_cmd_system_children(data, cmd, name);
+		else if (fork_pid > CHILDREN)
+			ft_wait_children_execve(data, fork_pid);
+		if (fork_pid == CHILDREN_FAIL)
+			perror("minishell: ");
 	}
-	if (fork_pid == CHILDREN_FAIL)
-		perror("minishell: ");
 	return (status);
 }
 
@@ -106,7 +122,6 @@ int	ft_exec_cmd_true(t_data *data, const t_cmd_content cmd, const char *name)
 			status = ft_exec_cmd_builtin(data, cmd);
 		else
 			status = ft_exec_cmd_system(data, cmd, name);
-		data->env->exit_status = status % EXIT_MODE;
 	}
 	return (status);
 }

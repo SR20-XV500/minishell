@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 16:10:21 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 22:41:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 
 # define SIGNAL_HANDLING 0
-# define SIGNAL_CRASH 1
+# define SIGNAL_CRASH 70
 # define FD_FAIL_STATUS 56
 # define DUP_FAIL_STATUS 57
 

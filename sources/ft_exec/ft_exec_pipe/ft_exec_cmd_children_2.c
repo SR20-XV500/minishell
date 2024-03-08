@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 22:38:12 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 19:37:14 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 22:32:04 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_wait_children(t_data *data, pid_t *children, int len)
 		while (index < len)
 		{
 			waitpid(children[index], &tmp, 0);
-			data->env->exit_status = tmp % EXIT_MODE;
+			data->env->exit_status = WEXITSTATUS(tmp);
 			index++;
 		}
 	}
