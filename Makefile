@@ -14,7 +14,7 @@ NAME			::= minishell
 SOURCES 		::= sources/
 T_UTILS			::= ft_check_args_main ft_get_line ft_signal \
 					ft_path_parser_join ft_path_parser ft_file_checks \
-					ft_quicksort ft_path_multi
+					ft_quicksort ft_path_multi ft_signal_heredoc
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_EXEC_PIPE	::= ft_exec_cmd_children ft_exec_cmd_children_2 ft_exec_pipe
 FT_EXEC_PIPE	::= $(foreach buffer, $(T_FT_EXEC_PIPE), \

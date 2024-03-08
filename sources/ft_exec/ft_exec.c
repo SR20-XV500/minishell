@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 22:03:04 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:07:38 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,22 @@ int	ft_exec(t_data *data)
 	if (data)
 	{
 		status = ft_exec_here_doc(data);
-		if (status == SUCCESS)
-			status = ft_signal_exec();
-		if (status == SUCCESS)
+		if (g_signal_handle != SIGINT_SIGNAL)
 		{
-			if (ft_word_count(data->words, D_PIPE))
-				status = ft_exec_pipe(data);
-			else
-				status = ft_exec_basic(data, data->words);
+			if (status == SUCCESS)
+				status = ft_signal_exec();
+			if (status == SUCCESS)
+			{
+				if (ft_word_count(data->words, D_PIPE))
+					status = ft_exec_pipe(data);
+				else
+					status = ft_exec_basic(data, data->words);
+			}
+			if (status == SUCCESS && g_signal_handle == SIGQUIT_SIGNAL)
+				ft_fprintf(STDERR, "Quit\n");
+			else if (g_signal_handle == SIGINT_SIGNAL)
+				ft_fprintf(STDERR, "\n");
 		}
-		if (status == SUCCESS && g_signal_handle == SIGQUIT_SIGNAL)
-			ft_fprintf(STDERR, "Quit\n");
-		else if (g_signal_handle == SIGINT_SIGNAL)
-			ft_fprintf(STDERR, "\n");
 		data->env->exit_status += g_signal_handle;
 	}
 	return (status);

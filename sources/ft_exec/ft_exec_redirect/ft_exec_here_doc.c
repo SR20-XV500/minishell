@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_here_doc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:35:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 13:08:14 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:11:00 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	ft_here_doc_add_content(t_data *data)
 	status = SUCCESS;
 	current = data->words;
 	buffer = data->here_doc;
-	while (status == SUCCESS && current)
+	while (status == SUCCESS && current && g_signal_handle != SIGINT_SIGNAL)
 	{
 		if (((t_word *)current->content)->type == TY_DELIM_HEREDOC)
 		{
@@ -98,11 +98,11 @@ static int	ft_here_doc_add_content(t_data *data)
 				status = MALLOC_FAIL;
 		}
 		if (*buffer && ((t_word *)current->content)->type == D_PIPE
-			&& status == SUCCESS)
+			&& status == SUCCESS && g_signal_handle != SIGINT_SIGNAL)
 			buffer++;
 		current = current->next;
 	}
-	if (status == MALLOC_FAIL)
+	if (status == MALLOC_FAIL || g_signal_handle == SIGINT_SIGNAL)
 		ft_free_here_doc(&data->here_doc);
 	return (status);
 }
@@ -110,13 +110,25 @@ static int	ft_here_doc_add_content(t_data *data)
 int	ft_exec_here_doc(t_data *data)
 {
 	int	status;
+	int	fd_tmp;
 
 	status = BAD_PARAMETER;
 	if (data)
 	{
-		status = ft_make_here_doc(data);
+		fd_tmp = dup(0);
+		status = ft_signal_heredoc();
+		if (status == SIGNAL_HANDLING)
+			status = ft_make_here_doc(data);
 		if (status == SUCCESS && data->here_doc)
 			status = ft_here_doc_add_content(data);
+		if (g_signal_handle == SIGINT_SIGNAL)
+		{
+			if (open("/dev/pts/0", O_WRONLY) == FD_FAIL_OPEN)
+				status = FD_FAIL_STATUS;
+			if (dup2(fd_tmp, 0) == EXEC_DUP_FAIL)
+				status = DUP_FAIL_STATUS;
+		}
+		close(fd_tmp);
 	}
 	return (status);
 }

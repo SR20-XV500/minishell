@@ -6,20 +6,19 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:40 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 18:48:01 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:01:06 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // TODO: with SIGINT return status code 130 + return exec
-// TODO: fix pipe SIGQUIT (BUGS)
+// TODO: fix return exit status code 130 if ^C is efectued in interactive mode
 
 int	g_signal_handle = 0;
 
 static void	ft_interactive_sigint(int signal, siginfo_t *info, void *ucontext)
 {
-	static unsigned i = 0;
 	if (signal == SIGINT)
 	{
 		ft_printf("\n");
@@ -28,7 +27,6 @@ static void	ft_interactive_sigint(int signal, siginfo_t *info, void *ucontext)
 		rl_redisplay();
 		g_signal_handle = SIGINT_SIGNAL;
 	}
-	i++;
 	(void)ucontext;
 	(void)info;
 }

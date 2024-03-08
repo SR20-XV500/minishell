@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 00:13:31 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:10:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 # define SIGNAL_HANDLING 0
 # define SIGNAL_CRASH 1
+# define FD_FAIL_STATUS 56
+# define DUP_FAIL_STATUS 57
 
 # define SIGINT_SIGNAL 130
 # define SIGQUIT_SIGNAL 131
@@ -34,6 +36,7 @@ void	ft_use_line(t_data *data);
 
 int		ft_signal_interactive(void);
 int		ft_signal_exec(void);
+int		ft_signal_heredoc(void);
 
 void	ft_pwd_init(char **content);
 
