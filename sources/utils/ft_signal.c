@@ -6,14 +6,11 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:40 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 23:28:16 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 00:50:34 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO: with SIGINT return status code 130 + return exec
-// TODO: fix return exit status code 130 if ^C is efectued in interactive mode
 
 int	g_signal_handle = 0;
 
@@ -34,13 +31,9 @@ static void	ft_interactive_sigint(int signal, siginfo_t *info, void *ucontext)
 static void	ft_exec_handle(int signals, siginfo_t *info, void *ucontext)
 {
 	if (signals == SIGINT)
-	{
 		g_signal_handle = SIGINT_SIGNAL;
-	}
 	if (signals == SIGQUIT)
-	{
 		g_signal_handle = SIGQUIT_SIGNAL;
-	}
 	(void)ucontext;
 	(void)info;
 }

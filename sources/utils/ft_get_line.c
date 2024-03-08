@@ -6,21 +6,11 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 00:43:17 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 00:52:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	ft_print_word(t_list *lst)
-{
-	if (lst)
-	{
-		ft_printf("%s ---> %d\n", ((t_word *)lst->content)->word,
-			((t_word *)lst->content)->type);
-		ft_print_word(lst->next);
-	}
-}
 
 static char	**ft_get_line(void)
 {
@@ -43,7 +33,6 @@ static int	ft_use_current_line(char **lines, t_data *data)
 	size_t	i;
 
 	i = 0;
-	(void)ft_print_word;
 	exec_status = SUCCESS;
 	while (lines[i] && data->exit_program && exec_status == SUCCESS)
 	{
