@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:40 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 23:01:06 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 22:55:37 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	ft_signal_exec(void)
 	ft_memset(&sa_exec, 0, sizeof(struct sigaction));
 	sa_exec.sa_flags = SA_SIGINFO;
 	sa_exec.sa_sigaction = &ft_exec_handle;
-	if (sigaction(SIGINT, &sa_exec, NULL) == -1)
+	if (sigaction(SIGINT, &sa_exec, NULL) == SIGACTION_FAIL)
 		status = SIGNAL_CRASH;
-	if (sigaction(SIGQUIT, &sa_exec, NULL) == -1)
+	if (sigaction(SIGQUIT, &sa_exec, NULL) == SIGACTION_FAIL)
 		status = SIGNAL_CRASH;
 	return (status);
 }
@@ -73,9 +73,9 @@ int	ft_signal_interactive(void)
 	sa_int.sa_sigaction = &ft_interactive_sigint;
 	ft_memset(&sa_quit, 0, sizeof(struct sigaction));
 	sa_quit.sa_handler = SIG_IGN;
-	if (sigaction(SIGQUIT, &sa_quit, NULL) == -1)
+	if (sigaction(SIGQUIT, &sa_quit, NULL) == SIGACTION_FAIL)
 		ret = SIGNAL_CRASH;
-	if (sigaction(SIGINT, &sa_int, NULL) == -1)
+	if (sigaction(SIGINT, &sa_int, NULL) == SIGACTION_FAIL)
 		ret = SIGNAL_CRASH;
 	return (ret);
 }

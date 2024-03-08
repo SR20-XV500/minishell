@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:43:24 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 16:48:10 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 22:55:44 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_signal_heredoc(void)
 	ft_memset(&sa_int, 0, sizeof(struct sigaction));
 	sa_int.sa_flags = SA_SIGINFO;
 	sa_int.sa_sigaction = &ft_heredoc_sigint;
-	if (sigaction(SIGINT, &sa_int, NULL) == -1)
+	if (sigaction(SIGINT, &sa_int, NULL) == SIGACTION_FAIL)
 		status = SIGNAL_CRASH;
 	return (status);
 }
