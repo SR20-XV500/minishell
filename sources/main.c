@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 02:16:41 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/07 01:07:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 23:18:59 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	main(int argc, char **argv, const char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
+	if (g_signal_handle == SIGINT_SIGNAL)
+		exit_status = g_signal_handle;
 	return (exit_status);
 }

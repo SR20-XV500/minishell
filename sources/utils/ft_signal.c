@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:22:40 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 22:55:37 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 23:28:16 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ static void	ft_exec_handle(int signals, siginfo_t *info, void *ucontext)
 	}
 	(void)ucontext;
 	(void)info;
+}
+
+int	ft_signal_ing(void)
+{
+	int	status;
+
+	status = SIGNAL_HANDLING;
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR
+		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		status = SIGNAL_CRASH;
+	return (status);
 }
 
 int	ft_signal_exec(void)

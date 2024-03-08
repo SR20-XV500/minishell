@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 16:52:24 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 23:16:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	ft_use_current_line(char **lines, t_data *data)
 	exec_status = SUCCESS;
 	while (lines[i] && data->exit_program && exec_status == SUCCESS)
 	{
+		if (g_signal_handle == SIGINT_SIGNAL)
+			data->env->exit_status = g_signal_handle;
 		g_signal_handle = 0;
 		data->line_count += 1;
 		add_history(lines[i]);

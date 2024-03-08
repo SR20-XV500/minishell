@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:38:06 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 18:14:37 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 23:34:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ int	ft_word_count(t_list *lst, int type)
 	return (count);
 }
 
+static int	ft_exec_content(t_data *data)
+{
+	int	status;
+
+	status = SUCCESS;
+	if (ft_word_count(data->words, D_PIPE))
+		status = ft_exec_pipe(data);
+	else
+		status = ft_exec_basic(data, data->words);
+	return (status);
+}
+
 int	ft_exec(t_data *data)
 {
 	int	status;
@@ -78,24 +90,21 @@ int	ft_exec(t_data *data)
 	status = BAD_PARAMETER;
 	if (data)
 	{
+		data->env->exit_status = 0;
 		status = ft_exec_here_doc(data);
 		if (g_signal_handle != SIGINT_SIGNAL)
 		{
 			if (status == SUCCESS)
 				status = ft_signal_exec();
 			if (status == SUCCESS)
-			{
-				if (ft_word_count(data->words, D_PIPE))
-					status = ft_exec_pipe(data);
-				else
-					status = ft_exec_basic(data, data->words);
-			}
+				status = ft_exec_content(data);
 			if (g_signal_handle == SIGQUIT_SIGNAL)
 				ft_fprintf(STDERR, "Quit\n");
 			else if (g_signal_handle == SIGINT_SIGNAL)
 				ft_fprintf(STDERR, "\n");
 		}
 		data->env->exit_status += g_signal_handle;
+		g_signal_handle = 0;
 	}
 	return (status);
 }

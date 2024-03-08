@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 22:46:08 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 23:25:01 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 
 static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 {
+	int	exit_status;
 	int	status;
 
-	status = FAIL;
+	exit_status = SUCCESS;
+	status = SUCCESS;
 	if (ft_strncmp("cd", cmd.path, 3) == CMP_EGAL)
-		status = ft_cd(cmd.argv, data->env);
+		exit_status = ft_cd(cmd.argv, data->env);
 	else if (ft_strncmp("echo", cmd.path, 5) == CMP_EGAL)
-		status = ft_echo(cmd.argv, cmd.envp);
+		exit_status = ft_echo(cmd.argv, cmd.envp);
 	else if (ft_strncmp("pwd", cmd.path, 4) == CMP_EGAL)
-		status = ft_pwd(cmd.argv, data->env);
+		exit_status = ft_pwd(cmd.argv, data->env);
 	else if (ft_strncmp("export", cmd.path, 7) == CMP_EGAL)
-		status = ft_export(cmd.argv, data->env);
+		exit_status = ft_export(cmd.argv, data->env);
 	else if (ft_strncmp("unset", cmd.path, 6) == CMP_EGAL)
-		status = ft_unset(cmd.argv, data->env);
+		exit_status = ft_unset(cmd.argv, data->env);
 	else if (ft_strncmp("env", cmd.path, 4) == CMP_EGAL)
-		status = ft_env((const char **)cmd.envp);
+		exit_status = ft_env((const char **)cmd.envp);
 	else if (ft_strncmp("exit", cmd.path, 5) == CMP_EGAL)
-		status = ft_exit(data, (const char **)cmd.argv);
+		exit_status = ft_exit(data, (const char **)cmd.argv);
+	data->env->exit_status = exit_status;
 	return (status);
 }
 
@@ -77,17 +80,6 @@ static void	ft_wait_children_execve(t_data *data, pid_t fork_pid)
 			g_signal_handle = SIGQUIT_SIGNAL;
 	}
 	data->env->exit_status = WEXITSTATUS(status);
-}
-
-int	ft_signal_ing(void)
-{
-	int	status;
-
-	status = SIGNAL_HANDLING;
-	if (signal(SIGINT, SIG_IGN) == SIG_ERR ||
-		signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		status = SIGNAL_CRASH;
-	return (status);
 }
 
 static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
