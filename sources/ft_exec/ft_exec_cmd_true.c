@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 23:25:01 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 23:51:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 {
 	int	exit_status;
-	int	status;
 
 	exit_status = SUCCESS;
-	status = SUCCESS;
 	if (ft_strncmp("cd", cmd.path, 3) == CMP_EGAL)
 		exit_status = ft_cd(cmd.argv, data->env);
 	else if (ft_strncmp("echo", cmd.path, 5) == CMP_EGAL)
@@ -34,7 +32,7 @@ static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 	else if (ft_strncmp("exit", cmd.path, 5) == CMP_EGAL)
 		exit_status = ft_exit(data, (const char **)cmd.argv);
 	data->env->exit_status = exit_status;
-	return (status);
+	return (SUCCESS);
 }
 
 static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
