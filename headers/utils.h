@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 01:05:05 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 23:25:37 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 00:05:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define SIGACTION_FAIL -1
 # define FD_FAIL_STATUS 56
 # define DUP_FAIL_STATUS 57
+# define SIGNAL_STATUS_CODE 128
 
 # define SIGINT_SIGNAL 130
 # define SIGQUIT_SIGNAL 131
