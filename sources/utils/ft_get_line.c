@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 23:16:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 00:40:49 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static char	**ft_get_line(void)
 	return (lines);
 }
 
-static void	ft_use_current_line(char **lines, t_data *data)
+static int	ft_use_current_line(char **lines, t_data *data)
 {
-	size_t	i;
 	int		exec_status;
+	size_t	i;
 
 	i = 0;
 	(void)ft_print_word;
@@ -58,18 +58,33 @@ static void	ft_use_current_line(char **lines, t_data *data)
 		ft_free_here_doc(&data->here_doc);
 		i++;
 	}
+	return (exec_status);
+}
+
+static int ft_status_code(int status_code)
+{
+	int	status;
+
+	status = SUCCESS;
+	if (status_code == SIGNAL_CRASH
+		|| status_code == DUP_FAIL_STATUS
+		|| status_code == FD_FAIL_STATUS)
+		status = FAIL;
+	return (status);
 }
 
 void	ft_use_line(t_data *data)
 {
 	char	**lines;
+	int		status;
 
 	lines = ft_get_line();
-	while (lines && data->exit_program == FAIL
+	status = SUCCESS;
+	while (lines && data->exit_program == FAIL && status == SUCCESS
 		&& ft_signal_interactive() == SIGNAL_HANDLING)
 	{
 		data->tabs_lines = lines;
-		ft_use_current_line(lines, data);
+		status = ft_status_code(ft_use_current_line(lines, data));
 		ft_tab_free(lines);
 		data->tabs_lines = NULL;
 		lines = NULL;
