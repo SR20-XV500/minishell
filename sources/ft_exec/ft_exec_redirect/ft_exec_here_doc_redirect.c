@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:57:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/01 15:36:41 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:06:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_exec_here_doc_redirect(t_data *data, t_list *lst_start)
 	int	std[2];
 
 	status = BAD_PARAMETER;
-	if (data && lst_start)
+	if (data && lst_start && data->here_doc)
 	{
 		status = ERR_PIPE_FAIL;
 		if (pipe(std) == SUCCESS)

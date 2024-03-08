@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/06 00:21:06 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 23:51:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,25 @@
 
 static int	ft_exec_cmd_builtin(t_data *data, const t_cmd_content cmd)
 {
-	int	status;
+	int	exit_status;
 
-	status = FAIL;
+	exit_status = SUCCESS;
 	if (ft_strncmp("cd", cmd.path, 3) == CMP_EGAL)
-		status = ft_cd(cmd.argv, data->env);
+		exit_status = ft_cd(cmd.argv, data->env);
 	else if (ft_strncmp("echo", cmd.path, 5) == CMP_EGAL)
-		status = ft_echo(cmd.argv, cmd.envp);
+		exit_status = ft_echo(cmd.argv, cmd.envp);
 	else if (ft_strncmp("pwd", cmd.path, 4) == CMP_EGAL)
-		status = ft_pwd(cmd.argv, data->env);
+		exit_status = ft_pwd(cmd.argv, data->env);
 	else if (ft_strncmp("export", cmd.path, 7) == CMP_EGAL)
-		status = ft_export(cmd.argv, data->env);
+		exit_status = ft_export(cmd.argv, data->env);
 	else if (ft_strncmp("unset", cmd.path, 6) == CMP_EGAL)
-		status = ft_unset(cmd.argv, data->env);
+		exit_status = ft_unset(cmd.argv, data->env);
 	else if (ft_strncmp("env", cmd.path, 4) == CMP_EGAL)
-		status = ft_env((const char **)cmd.envp);
+		exit_status = ft_env((const char **)cmd.envp);
 	else if (ft_strncmp("exit", cmd.path, 5) == CMP_EGAL)
-		status = ft_exit(data, (const char **)cmd.argv);
-	return (status);
+		exit_status = ft_exit(data, (const char **)cmd.argv);
+	data->env->exit_status = exit_status;
+	return (SUCCESS);
 }
 
 static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
@@ -40,12 +41,12 @@ static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
 	char	*buffer_name;
 	int		status;
 
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	status = EXEC_CMD_NOT_FOUND;
 	buffer_name = ft_strdup(name);
 	ft_data_free(&data);
 	clear_history();
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (buffer_name == NULL || execve(cmd.path, cmd.argv, cmd.envp))
 	{
 		if (ft_is_directory(cmd.path) != SUCCESS)
@@ -64,6 +65,21 @@ static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
 	exit(status);
 }
 
+static void	ft_wait_children_execve(t_data *data, pid_t fork_pid)
+{
+	int	status;
+
+	waitpid(fork_pid, &status, NO_OPTION);
+	if (WIFSIGNALED(status) == TRUE)
+	{
+		if (WTERMSIG(status) == SIGINT)
+			g_signal_handle = SIGINT_SIGNAL;
+		if (WTERMSIG(status) == SIGQUIT)
+			g_signal_handle = SIGQUIT_SIGNAL;
+	}
+	data->env->exit_status = WEXITSTATUS(status);
+}
+
 static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
 		const char *name)
 {
@@ -71,13 +87,16 @@ static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
 	int		status;
 
 	fork_pid = fork();
-	status = SUCCESS;
-	if (fork_pid == CHILDREN)
-		ft_exec_cmd_system_children(data, cmd, name);
-	else if (fork_pid > CHILDREN)
-		waitpid(fork_pid, &status, NO_OPTION);
-	if (fork_pid == CHILDREN_FAIL)
-		perror("minishell: ");
+	status = ft_signal_ing();
+	if (status == SIGNAL_HANDLING)
+	{
+		if (fork_pid == CHILDREN)
+			ft_exec_cmd_system_children(data, cmd, name);
+		else if (fork_pid > CHILDREN)
+			ft_wait_children_execve(data, fork_pid);
+		if (fork_pid == CHILDREN_FAIL)
+			perror("minishell: ");
+	}
 	return (status);
 }
 
@@ -93,7 +112,6 @@ int	ft_exec_cmd_true(t_data *data, const t_cmd_content cmd, const char *name)
 			status = ft_exec_cmd_builtin(data, cmd);
 		else
 			status = ft_exec_cmd_system(data, cmd, name);
-		data->env->exit_status = status % EXIT_MODE;
 	}
 	return (status);
 }

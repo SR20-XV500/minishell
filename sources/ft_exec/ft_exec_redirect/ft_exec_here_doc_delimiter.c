@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_here_doc_delimiter.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:04:49 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 18:13:56 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:22:34 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_list	*ft_here_doc_get_content(const char *delim, size_t *line_count)
 	lst = NULL;
 	status = SUCCESS;
 	while (line && ft_strncmp(delim, line, ft_strlen(delim) + 1) != CMP_EGAL
-		&& status == SUCCESS)
+		&& status == SUCCESS && g_signal_handle != SIGINT_SIGNAL)
 	{
 		(*line_count)++;
 		status = ft_word_lst_add(&lst, line, HER_STR);
@@ -95,6 +95,7 @@ t_list	*ft_here_doc_delimiter(t_data *data, char *str)
 		if (lst && expand == SUCCESS)
 			ft_here_doc_expansion(data, &lst);
 		if (lst && ((t_word *)ft_lstlast(lst)->content)->word == NULL
+			&& g_signal_handle != SIGINT_SIGNAL
 			&& (ft_fprintf(STDERR, ERR_HERE_DOC, (int)data->line_count) == -1
 				|| ft_fprintf(STDERR, ERR_HERE_DOC_2, str) == -1))
 			ft_lstclear(&lst, &ft_word_free);
