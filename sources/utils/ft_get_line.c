@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 00:40:49 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 00:43:17 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	ft_use_current_line(char **lines, t_data *data)
 	return (exec_status);
 }
 
-static int ft_status_code(int status_code)
+static int	ft_status_code(int status_code)
 {
 	int	status;
 
