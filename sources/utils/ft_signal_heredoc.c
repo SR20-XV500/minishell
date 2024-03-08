@@ -6,17 +6,18 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:43:24 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 16:13:20 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:48:10 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_heredoc_sigint(int signal, siginfo_t *info, void *ucontext)
+static void	ft_heredoc_sigint(int signals, siginfo_t *info, void *ucontext)
 {
-	if (signal == SIGINT)
+	if (signals == SIGINT)
 	{
 		close(STDIN);
+		signal(SIGINT, SIG_IGN);
 		ft_printf("\n");
 		rl_replace_line("", 0);
 		rl_redisplay();

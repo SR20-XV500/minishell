@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 18:49:11 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:40:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int			ft_exec_redirect_fd(t_data *data, int type, const char *path,
 int			ft_exec_here_doc(t_data *data);
 int			ft_exec_here_doc_redirect(t_data *data, t_list *lst_start);
 t_list		*ft_here_doc_delimiter(t_data *data, char *str);
+int			ft_exec_here_doc_func(t_data *data);
+int			ft_open_new(void);
 
 int			ft_exec_dupbass(t_data *data);
 int			ft_exec_dup_close(t_data *data);

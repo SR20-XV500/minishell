@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:35:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 16:11:00 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:42:02 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,82 +28,18 @@ int	ft_redirect_priority(t_list *lst)
 	return (priority);
 }
 
-static int	ft_count_here_doc(t_data *data)
-{
-	int		count;
-	int		buffer;
-	t_list	*lst;
-
-	count = 0;
-	buffer = SUCCESS;
-	if (data)
-	{
-		lst = data->words;
-		count++;
-		while (lst && lst->content)
-		{
-			if (((t_word *)lst->content)->type == D_HEREDOC
-				&& buffer == SUCCESS)
-			{
-				buffer = FAIL;
-				count++;
-			}
-			else if (((t_word *)lst->content)->type == D_PIPE)
-				buffer = SUCCESS;
-			lst = lst->next;
-		}
-	}
-	return (count);
-}
-
-static int	ft_make_here_doc(t_data *data)
+int	ft_open_new(void)
 {
 	int	status;
-	int	len;
+	int	fd;
 
-	status = BAD_PARAMETER;
-	if (data)
+	status = SUCCESS; 
+	fd = open("/dev/pts/0", O_WRONLY);
+	if (fd == FD_FAIL_OPEN || fd != STDIN)
 	{
-		status = SUCCESS;
-		len = ft_count_here_doc(data);
-		if (len > 1)
-		{
-			data->here_doc = malloc(sizeof(t_list *) * len);
-			if (data->here_doc)
-				ft_bzero(data->here_doc, sizeof(t_list *) * len);
-			else
-				status = MALLOC_FAIL;
-		}
+		status = FAIL;
+		close(fd);
 	}
-	return (status);
-}
-
-static int	ft_here_doc_add_content(t_data *data)
-{
-	int		status;
-	t_list	*current;
-	t_list	**buffer;
-
-	status = SUCCESS;
-	current = data->words;
-	buffer = data->here_doc;
-	while (status == SUCCESS && current && g_signal_handle != SIGINT_SIGNAL)
-	{
-		if (((t_word *)current->content)->type == TY_DELIM_HEREDOC)
-		{
-			ft_lstclear(buffer, &ft_word_free);
-			*buffer = ft_here_doc_delimiter(data,
-					((t_word *)current->content)->word);
-			if (*buffer == NULL)
-				status = MALLOC_FAIL;
-		}
-		if (*buffer && ((t_word *)current->content)->type == D_PIPE
-			&& status == SUCCESS && g_signal_handle != SIGINT_SIGNAL)
-			buffer++;
-		current = current->next;
-	}
-	if (status == MALLOC_FAIL || g_signal_handle == SIGINT_SIGNAL)
-		ft_free_here_doc(&data->here_doc);
 	return (status);
 }
 
@@ -115,20 +51,22 @@ int	ft_exec_here_doc(t_data *data)
 	status = BAD_PARAMETER;
 	if (data)
 	{
-		fd_tmp = dup(0);
-		status = ft_signal_heredoc();
-		if (status == SIGNAL_HANDLING)
-			status = ft_make_here_doc(data);
-		if (status == SUCCESS && data->here_doc)
-			status = ft_here_doc_add_content(data);
-		if (g_signal_handle == SIGINT_SIGNAL)
+		status = DUP_FAIL_STATUS;
+		fd_tmp = dup(STDIN);
+		if (fd_tmp != EXEC_DUP_FAIL)
 		{
-			if (open("/dev/pts/0", O_WRONLY) == FD_FAIL_OPEN)
-				status = FD_FAIL_STATUS;
-			if (dup2(fd_tmp, 0) == EXEC_DUP_FAIL)
-				status = DUP_FAIL_STATUS;
+			status = ft_signal_heredoc();
+			if (status == SIGNAL_HANDLING)
+				status = ft_exec_here_doc_func(data);
+			if (g_signal_handle == SIGINT_SIGNAL)
+			{
+				if (ft_open_new() != SUCCESS)
+					status = FD_FAIL_STATUS;
+				if (dup2(fd_tmp, 0) == EXEC_DUP_FAIL)
+					status = DUP_FAIL_STATUS;
+			}
+			close(fd_tmp);
 		}
-		close(fd_tmp);
 	}
 	return (status);
 }
