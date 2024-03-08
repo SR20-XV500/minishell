@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 23:51:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 00:04:36 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,7 @@ static void	ft_wait_children_execve(t_data *data, pid_t fork_pid)
 
 	waitpid(fork_pid, &status, NO_OPTION);
 	if (WIFSIGNALED(status) == TRUE)
-	{
-		if (WTERMSIG(status) == SIGINT)
-			g_signal_handle = SIGINT_SIGNAL;
-		if (WTERMSIG(status) == SIGQUIT)
-			g_signal_handle = SIGQUIT_SIGNAL;
-	}
+		g_signal_handle = WTERMSIG(status) + SIGNAL_STATUS_CODE;
 	data->env->exit_status = WEXITSTATUS(status);
 }
 
