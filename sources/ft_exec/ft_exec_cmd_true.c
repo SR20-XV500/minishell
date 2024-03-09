@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 01:04:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 16:23:19 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,7 @@ static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	if (buffer_name == NULL || execve(cmd.path, cmd.argv, cmd.envp))
-	{
-		if (ft_is_directory(cmd.path) != SUCCESS)
-		{
-			ft_fprintf(STDERR, "minishell: ");
-			perror(buffer_name);
-		}
-		else
-		{
-			ft_fprintf(STDERR, "minishell: %s: Is a directory\n", buffer_name);
-			status = EXEC_CMD_NOT_FOUND_DIR;
-		}
-	}
+		status = ft_exec_display_error_execve(cmd, buffer_name);
 	free(buffer_name);
 	ft_exec_cmd_free(cmd);
 	exit(status);
