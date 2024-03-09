@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_data.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 18:15:04 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 13:05:10 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/09 01:09:12 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct s_word
 	int		type;
 }			t_word;
 
-//* TODO: Refactor input_fd/output_fd
 typedef struct s_data
 {
 	t_env	*env;

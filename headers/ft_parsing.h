@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 13:11:06 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/09 01:08:02 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # define PARSER_NEAR_PIPE 2
 # define PARSER_EXPANSION_VAR_CHANGE 14
 # define PARSER_EXPANSION_VAR_NO_CHANGE 15
-# define PARSER_GOOD_QUOTE 0
-# define PARSER_BAD_QUOTE 1
 # define NO_CHANGE_LST 26
 
 enum e_delimiter
