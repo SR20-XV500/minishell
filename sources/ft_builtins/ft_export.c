@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:27:00 by bcheronn          #+#    #+#             */
-/*   Updated: 2024/03/06 19:19:09 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/09 01:02:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	ft_export_to_env(char *arg, t_env *env)
 	return (ret);
 }
 
-// Update an existing variable or add it to **envp
 static int	ft_export_update_env(char *arg, t_env *env)
 {
 	int		ret;

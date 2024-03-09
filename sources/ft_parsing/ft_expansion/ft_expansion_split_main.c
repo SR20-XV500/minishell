@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansion_split_main.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 20:19:11 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 13:11:06 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/09 00:56:45 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ int	ft_expansion_split_node(t_data *data, t_list **lst, t_list *last)
 				status = MALLOC_FAIL;
 		}
 	}
-	(void)last;
 	return (status);
 }

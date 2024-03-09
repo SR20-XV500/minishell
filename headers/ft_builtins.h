@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/06 19:19:09 by bcheronn         ###   ########.fr       */
+/*   Updated: 2024/03/09 01:02:57 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define WRITE_FAIL -1
 # define ERR_EXPORT_ID "minishell: export: `%s': not a valid identifier\n"
 
-int		ft_echo(char **argv, char **envp);
+int		ft_echo(char **argv);
 
 int		ft_pwd(char **argv, t_env *env);
 
