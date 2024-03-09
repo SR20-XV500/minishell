@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:38:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 01:04:28 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 14:49:46 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
 	buffer_name = ft_strdup(name);
 	ft_data_free(&data);
 	clear_history();
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	if (buffer_name == NULL || execve(cmd.path, cmd.argv, cmd.envp))
+	if (signal(SIGINT, SIG_DFL) != SIG_ERR
+		&& signal(SIGQUIT, SIG_DFL) != SIG_ERR
+		&& (buffer_name == NULL || execve(cmd.path, cmd.argv, cmd.envp)))
 	{
 		if (ft_is_directory(cmd.path) != SUCCESS)
 		{
@@ -81,10 +81,11 @@ static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
 	pid_t	fork_pid;
 	int		status;
 
-	fork_pid = fork();
+	fork_pid = 0;
 	status = ft_signal_ing();
 	if (status == SIGNAL_HANDLING)
 	{
+		fork_pid = fork();
 		if (fork_pid == CHILDREN)
 			ft_exec_cmd_system_children(data, cmd, name);
 		else if (fork_pid > CHILDREN)
