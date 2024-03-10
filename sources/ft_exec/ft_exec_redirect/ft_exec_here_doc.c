@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:35:33 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 18:21:04 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:36:45 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ int	ft_open_new(void)
 
 	status = SUCCESS;
 	fd = open("/dev/pts/0", O_WRONLY);
-	if (fd == FD_FAIL_OPEN || fd != STDIN)
+	if (fd != STDIN)
 	{
 		status = FAIL;
-		close(fd);
+		if (fd != FD_FAIL_OPEN)
+			close(fd);
 	}
 	return (status);
 }
@@ -62,7 +63,7 @@ int	ft_exec_here_doc(t_data *data)
 			{
 				if (ft_open_new() != SUCCESS)
 					status = FD_FAIL_STATUS;
-				if (dup2(fd_tmp, 0) == EXEC_DUP_FAIL)
+				if (dup2(fd_tmp, STDIN) == EXEC_DUP_FAIL)
 					status = DUP_FAIL_STATUS;
 			}
 			close(fd_tmp);
