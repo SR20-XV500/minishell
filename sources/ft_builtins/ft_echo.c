@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:14:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 01:02:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:43:55 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 static int	ft_is_arg(char *str)
 {
 	int	ret;
+	int	buffer;
 
 	ret = IS_NOT_ARG;
+	buffer = FAIL;
 	if (str && *str == '-')
 	{
 		str++;
 		while (*str == 'n')
+		{
 			str++;
-		if (*str == '\0')
+			buffer = SUCCESS;
+		}
+		if (*str == '\0' && buffer == SUCCESS)
 			ret = IS_ARG;
 	}
 	return (ret);
