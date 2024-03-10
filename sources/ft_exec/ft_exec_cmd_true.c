@@ -45,10 +45,21 @@ static void	ft_exec_cmd_system_children(t_data *data, const t_cmd_content cmd,
 	buffer_name = ft_strdup(name);
 	ft_data_free(&data);
 	clear_history();
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	if (buffer_name == NULL || execve(cmd.path, cmd.argv, cmd.envp))
-		status = ft_exec_display_error_execve(cmd, buffer_name);
+	if (signal(SIGINT, SIG_DFL) != SIG_ERR
+		&& signal(SIGQUIT, SIG_DFL) != SIG_ERR
+		&& (buffer_name == NULL || execve(cmd.path, cmd.argv, cmd.envp)))
+	{
+		if (ft_is_directory(cmd.path) != SUCCESS)
+		{
+			ft_fprintf(STDERR, "minishell: ");
+			perror(buffer_name);
+		}
+		else
+		{
+			ft_fprintf(STDERR, "minishell: %s: Is a directory\n", buffer_name);
+			status = EXEC_CMD_NOT_FOUND_DIR;
+		}
+	}
 	free(buffer_name);
 	ft_exec_cmd_free(cmd);
 	exit(status);
@@ -70,10 +81,11 @@ static int	ft_exec_cmd_system(t_data *data, const t_cmd_content cmd,
 	pid_t	fork_pid;
 	int		status;
 
-	fork_pid = fork();
+	fork_pid = 0;
 	status = ft_signal_ing();
 	if (status == SIGNAL_HANDLING)
 	{
+		fork_pid = fork();
 		if (fork_pid == CHILDREN)
 			ft_exec_cmd_system_children(data, cmd, name);
 		else if (fork_pid > CHILDREN)
