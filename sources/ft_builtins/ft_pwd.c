@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:48:43 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/06 00:20:00 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:27:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ int	ft_pwd(char **argv, t_env *env)
 		ret = ft_printf("%s\n", env->pwd);
 	if (ret == WRITE_FAIL)
 		ret = FAIL;
+	else
+		ret = SUCCESS;
 	return (ret);
 }
