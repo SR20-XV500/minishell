@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirect_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:21:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 18:50:36 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:30:55 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,15 @@ static char	*ft_redirect_get_path_parser(t_data *data, const char *path)
 static void	ft_redirect_display_error(t_data *data, const char *error,
 		char **path, int status)
 {
-	if (status == REDIRECT_AMBIGUOUS_REDIRECT || (*path && **path == '\0'))
+	if (status == REDIRECT_AMBIGUOUS_REDIRECT || (*path && **path == '\0')
+		|| (error && *error == '\0'))
 		data->env->exit_status = REDIRECT_FAIL;
-	if (*path && **path == '\0')
+	if ((*path && **path == '\0') || (error && *error == '\0'))
 	{
-		ft_fprintf(STDERR, ERR_SUCH_FILE, *path);
+		if (*error == '\0')
+			ft_fprintf(STDERR, ERR_SUCH_FILE, "");
+		else
+			ft_fprintf(STDERR, ERR_SUCH_FILE, *path);
 		free(*path);
 		*path = NULL;
 	}
@@ -79,16 +83,16 @@ char	*ft_redirect_get_path(t_data *data, const char *str)
 	if (str)
 	{
 		buff = ft_trim_ambiguous(ft_expansion_get_str(data, str));
-		if (buff && ft_expansion_is_multi_arg(buff) == FAIL && *buff)
+		if (buff && ft_expansion_is_multi_arg(buff) == FAIL
+			&& ft_quotes_remove(buff) == SUCCESS && *buff)
 		{
 			status = MALLOC_FAIL;
-			ft_quotes_remove(buff);
 			path = ft_redirect_get_path_parser(data, buff);
 			if (path)
 				status = SUCCESS;
 		}
 	}
-	if (buff && status != REDIRECT_AMBIGUOUS_REDIRECT)
+	if (buff && (status != REDIRECT_AMBIGUOUS_REDIRECT || *buff == '\0'))
 		ft_redirect_display_error(data, buff, &path, status);
 	else
 		ft_redirect_display_error(data, str, &path, status);
