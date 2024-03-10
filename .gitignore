@@ -1,8 +1,0 @@
-.gitignore
-minishell
-**/*.o
-**/*.swap
-libft/libft.a
-en.subject.pdf
-fr.subject.pdf
-.vscode
