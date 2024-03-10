@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcheronn <bcheronn@student.42mulhouse>     +#+  +:+       +#+        */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:20:14 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/04 18:50:03 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:18:41 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_exec_redirect_fd_err(t_data *data, int fd, const char *err_str,
-		const char *path)
+static int	ft_exec_redirect_fd_err(t_data *data, t_redirect redirect,
+		const char *err_str, const char *path)
 {
 	int		status;
 	char	*expansion;
 
 	status = SUCCESS;
 	expansion = NULL;
-	if (fd == FD_FAIL_OPEN)
+	if (redirect.fd == FD_FAIL_OPEN)
 	{
 		expansion = ft_trim_ambiguous(ft_expansion_get_str(data, err_str));
 		status = FAIL;
@@ -28,7 +28,7 @@ static int	ft_exec_redirect_fd_err(t_data *data, int fd, const char *err_str,
 		perror(expansion);
 		data->env->exit_status = REDIRECT_FAIL;
 	}
-	else if (ft_is_directory(path) == SUCCESS)
+	else if (ft_is_directory(path) == SUCCESS && redirect.type != D_INPUT)
 	{
 		expansion = ft_trim_ambiguous(ft_expansion_get_str(data, err_str));
 		status = FAIL;
@@ -67,13 +67,11 @@ int	ft_exec_redirect_fd(t_data *data, int type, const char *path,
 			open_fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, OPEN_WR_R_R);
 		else
 			open_fd = open(path, O_WRONLY | O_CREAT | O_APPEND, OPEN_WR_R_R);
-		if (open_fd)
-		{
-			if (*change_fd > MAX_OPEN_PRE_OPEN)
-				close(*change_fd);
-			*change_fd = open_fd;
-		}
-		status = ft_exec_redirect_fd_err(data, open_fd, err_str, path);
+		if (*change_fd > MAX_OPEN_PRE_OPEN)
+			close(*change_fd);
+		*change_fd = open_fd;
+		status = ft_exec_redirect_fd_err(data, (t_redirect){open_fd, type},
+				err_str, path);
 	}
 	return (status);
 }
