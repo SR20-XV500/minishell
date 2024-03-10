@@ -25,7 +25,8 @@ T_FT_EXEC_RED	::= ft_redirect_path ft_exec_fd ft_exec_dup \
 FT_EXEC_RED		::= $(foreach buffer, $(T_FT_EXEC_RED), \
 						ft_exec_redirect/$(buffer))
 T_FT_EXEC		::= ft_exec ft_exec_cmd_path $(FT_EXEC_RED) $(FT_EXEC_PIPE) \
-					ft_exec_cmd ft_exec_cmd_free ft_exec_cmd_true
+					ft_exec_cmd ft_exec_cmd_free ft_exec_cmd_true \
+					ft_exec_prompt_error
 FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
 T_FT_PARSING_EX	::= ft_expansion_get ft_expansion_var_join ft_expansion_split \

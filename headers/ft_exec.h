@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/08 16:40:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/09 16:28:19 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void		ft_exec_cmd_free(const t_cmd_content cmd_content);
 char		*ft_exec_cmd_get_path(t_data *data, const char *cmd_name);
 int			ft_exec_cmd_true(t_data *data, const t_cmd_content cmd,
 				const char *name);
+int			ft_exec_display_error_execve(const t_cmd_content cmd,
+				const char *buff);
 int			ft_exec_redirect(t_data *data, t_list *lst);
 int			ft_is_builtin(const char *cmd);
 
