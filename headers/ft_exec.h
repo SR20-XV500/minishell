@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/10 17:13:00 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:01:56 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define CHILDREN_FAIL -1
 # define EXEC_CMD_NOT_FOUND 127
 # define EXEC_CMD_NOT_FOUND_DIR 126
+# define EXEC_CMD_PERMISSION_DENIED 126
 # define REDIRECT_FAIL 1
 # define OPEN_WR_R_R 0644
 # define FD_FAIL_OPEN -1
