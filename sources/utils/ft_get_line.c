@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 01:37:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 00:52:25 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:09:09 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	ft_use_current_line(char **lines, t_data *data)
 			exec_status = ft_exec(data);
 		ft_word_lst_clear(data);
 		ft_free_here_doc(&data->here_doc);
+		ft_data_clear_fd(data);
 		i++;
 	}
 	return (exec_status);

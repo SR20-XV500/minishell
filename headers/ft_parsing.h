@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 01:08:02 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:08:29 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*ft_expansion_get_str_func(t_data *data, const char *str,
 			int (*get_while)(t_data *, const char *, size_t *, char **));
 int		ft_expansion_add_car(char *str, int car, char **buffer);
 
-void	ft_quotes_remove(char *str);
+int		ft_quotes_remove(char *str);
 int		ft_quotes_rm_rf(t_data *data);
 
 #endif

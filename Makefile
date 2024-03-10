@@ -39,14 +39,14 @@ T_FT_PARSING	::= ft_parser ft_parser_get_elements ft_check_lst ft_type_set \
 FT_PARSING		::= $(foreach buffer, $(T_FT_PARSING), \
 						$(SOURCES)ft_parsing/$(buffer).c)
 T_FT_BUILTINS	::= ft_echo ft_pwd ft_cd ft_cd_env ft_unset ft_export \
-					ft_export_print ft_exit ft_env ft_unset_path
+					ft_export_print ft_exit ft_env ft_unset_path	
 FT_BUILTINS		::= $(foreach buffer, $(T_FT_BUILTINS), \
 						$(SOURCES)ft_builtins/$(buffer).c)
 T_FT_ENV		::= ft_env_data ft_env_tab_get ft_env_get ft_env_iter \
 					ft_env_initial ft_env_initial_shlvl
 FT_ENV			::= $(foreach buffer, $(T_FT_ENV), \
 						$(SOURCES)ft_env/$(buffer).c)
-T_FT_DATA		::= ft_data ft_word ft_word_lst
+T_FT_DATA		::= ft_data ft_word ft_word_lst ft_data_clear
 FT_DATA			::= $(foreach buffer, $(T_FT_DATA), \
 						$(SOURCES)ft_data/$(buffer).c)
 SOURCES			::= $(SOURCES)main.c $(UTILS) $(FT_PARSING) $(FT_BUILTINS) \

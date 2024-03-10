@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:13:28 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 16:28:19 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:13:00 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ typedef struct s_cmd_content
 	char	**envp;
 	char	*path;
 }			t_cmd_content;
+
+typedef struct s_redirect
+{
+	int	fd;
+	int	type;
+}			t_redirect;
 
 char		*ft_redirect_get_path(t_data *data, const char *str);
 char		*ft_trim_ambiguous(char *str);
