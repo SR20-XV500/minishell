@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 01:54:23 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/05 17:49:37 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:12:11 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	ft_cd_update_env(const char *path, t_env *env)
 	{
 		ft_cd_change_pwd(env);
 		if (ft_env_tab_get_pos(env->envp, "PWD") != ENV_NOT_SET
-			|| ft_env_tab_get_pos(env->envp, "PWD") != ENV_NOT_SET)
+			|| ft_env_tab_get_pos(env->export, "PWD") != ENV_NOT_SET)
 		{
 			buffer = ft_strjoin("PWD=", path);
 			if (buffer)
