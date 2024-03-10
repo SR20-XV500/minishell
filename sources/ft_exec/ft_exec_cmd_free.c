@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_exec_cmd_free.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 02:16:52 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/03 00:03:15 by tlassere         ###   ########.fr       */
+/*   Created: 2024/02/21 19:06:06 by tlassere          #+#    #+#             */
+/*   Updated: 2024/02/22 01:00:07 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "libft.h"
-# include "ft_env.h"
-# include "ft_data.h"
-# include "ft_parsing.h"
-# include "ft_builtins.h"
-# include "ft_exec.h"
-# include "utils.h"
-# include <stdio.h>
-
-# define ERR_WRITE_FAIL -39
-# define ERR_CLOSE_FAIL -59
-
-#endif
+void	ft_exec_cmd_free(const t_cmd_content cmd_content)
+{
+	if (cmd_content.argv)
+		ft_tab_free(cmd_content.argv);
+	if (cmd_content.envp)
+		ft_tab_free(cmd_content.envp);
+	if (cmd_content.path)
+		free(cmd_content.path);
+}
