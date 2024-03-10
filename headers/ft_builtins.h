@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:29:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 01:02:57 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:34:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # define CD_VALID_PATH 1
 # define FALSE 0
 # define TRUE 1
-# define EXIT_ERR 2
+# define EXIT_ERR_NUM 2
+# define EXIT_ERR_TMA 1
 # define WRITE_FAIL -1
 # define ERR_EXPORT_ID "minishell: export: `%s': not a valid identifier\n"
 
