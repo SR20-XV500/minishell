@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:36:22 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/06 19:52:51 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:34:13 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	ft_exit_get_status_arg(const char *str)
 		status = (char)ft_atoll(str);
 	else
 	{
-		status = EXIT_ERR;
+		status = EXIT_ERR_NUM;
 		ft_fprintf(STDERR, "minishell: exit: %s: numeric argument required\n",
 			str);
 	}
@@ -69,8 +69,8 @@ int	ft_exit(t_data *data, const char **argv)
 	{
 		data->exit_program = SUCCESS;
 		if (ft_fprintf(STDERR, "exit\n") == WRITE_FAIL)
-			status = EXIT_ERR;
-		if (ft_tab_len((char **)argv) == 1 && status != EXIT_ERR)
+			status = EXIT_ERR_NUM;
+		if (ft_tab_len((char **)argv) == 1 && status != EXIT_ERR_NUM)
 			status = data->env->exit_status;
 		else if (ft_tab_len((char **)argv) == 2
 			|| ft_exit_arg_is_valid(argv[1]) != SUCCESS)
@@ -78,7 +78,7 @@ int	ft_exit(t_data *data, const char **argv)
 		else
 		{
 			ft_fprintf(STDERR, "minishell: exit: too many arguments\n");
-			status = EXIT_ERR;
+			status = EXIT_ERR_TMA;
 			data->exit_program = FAIL;
 		}
 	}
