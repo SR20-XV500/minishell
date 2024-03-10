@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:23:36 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 16:26:09 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:01:30 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	ft_exec_display_error_execve(const t_cmd_content cmd, const char *buff)
 			ft_fprintf(STDERR, "'': command not found\n");
 		else
 			perror(buff);
+		if (ft_is_file(cmd.path) == SUCCESS)
+			status = EXEC_CMD_PERMISSION_DENIED;
 	}
 	else
 	{
