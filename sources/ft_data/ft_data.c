@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:55:10 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/06 00:23:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:09:34 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,7 @@ void	ft_data_free(t_data **data)
 		}
 		if ((*data)->words)
 			ft_word_lst_clear(*data);
-		if ((*data)->input_fd > 2)
-			close((*data)->input_fd);
-		if ((*data)->output_fd > 2)
-			close((*data)->output_fd);
-		if ((*data)->dup_std[STDIN] > 2)
-			close((*data)->dup_std[STDIN]);
-		if ((*data)->dup_std[STDOUT] > 2)
-			close((*data)->dup_std[STDOUT]);
+		ft_data_clear_fd(*data);
 		if ((*data)->children)
 			free((*data)->children);
 		if ((*data)->here_doc)

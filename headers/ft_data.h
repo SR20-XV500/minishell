@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 18:15:04 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/09 01:09:12 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/10 15:08:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_data
 t_data		*ft_data_get(const char **envp);
 void		ft_data_free(t_data **data);
 void		ft_free_here_doc(t_list ***here_doc);
+void		ft_data_clear_fd(t_data *data);
 
 int			ft_word_add(t_data *data, const char *str, int type);
 void		ft_word_free(void *data);
