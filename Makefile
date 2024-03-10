@@ -50,7 +50,7 @@ T_FT_DATA		::= ft_data ft_word ft_word_lst ft_data_clear
 FT_DATA			::= $(foreach buffer, $(T_FT_DATA), \
 						$(SOURCES)ft_data/$(buffer).c)
 SOURCES			::= $(SOURCES)$(NAME).c $(UTILS) $(FT_PARSING) $(FT_BUILTINS) \
-						$(FT_EXEC) $(FT_ENV) $(FT_DATA)
+					$(FT_EXEC) $(FT_ENV) $(FT_DATA)
 OBJS			::= $(SOURCES:.c=.o)
 HEADERS			::= headers/
 HEADERS_CONTENT	::= $(HEADERS)$(NAME).h $(HEADERS)utils.h \
