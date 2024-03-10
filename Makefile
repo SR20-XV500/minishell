@@ -14,7 +14,7 @@ NAME			::= minishell
 SOURCES 		::= sources/
 T_UTILS			::= ft_check_args_main ft_get_line ft_signal \
 					ft_path_parser_join ft_path_parser ft_file_checks \
-					ft_quicksort ft_path_multi ft_signal_heredoc	
+					ft_quicksort ft_path_multi ft_signal_heredoc
 UTILS			::= $(foreach buffer, $(T_UTILS), $(SOURCES)utils/$(buffer).c)
 T_FT_EXEC_PIPE	::= ft_exec_cmd_children ft_exec_cmd_children_2 ft_exec_pipe
 FT_EXEC_PIPE	::= $(foreach buffer, $(T_FT_EXEC_PIPE), \
@@ -39,7 +39,7 @@ T_FT_PARSING	::= ft_parser ft_parser_get_elements ft_check_lst ft_type_set \
 FT_PARSING		::= $(foreach buffer, $(T_FT_PARSING), \
 						$(SOURCES)ft_parsing/$(buffer).c)
 T_FT_BUILTINS	::= ft_echo ft_pwd ft_cd ft_cd_env ft_unset ft_export \
-					ft_export_print ft_exit ft_env ft_unset_path	
+					ft_export_print ft_exit ft_env ft_unset_path
 FT_BUILTINS		::= $(foreach buffer, $(T_FT_BUILTINS), \
 						$(SOURCES)ft_builtins/$(buffer).c)
 T_FT_ENV		::= ft_env_data ft_env_tab_get ft_env_get ft_env_iter \
@@ -49,11 +49,11 @@ FT_ENV			::= $(foreach buffer, $(T_FT_ENV), \
 T_FT_DATA		::= ft_data ft_word ft_word_lst ft_data_clear
 FT_DATA			::= $(foreach buffer, $(T_FT_DATA), \
 						$(SOURCES)ft_data/$(buffer).c)
-SOURCES			::= $(SOURCES)main.c $(UTILS) $(FT_PARSING) $(FT_BUILTINS) \
-					$(FT_EXEC) $(FT_ENV) $(FT_DATA)
+SOURCES			::= $(SOURCES)$(NAME).c $(UTILS) $(FT_PARSING) $(FT_BUILTINS) \
+						$(FT_EXEC) $(FT_ENV) $(FT_DATA)
 OBJS			::= $(SOURCES:.c=.o)
 HEADERS			::= headers/
-HEADERS_CONTENT	::= $(HEADERS)minishell.h $(HEADERS)utils.h \
+HEADERS_CONTENT	::= $(HEADERS)$(NAME).h $(HEADERS)utils.h \
 					$(HEADERS)ft_parsing.h $(HEADERS)ft_env.h \
 					$(HEADERS)ft_builtins.h $(HEADERS)ft_exec.h \
 					$(HEADERS)ft_data.h
