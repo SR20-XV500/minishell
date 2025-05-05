@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/06 01:27:16 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/06 01:39:32 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,43 @@ int	ft_expansion_is_word(const char *str)
 	return (FALSE);
 }
 
+static void ft_remove_caracter(char *str)
+{
+	memmove(str, str + 1, strlen(str));	
+}
+
 static int ft_quote_using(char *str, int *inquote)
 {
 	if (*inquote == TRUE)
 	{
 		*inquote = FALSE;
-		memmove(str, str + 1, strlen(str));	
+		ft_remove_caracter(str);
 		return (TRUE);
 	}
 	if (*inquote == FALSE && ft_strchr(str + 1, '"'))
 	{
 		*inquote = TRUE;
-		memmove(str, str + 1, strlen(str));
+		ft_remove_caracter(str);
 		return (TRUE);
+	}
+	return (FALSE);
+}
+
+static int skip_simple_quote(char **str)
+{
+	char	*next;
+
+	if (**str == '\'')
+	{
+		next = ft_strchr(*str + 1, '\'');
+		if (next)
+		{
+			next--;
+			ft_remove_caracter(*str);
+			ft_remove_caracter(next);
+			*str = next;
+			return (TRUE);
+		}
 	}
 	return (FALSE);
 }
@@ -48,8 +72,9 @@ static int ft_expend_word(t_data *data, t_list *lst)
 	inquote = FALSE;
 	while (*str)
 	{
-		if (*str != '"' || ft_quote_using(str, &inquote) == FALSE)
+		if ((*str != '"' || ft_quote_using(str, &inquote) == FALSE) && ( inquote == TRUE || skip_simple_quote(&str) == FALSE))
 		{
+			
 			str++;
 		}
 	}
