@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:21:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/10 16:30:55 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/06 00:23:09 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,11 @@ char	*ft_redirect_get_path(t_data *data, const char *str)
 
 	path = NULL;
 	buff = NULL;
-	status = REDIRECT_AMBIGUOUS_REDIRECT;
+	status = REDIRECT_AMBIGUOUS_REDIRECT; // TODO change place for this
 	if (str)
 	{
-		buff = ft_trim_ambiguous(ft_expansion_get_str(data, str));
-		if (buff && ft_expansion_is_multi_arg(buff) == FAIL
-			&& ft_quotes_remove(buff) == SUCCESS && *buff)
+		buff = ft_trim_ambiguous(ft_strdup(str)); // TODO Rework get ambigouse redirect (in parsing make node: NOEXPENDED_PATH and other PATH)
+		if (buff && ft_quotes_remove(buff) == SUCCESS && *buff)
 		{
 			status = MALLOC_FAIL;
 			path = ft_redirect_get_path_parser(data, buff);
@@ -92,6 +91,7 @@ char	*ft_redirect_get_path(t_data *data, const char *str)
 				status = SUCCESS;
 		}
 	}
+	// TODO rework error :U
 	if (buff && (status != REDIRECT_AMBIGUOUS_REDIRECT || *buff == '\0'))
 		ft_redirect_display_error(data, buff, &path, status);
 	else
