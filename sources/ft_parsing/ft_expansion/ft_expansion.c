@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/06 00:03:57 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/06 00:48:55 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,33 @@ int	ft_expansion_is_word(const char *str)
 	return (FALSE);
 }
 
+static int ft_expend_word(t_data *data, t_list *lst)
+{
+	const t_word	*word;
+	
+	word = lst->content;
+	ft_printf("str: %s\ntype: %d\n", word->word, word->type);
+	(void)data;
+	return (SUCCESS);
+}
+
+static int ft_while_data(t_data *data)
+{
+	int status;
+	t_list *current;
+	t_list *next;
+
+	status = SUCCESS;
+	current = data->words;
+	while (current && status == SUCCESS)
+	{
+		next = current->next;
+		status = ft_expend_word(data, current);
+		current = next;
+	}
+	return (status);
+}
+
 int	ft_expansion(t_data *data)
 {
 	int	status;
@@ -27,7 +54,7 @@ int	ft_expansion(t_data *data)
 	status = BAD_PARAMETER;
 	if (data)
 	{
-		status = SUCCESS;
+		status = ft_while_data(data);
 	}
 	return (status);
 }
