@@ -9,6 +9,7 @@ typedef struct s_teraform
 	int		ljoin;
 	int		rjoin;
 	int		inquote;
+	size_t	rlen;
 } t_teraform;
 
 static char	*ft_get_token(char *str)
@@ -59,7 +60,7 @@ static char *ft_research_token(char *token, t_data *data)
 	return (ft_env_tab_get_null(data->env->envp, token + 1));
 }
 
-static int	ft_set_expende(t_teraform *teraform, t_data *data)
+static int	ft_set_expand(t_teraform *teraform, t_data *data)
 {
 	char	*buffer;
 
@@ -98,6 +99,49 @@ static void	ft_free_teraform(t_teraform *teraform)
 		ft_tab_free(teraform->sp);
 }
 
+#define LEFT 0
+#define RIGHT 1
+
+static int	joint_expand_strs(char **tabelement, char **jstr, int pos)
+{
+	char *newstr;
+	size_t l_tab;
+	size_t l_jstr;
+
+	l_tab = ft_strlen(*tabelement);
+	l_jstr = ft_strlen(*jstr);
+	newstr = malloc(l_tab + l_jstr + 1);
+	if (newstr == NULL)
+		return (FAIL);
+	newstr[l_tab + l_jstr] = '\0';
+	if (pos == LEFT)
+	{
+		ft_strlcpy(newstr, *jstr, l_jstr + 1);
+		ft_strlcpy(newstr + l_jstr, *tabelement, l_tab + 1);
+	}
+	else
+	{
+		ft_strlcpy(newstr, *tabelement, l_tab + 1);
+		ft_strlcpy(newstr + l_tab, *jstr, l_jstr + 1);
+	}
+	free(*tabelement);
+	free(*jstr);
+	*jstr = NULL;
+	*tabelement = newstr;
+	return (SUCCESS);
+}
+
+char	*join_expand(t_list **lst, t_teraform *teraform, char *str)
+{
+	teraform->rlen = strlen(teraform->right);
+	if (teraform->ljoin == TRUE)
+		joint_expand_strs(teraform->sp, &teraform->left, LEFT);
+	if (teraform->rjoin == TRUE)
+		joint_expand_strs(teraform->sp + ft_tab_len(teraform->sp) - 1, &teraform->right, RIGHT);
+	(void)lst;
+	return (str + 1);
+}
+
 char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
 {
 	t_teraform	teraform;
@@ -108,9 +152,9 @@ char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
 	teraform.rjoin = TRUE;
 	teraform.ljoin = TRUE;
 	ret = str;
-	if (ft_set_terraform(&teraform, ((t_word *)(*lst)->content)->word, str) == SUCCESS && ft_set_expende(&teraform, data) == SUCCESS)
-		ret = str + 1;
-	(void)data;
+	if (ft_set_terraform(&teraform, ((t_word *)(*lst)->content)->word, str) == SUCCESS && ft_set_expand(&teraform, data) == SUCCESS)
+		//ret = join_expand(lst, &teraform, str);
+
 	ft_printf("%w\n", teraform.sp);
 	ft_free_teraform(&teraform);
 	return (ret); // return the same *str if problem
