@@ -5,6 +5,7 @@ typedef struct s_teraform
 	char	*left;
 	char	*right;
 	char	*token;
+	char	**sp;
 	int		inquote;
 } t_teraform;
 
@@ -57,16 +58,21 @@ static void	ft_free_teraform(t_teraform *teraform)
 		free(teraform->right);
 	if (teraform->token)
 		free(teraform->token);
+	if (teraform->sp)
+		ft_tab_free(teraform->sp);
 }
 
 char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
 {
 	t_teraform	teraform;
+	char		*ret;
 
 	ft_bzero(&teraform, sizeof(t_teraform));
 	teraform.inquote = inquote;
-	ft_set_terraform(&teraform, ((t_word *)(*lst)->content)->word, str);
+	ret = str;
+	if (ft_set_terraform(&teraform, ((t_word *)(*lst)->content)->word, str) == SUCCESS)
+		ret = str + 1;
 	(void)data;
 	ft_free_teraform(&teraform);
-	return (str + 1); // return the same *str if problem
+	return (ret); // return the same *str if problem
 }
