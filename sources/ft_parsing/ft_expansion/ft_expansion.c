@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/06 01:49:38 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:58:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,16 @@ static int ft_while_data(t_data *data)
 	int status;
 	t_list *current;
 	t_list *next;
+	int type;
 
 	status = SUCCESS;
 	current = data->words;
 	while (current && status == SUCCESS)
 	{
 		next = current->next;
-		status = ft_expend_word(data, current);
+		type = ((t_word *)current->content)->type;
+		if (type == TY_NOT_SET || type == TY_PATH)
+			status = ft_expend_word(data, current);
 		current = next;
 	}
 	return (status);
