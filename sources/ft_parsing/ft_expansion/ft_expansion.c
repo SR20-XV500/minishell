@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/06 16:58:18 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:10:11 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,6 @@ static int skip_simple_quote(char **str)
 	return (FALSE);
 }
 
-static char *ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
-{
-	(void)data;
-	(void)lst;
-	(void)inquote;
-	return (str + 1); // :)
-}
-
 static int ft_expend_word(t_data *data, t_list *lst)
 {
 	t_word	*word;	
@@ -104,7 +96,7 @@ static int ft_while_data(t_data *data)
 	{
 		next = current->next;
 		type = ((t_word *)current->content)->type;
-		if (type == TY_NOT_SET || type == TY_PATH)
+		if (type == D_NOT_SET || type == TY_PATH)
 			status = ft_expend_word(data, current);
 		current = next;
 	}

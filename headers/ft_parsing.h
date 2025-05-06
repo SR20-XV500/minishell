@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/06 00:09:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/06 17:12:22 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		ft_type_set_path(t_data *data);
 int		ft_type_set_cmd(t_data *data);
 
 int		ft_expansion(t_data *data);
+char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote);
 int		ft_expansion_is_word(const char *str);
 
 int		ft_quotes_remove(char *str);
