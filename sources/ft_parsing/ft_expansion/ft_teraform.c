@@ -6,6 +6,8 @@ typedef struct s_teraform
 	char	*right;
 	char	*token;
 	char	**sp;
+	int		ljoin;
+	int		rjoin;
 	int		inquote;
 } t_teraform;
 
@@ -50,6 +52,40 @@ static int	ft_set_terraform(t_teraform *teraform, char *begin_str, char *str)
 	return (SUCCESS);
 }
 
+static char *ft_research_token(char *token, t_data *data)
+{
+	if (token[1] == '?')
+		return (ft_itoa(data->exit_program));
+	return (ft_env_tab_get_null(data->env->envp, token + 1));
+}
+
+static int	ft_set_expende(t_teraform *teraform, t_data *data)
+{
+	char	*buffer;
+
+	buffer = ft_research_token(teraform->token, data);
+	if (ft_strlen(buffer) >= 1)
+	{
+		if (ft_strchr("\t\v\n\r ", buffer[0]))
+			teraform->ljoin = FALSE;
+		if (ft_strchr("\t\v\n\r ", buffer[ft_strlen(buffer) - 1]))
+			teraform->rjoin = FALSE;
+	}
+	if (teraform->inquote || buffer == NULL)
+	{
+		teraform->sp = malloc(sizeof(char *) * 2);
+		if (!teraform->sp)
+			return (free(buffer), FAIL);
+		teraform->sp[0] = buffer;
+		teraform->sp[1] = NULL;
+	}
+	else
+		teraform->sp = the_mastermind(buffer);
+	if (!teraform->sp)
+		return (FAIL);
+	return (SUCCESS);
+}
+
 static void	ft_free_teraform(t_teraform *teraform)
 {
 	if (teraform->left)
@@ -69,10 +105,13 @@ char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
 
 	ft_bzero(&teraform, sizeof(t_teraform));
 	teraform.inquote = inquote;
+	teraform.rjoin = TRUE;
+	teraform.ljoin = TRUE;
 	ret = str;
-	if (ft_set_terraform(&teraform, ((t_word *)(*lst)->content)->word, str) == SUCCESS)
+	if (ft_set_terraform(&teraform, ((t_word *)(*lst)->content)->word, str) == SUCCESS && ft_set_expende(&teraform, data) == SUCCESS)
 		ret = str + 1;
 	(void)data;
+	ft_printf("%w\n", teraform.sp);
 	ft_free_teraform(&teraform);
 	return (ret); // return the same *str if problem
 }

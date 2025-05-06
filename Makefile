@@ -29,7 +29,7 @@ T_FT_EXEC		::= ft_exec ft_exec_cmd_path $(FT_EXEC_RED) $(FT_EXEC_PIPE) \
 					ft_exec_prompt_error
 FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
-T_FT_PARSING_EX	::= ft_expansion ft_teraform
+T_FT_PARSING_EX	::= ft_expansion ft_teraform the_mastermind
 FT_PARSING_EX	::= $(foreach buffer, $(T_FT_PARSING_EX), \
 						ft_expansion/$(buffer))
 T_FT_PARSING	::= ft_parser ft_parser_get_elements ft_check_lst ft_type_set \
