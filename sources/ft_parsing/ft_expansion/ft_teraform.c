@@ -99,47 +99,121 @@ static void	ft_free_teraform(t_teraform *teraform)
 		ft_tab_free(teraform->sp);
 }
 
-#define LEFT 0
-#define RIGHT 1
-
-static int	joint_expand_strs(char **tabelement, char **jstr, int pos)
+void	join_add_node(t_list **begin, t_list *add)
 {
-	char *newstr;
-	size_t l_tab;
-	size_t l_jstr;
+	if (add)
+	{
+		if (*begin)
+			ft_lstlast(*begin)->next = add;
+		else
+			*begin = add;
+	}
+}
 
-	l_tab = ft_strlen(*tabelement);
-	l_jstr = ft_strlen(*jstr);
-	newstr = malloc(l_tab + l_jstr + 1);
-	if (newstr == NULL)
+int	join_create_set_node(t_list **begin, char *buffer, int type)
+{
+	t_list	*newnode;
+
+	if (buffer == NULL)
 		return (FAIL);
-	newstr[l_tab + l_jstr] = '\0';
-	if (pos == LEFT)
+	newnode = ft_word_lst_make(buffer, type);
+	if (newnode == NULL)
 	{
-		ft_strlcpy(newstr, *jstr, l_jstr + 1);
-		ft_strlcpy(newstr + l_jstr, *tabelement, l_tab + 1);
+		free(buffer);
+		return (FAIL);
 	}
-	else
-	{
-		ft_strlcpy(newstr, *tabelement, l_tab + 1);
-		ft_strlcpy(newstr + l_tab, *jstr, l_jstr + 1);
-	}
-	free(*tabelement);
-	free(*jstr);
-	*jstr = NULL;
-	*tabelement = newstr;
+	join_add_node(begin, newnode);
 	return (SUCCESS);
+}
+
+int	join_expand_left_node(t_list **begin, t_teraform *teraform, int type)
+{
+	char	*buffer;
+
+	if (teraform->left)
+	{
+		if (teraform->sp[0] && teraform->ljoin)
+			buffer = ft_strjoin(teraform->left, teraform->sp[0]);
+		else
+			buffer = ft_strdup(teraform->left);
+		return (join_create_set_node(begin, buffer, type));
+	}
+	return (SUCCESS);
+}
+
+int	join_expand_right_node(t_list **begin, t_teraform *teraform, int type)
+{
+	char	*buffer;
+	t_word	*last;
+
+	if (teraform->right)
+	{
+		if (teraform->rjoin && *begin)
+		{
+			last = ft_lstlast(*begin)->content;
+			buffer = ft_strjoin(last->word, teraform->right);
+			if (buffer == NULL)
+				return (FAIL);
+			free(last->word);
+			last->word = buffer;
+		}
+		else
+			return (join_create_set_node(begin, ft_strdup(teraform->right), type));
+	}
+	return (SUCCESS);
+}
+
+// TODO free nodes on error
+
+int	join_middle(t_list **begin, t_teraform *teraform, int type)
+{
+	size_t	i;
+
+	i = 0;
+	if (teraform->sp[i])
+	{
+		if (teraform->left && teraform->ljoin)
+			i++;
+		while (teraform->sp[i])
+		{
+			if (join_create_set_node(begin, ft_strdup(teraform->sp[i]), type) == FAIL)
+				return (FAIL);
+			i++;
+		}
+	}
+	return (SUCCESS);
+}
+
+char	*join_nodes(t_list **lst, t_list *newlst, char *newpos)
+{
+	t_word *buffer;
+
+	if (newlst == NULL)
+	{
+		buffer = (*lst)->content;
+		free(buffer->word);
+		buffer->word = NULL;
+		return (NULL);
+	}
+	return (newpos);
 }
 
 char	*join_expand(t_list **lst, t_teraform *teraform, char *str)
 {
-	teraform->rlen = strlen(teraform->right);
-	if (teraform->ljoin == TRUE)
-		joint_expand_strs(teraform->sp, &teraform->left, LEFT);
-	if (teraform->rjoin == TRUE)
-		joint_expand_strs(teraform->sp + ft_tab_len(teraform->sp) - 1, &teraform->right, RIGHT);
-	(void)lst;
-	return (str + 1);
+	t_list	*newlst;
+	int		type;
+
+	newlst = NULL;
+	type = ((t_word *)(*lst)->content)->type;
+	if (join_expand_left_node(&newlst, teraform, type) == FAIL)
+		return (str);
+	if (join_middle(&newlst, teraform, type) == FAIL)
+		return (ft_words_clear(&newlst), str);
+	if (join_expand_right_node(&newlst, teraform, type) == FAIL)
+		return (ft_words_clear(&newlst), str);
+	if (newlst == NULL)
+		return (NULL);
+	return (join_nodes(lst, newlst, NULL));
 }
 
 char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
@@ -153,8 +227,7 @@ char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
 	teraform.ljoin = TRUE;
 	ret = str;
 	if (ft_set_terraform(&teraform, ((t_word *)(*lst)->content)->word, str) == SUCCESS && ft_set_expand(&teraform, data) == SUCCESS)
-		//ret = join_expand(lst, &teraform, str);
-
+		ret = join_expand(lst, &teraform, str);
 	ft_printf("%w\n", teraform.sp);
 	ft_free_teraform(&teraform);
 	return (ret); // return the same *str if problem
