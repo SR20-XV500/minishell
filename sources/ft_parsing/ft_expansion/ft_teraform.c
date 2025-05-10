@@ -12,6 +12,36 @@ typedef struct s_teraform
 	size_t	rlen;
 } t_teraform;
 
+
+static t_word	*ft_word_make(char *str, int type)
+{
+	t_word	*word;
+
+	word = malloc(sizeof(t_word));
+	if (word)
+	{
+		word->type = type;
+		word->word = str;
+	}
+	return (word);
+}
+
+t_list	*ft_word_lst_make_join(char *str, int type)
+{
+	t_list	*lst;
+	t_word	*word;
+
+	lst = NULL;
+	word = ft_word_make(str, type);
+	if (word)
+	{
+		lst = ft_lstnew(word);
+		if (lst == NULL)
+			free(word);
+	}
+	return (lst);
+}
+
 static char	*ft_get_token(char *str)
 {
 	size_t i;
@@ -116,7 +146,7 @@ int	join_create_set_node(t_list **begin, char *buffer, int type)
 
 	if (buffer == NULL)
 		return (FAIL);
-	newnode = ft_word_lst_make(buffer, type);
+	newnode = ft_word_lst_make_join(buffer, type);
 	if (newnode == NULL)
 	{
 		free(buffer);
@@ -169,8 +199,6 @@ int	join_expand_right_node(t_list **begin, t_teraform *teraform, int type, char 
 	}
 	return (SUCCESS);
 }
-
-// TODO free nodes on error
 
 int	join_middle(t_list **begin, t_teraform *teraform, int type)
 {
@@ -248,8 +276,6 @@ char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
 	ret = str;
 	if (ft_set_terraform(&teraform, ((t_word *)(*lst)->content)->word, str) == SUCCESS && ft_set_expand(&teraform, data) == SUCCESS)
 		ret = join_expand(lst, &teraform, str);
-	ft_printf("ret: %p\n", ret);
-	ft_printf("%w\n", teraform.sp);
 	ft_free_teraform(&teraform);
 	return (ret);
 }
