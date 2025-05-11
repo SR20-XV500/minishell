@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 13:24:31 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:28:44 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ int		ft_expansion_is_word(const char *str);
 char	**the_mastermind(char *token_split);
 
 int		ft_quotes_remove(char *str);
+
+t_list	*ft_word_lst_make_join(char *str, int type);
 
 #endif
