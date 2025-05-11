@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:38:04 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 14:12:02 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:39:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ char	*join_expand(t_list **lst, t_teraform *teraform, char *str)
 		return (ft_words_clear(&newlst), str);
 	if (newlst == NULL)
 		return (NULL);
+	
 	return (join_nodes(lst, newlst, newpos));
 }

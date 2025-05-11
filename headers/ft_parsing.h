@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 13:54:05 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:39:27 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ char	*ft_research_token(char *token, t_data *data);
 void	join_add_node(t_list **begin, t_list *add);
 int		join_create_set_node(t_list **begin, char *buffer, int type);
 char	*join_expand(t_list **lst, t_teraform *teraform, char *str);
+void	ft_while_del_node(t_data *data);
 
 #endif

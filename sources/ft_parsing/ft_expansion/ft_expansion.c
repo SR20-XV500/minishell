@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 14:08:11 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:38:24 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int	ft_expend_word(t_data *data, t_list *lst)
 {
 	t_word	*word;	
 	char	*str;
+	char	*buffer;
 	int		inquote;
 
 	word = lst->content;
@@ -63,7 +64,12 @@ static int	ft_expend_word(t_data *data, t_list *lst)
 			&& (inquote == TRUE || skip_simple_quote(&str) == FALSE))
 		{
 			if (ft_expansion_is_word(str))
-				str = ft_expend_teraform(data, &lst, str, inquote);
+			{
+				buffer = ft_expend_teraform(data, &lst, str, inquote);
+				if (buffer == str)
+					return (FAIL);
+				str = buffer;
+			}
 			else
 				str++;
 		}
@@ -84,6 +90,7 @@ static int	ft_while_data(t_data *data)
 	{
 		next = current->next;
 		type = ((t_word *)current->content)->type;
+		ft_printf("kwi %d\ncontent %s\n\n", type, ((t_word *)current->content)->word);
 		if (type == D_NOT_SET || type == TY_PATH)
 			status = ft_expend_word(data, current);
 		current = next;
@@ -99,6 +106,8 @@ int	ft_expansion(t_data *data)
 	if (data)
 	{
 		status = ft_while_data(data);
+		if (status == SUCCESS)
+			ft_while_del_node(data);
 		// TODO remove NULL node word
 	}
 	return (status);
