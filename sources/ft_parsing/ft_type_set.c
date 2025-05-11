@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:29:20 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 17:10:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:58:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_type_node(t_list *cur_lst)
 	if (new_node == NULL)
 		return (MALLOC_FAIL);
 	new_node->next = cur_lst->next;
-	cur_lst->next = new_node;	
+	cur_lst->next = new_node;
 	return (SUCCESS);
 }
 

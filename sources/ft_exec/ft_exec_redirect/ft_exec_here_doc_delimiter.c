@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:04:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 20:51:02 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:58:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_list	*ft_here_doc_delimiter(t_data *data, char *str)
 		if (buffer != ft_strlen(str))
 			expand = FAIL;
 		lst = ft_here_doc_get_content(str, &line_count);
-		if (lst && expand == SUCCESS && ft_here_doc_expansion(data, lst) != SUCCESS)
+		if (lst && expand == SUCCESS && ft_here_doc_expansion(data, lst))
 			ft_lstclear(&lst, &ft_word_free);
 		if (lst && ((t_word *)ft_lstlast(lst)->content)->word == NULL
 			&& g_signal_handle != SIGINT_SIGNAL

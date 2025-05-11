@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:44:23 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 20:55:17 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:59:56 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static int	ft_set_expand(t_teraform *teraform, t_data *data)
 	{
 		if (teraform->inquote == FALSE && ft_strchr("\t\v\n\r ", buffer[0]))
 			teraform->ljoin = FALSE;
-		if (teraform->inquote == FALSE &&ft_strchr("\t\v\n\r ",
-				buffer[ft_strlen(buffer) - 1]))
+		if (teraform->inquote == FALSE
+			&& ft_strchr("\t\v\n\r ", buffer[ft_strlen(buffer) - 1]))
 			teraform->rjoin = FALSE;
 	}
 	if (teraform->inquote || buffer == NULL)
