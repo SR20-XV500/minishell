@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 15:46:08 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:57:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	ft_expansion(t_data *data)
 		status = ft_while_data(data);
 		if (status == SUCCESS)
 			ft_while_del_node(data);
-		// TODO remove NULL node word
 	}
 	return (status);
 }
