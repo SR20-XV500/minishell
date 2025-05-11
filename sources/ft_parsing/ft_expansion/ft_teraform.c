@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:44:23 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 13:44:24 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:09:09 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*ft_get_token(char *str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 1;
 	if (str[i] != '?')
@@ -29,7 +29,7 @@ static char	*ft_get_token(char *str)
 
 static int	ft_set_terraform(t_teraform *teraform, char *begin_str, char *str)
 {
-	size_t blen;
+	size_t	blen;
 
 	if (begin_str != str)
 	{
@@ -99,7 +99,9 @@ char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
 	teraform.rjoin = TRUE;
 	teraform.ljoin = TRUE;
 	ret = str;
-	if (ft_set_terraform(&teraform, ((t_word *)(*lst)->content)->word, str) == SUCCESS && ft_set_expand(&teraform, data) == SUCCESS)
+	if (ft_set_terraform(&teraform,
+			((t_word *)(*lst)->content)->word, str) == SUCCESS
+			&& ft_set_expand(&teraform, data) == SUCCESS)
 		ret = join_expand(lst, &teraform, str);
 	ft_free_teraform(&teraform);
 	return (ret);

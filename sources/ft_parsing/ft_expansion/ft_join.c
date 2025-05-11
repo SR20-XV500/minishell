@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:38:04 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 13:38:13 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:12:02 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	join_expand_left_node(t_list **begin, t_teraform *teraform, int type)
 	return (SUCCESS);
 }
 
-int	join_expand_right_node(t_list **begin, t_teraform *teraform, int type, char **newpos)
+int	join_expand_right_node(t_list **begin, t_teraform *teraform,
+	int type, char **newpos)
 {
 	char	*buffer;
 	t_word	*last;
@@ -48,7 +49,7 @@ int	join_expand_right_node(t_list **begin, t_teraform *teraform, int type, char 
 		}
 		else
 		{
-			if (join_create_set_node(begin, ft_strdup(teraform->right), type))	
+			if (join_create_set_node(begin, ft_strdup(teraform->right), type))
 				return (FAIL);
 			*newpos = ((t_word *)ft_lstlast(*begin)->content)->word;
 		}
@@ -67,7 +68,8 @@ int	join_middle(t_list **begin, t_teraform *teraform, int type)
 			i++;
 		while (teraform->sp[i])
 		{
-			if (join_create_set_node(begin, ft_strdup(teraform->sp[i]), type) == FAIL)
+			if (join_create_set_node(begin,
+					ft_strdup(teraform->sp[i]), type) == FAIL)
 				return (FAIL);
 			i++;
 		}
@@ -89,7 +91,7 @@ char	*join_nodes(t_list **lst, t_list *newlst, char *newpos)
 	}
 	last = ft_lstlast(newlst);
 	ft_word_free((*lst)->content);
-	(*lst)->content = newlst->content;	
+	(*lst)->content = newlst->content;
 	if (last != newlst)
 	{
 		last->next = (*lst)->next;

@@ -41,7 +41,7 @@ T_FT_BUILTINS	::= ft_echo ft_pwd ft_cd ft_cd_env ft_unset ft_export \
 FT_BUILTINS		::= $(foreach buffer, $(T_FT_BUILTINS), \
 						$(SOURCES)ft_builtins/$(buffer).c)
 T_FT_ENV		::= ft_env_data ft_env_tab_get ft_env_get ft_env_iter \
-					ft_env_initial ft_env_initial_shlvl
+					ft_env_initial ft_env_initial_shlvl ft_env_tab_get_null
 FT_ENV			::= $(foreach buffer, $(T_FT_ENV), \
 						$(SOURCES)ft_env/$(buffer).c)
 T_FT_DATA		::= ft_data ft_word ft_word_lst ft_data_clear

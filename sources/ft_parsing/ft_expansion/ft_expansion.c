@@ -6,13 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 13:33:17 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:08:11 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int ft_quote_using(char *str, int *inquote)
+static int	ft_quote_using(char *str, int *inquote)
 {
 	if (*inquote == TRUE)
 	{
@@ -29,7 +29,7 @@ static int ft_quote_using(char *str, int *inquote)
 	return (FALSE);
 }
 
-static int skip_simple_quote(char **str)
+static int	skip_simple_quote(char **str)
 {
 	char	*next;
 
@@ -48,18 +48,19 @@ static int skip_simple_quote(char **str)
 	return (FALSE);
 }
 
-static int ft_expend_word(t_data *data, t_list *lst)
+static int	ft_expend_word(t_data *data, t_list *lst)
 {
 	t_word	*word;	
-	char *str;
-	int inquote;
+	char	*str;
+	int		inquote;
 
 	word = lst->content;
 	str = word->word;
 	inquote = FALSE;
 	while (str && *str)
 	{
-		if ((*str != '"' || ft_quote_using(str, &inquote) == FALSE) && ( inquote == TRUE || skip_simple_quote(&str) == FALSE))
+		if ((*str != '"' || ft_quote_using(str, &inquote) == FALSE)
+			&& (inquote == TRUE || skip_simple_quote(&str) == FALSE))
 		{
 			if (ft_expansion_is_word(str))
 				str = ft_expend_teraform(data, &lst, str, inquote);
@@ -70,12 +71,12 @@ static int ft_expend_word(t_data *data, t_list *lst)
 	return (SUCCESS);
 }
 
-static int ft_while_data(t_data *data)
+static int	ft_while_data(t_data *data)
 {
-	int status;
-	t_list *current;
-	t_list *next;
-	int type;
+	int		status;
+	t_list	*current;
+	t_list	*next;
+	int		type;
 
 	status = SUCCESS;
 	current = data->words;

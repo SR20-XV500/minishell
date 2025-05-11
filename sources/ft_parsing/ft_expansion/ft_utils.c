@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:33:24 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 13:36:53 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:10:24 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int	ft_expansion_is_word(const char *str)
 {
 	if (*str == '$' && (ft_isalpha(*(str + 1)) || *(str + 1) == '_'
-		|| *(str + 1) == '?'))
+			|| *(str + 1) == '?'))
 		return (TRUE);
 	return (FALSE);
 }
 
-void ft_remove_caracter(char *str)
+void	ft_remove_caracter(char *str)
 {
-	memmove(str, str + 1, strlen(str));	
+	memmove(str, str + 1, strlen(str));
 }
 
-char *ft_research_token(char *token, t_data *data)
+char	*ft_research_token(char *token, t_data *data)
 {
 	if (token[1] == '?')
 		return (ft_itoa(data->exit_program));
