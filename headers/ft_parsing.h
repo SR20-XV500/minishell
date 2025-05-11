@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/06 21:00:58 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:24:31 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ enum e_heredoc
 	HER_STR = 90,
 	HER_EOF
 };
+
+typedef struct s_teraform
+{
+	char	*left;
+	char	*right;
+	char	*token;
+	char	**sp;
+	int		ljoin;
+	int		rjoin;
+	int		inquote;
+	size_t	rlen;
+} t_teraform;
 
 int		ft_parser(t_data *data, const char *str);
 int		ft_parser_use_line(t_data *data, const char *str);

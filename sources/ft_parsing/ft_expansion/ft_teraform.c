@@ -1,18 +1,5 @@
 #include "minishell.h"
 
-typedef struct s_teraform
-{
-	char	*left;
-	char	*right;
-	char	*token;
-	char	**sp;
-	int		ljoin;
-	int		rjoin;
-	int		inquote;
-	size_t	rlen;
-} t_teraform;
-
-
 static t_word	*ft_word_make(char *str, int type)
 {
 	t_word	*word;
@@ -77,9 +64,6 @@ static int	ft_set_terraform(t_teraform *teraform, char *begin_str, char *str)
 		if (teraform->right == NULL)
 			return (FAIL);
 	}
-	ft_printf("L:%s\n", teraform->left);
-	ft_printf("R:%s\n", teraform->right);
-	ft_printf("T:%s\n", teraform->token);
 	return (SUCCESS);
 }
 
