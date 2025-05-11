@@ -5,37 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 14:51:18 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 13:53:20 by tlassere         ###   ########.fr       */
+/*   Created: 2025/05/11 13:44:12 by tlassere          #+#    #+#             */
+/*   Updated: 2025/05/11 13:53:41 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_word	*ft_word_make(const char *str, int type)
+void	ft_words_clear(t_list **begin)
+{
+	ft_lstclear(begin, &ft_word_free);
+}
+
+static t_word	*ft_word_make(char *str, int type)
 {
 	t_word	*word;
-	char	*dump;
 
-	word = NULL;
-	dump = NULL;
-	if (str)
-		dump = ft_strdup(str);
-	if (dump || (str == NULL && dump == NULL))
+	word = malloc(sizeof(t_word));
+	if (word)
 	{
-		word = malloc(sizeof(t_word));
-		if (word)
-		{
-			word->type = type;
-			word->word = dump;
-		}
-		else if (str)
-			free(dump);
+		word->type = type;
+		word->word = str;
 	}
 	return (word);
 }
 
-t_list	*ft_word_lst_make(const char *str, int type)
+t_list	*ft_word_lst_make_join(char *str, int type)
 {
 	t_list	*lst;
 	t_word	*word;
@@ -46,34 +41,7 @@ t_list	*ft_word_lst_make(const char *str, int type)
 	{
 		lst = ft_lstnew(word);
 		if (lst == NULL)
-			ft_word_free(word);
+			free(word);
 	}
 	return (lst);
-}
-
-void	ft_word_free(void *data)
-{
-	t_word	*word;
-
-	if (data)
-	{
-		word = data;
-		free(word->word);
-		free(word);
-	}
-}
-
-void	ft_word_lst_clear(t_data *data)
-{
-	ft_lstclear(&data->words, &ft_word_free);
-}
-
-int	ft_word_add(t_data *data, const char *str, int type)
-{
-	int		ret;
-
-	ret = BAD_PARAMETER;
-	if (data && str)
-		ret = ft_word_lst_add(&data->words, str, type);
-	return (ret);
 }

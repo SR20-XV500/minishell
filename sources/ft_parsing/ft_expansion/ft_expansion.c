@@ -6,109 +6,93 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/18 22:17:48 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:57:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_expansion_is_word(const char *str)
+static int	ft_quote_using(char *str, int *inquote)
 {
-	int	status;
-
-	status = BAD_PARAMETER;
-	if (str)
+	if (*inquote == TRUE)
 	{
-		status = FAIL;
-		if (*str == '$' && (ft_isalpha(*(str + 1))
-				|| *(str + 1) == '_' || *(str + 1) == '?'))
-			status = SUCCESS;
+		*inquote = FALSE;
+		ft_remove_caracter(str);
+		return (TRUE);
 	}
-	return (status);
+	if (*inquote == FALSE && ft_strchr(str + 1, '"'))
+	{
+		*inquote = TRUE;
+		ft_remove_caracter(str);
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
-static int	ft_expansion_replace_word_content(t_data *data,
-	t_list **lst, t_list *last)
+static int	skip_simple_quote(char **str)
 {
-	int		status;
-	char	*new_str;
-	t_word	*word;
+	char	*next;
 
-	status = BAD_PARAMETER;
-	new_str = NULL;
-	if (lst && *lst && (*lst)->content
-		&& ((t_word *)(*lst)->content)->word && data)
+	if (**str == '\'')
 	{
-		word = (*lst)->content;
-		status = SUCCESS;
-		if (word->type == D_NOT_SET)
+		next = ft_strchr(*str + 1, '\'');
+		if (next)
 		{
-			status = ft_expansion_str(data, word->word, &new_str);
-			if (status == PARSER_EXPANSION_VAR_CHANGE)
-			{
-				free(word->word);
-				word->word = new_str;
-			}
+			next--;
+			ft_remove_caracter(*str);
+			ft_remove_caracter(next);
+			*str = next;
+			return (TRUE);
 		}
-		if (status != MALLOC_FAIL)
-			status = SUCCESS;
 	}
-	(void)last;
-	return (status);
+	return (FALSE);
 }
 
-static int	ft_expansion_del_node(t_data *data, t_list **lst, t_list *last)
+static int	ft_expend_word(t_data *data, t_list *lst)
 {
-	int		status;
-	t_list	*next;
+	t_word	*word;	
+	char	*str;
+	char	*buffer;
+	int		inquote;
 
-	status = BAD_PARAMETER;
-	if (lst && *lst && (*lst)->content && data)
+	word = lst->content;
+	str = word->word;
+	inquote = FALSE;
+	while (str && *str)
 	{
-		status = SUCCESS;
-		next = (*lst)->next;
-		if (((t_word *)(*lst)->content)->word == NULL)
+		if ((*str != '"' || ft_quote_using(str, &inquote) == FALSE)
+			&& (inquote == TRUE || skip_simple_quote(&str) == FALSE))
 		{
-			ft_word_free((*lst)->content);
-			free(*lst);
-			*lst = next;
-			if (last)
-				last->next = next;
+			if (ft_expansion_is_word(str))
+			{
+				buffer = ft_expend_teraform(data, &lst, str, inquote);
+				if (buffer == str)
+					return (FAIL);
+				str = buffer;
+			}
 			else
-			{
-				status = NO_CHANGE_LST;
-				data->words = next;
-			}
+				str++;
 		}
 	}
-	return (status);
+	return (SUCCESS);
 }
 
-static int	ft_expansion_put_lst(t_data *data,
-	int (*f)(t_data *, t_list **, t_list *))
+static int	ft_while_data(t_data *data)
 {
 	int		status;
-	t_list	*lst;
-	t_list	*last;
+	t_list	*current;
+	t_list	*next;
+	int		type;
 
-	status = BAD_PARAMETER;
-	lst = data->words;
-	last = NULL;
-	if (lst)
+	status = SUCCESS;
+	current = data->words;
+	while (current && status == SUCCESS)
 	{
-		status = SUCCESS;
-		while (lst && (status == SUCCESS || status == NO_CHANGE_LST))
-		{
-			status = (*f)(data, &lst, last);
-			if (status != NO_CHANGE_LST)
-			{
-				last = lst;
-				if (lst)
-					lst = lst->next;
-			}
-		}
-		if (status == NO_CHANGE_LST)
-			status = SUCCESS;
+		next = current->next;
+		type = ((t_word *)current->content)->type;
+		if (type == D_NOT_SET || type == TY_PATH)
+			status = ft_expend_word(data, current);
+		current = next;
 	}
 	return (status);
 }
@@ -120,11 +104,9 @@ int	ft_expansion(t_data *data)
 	status = BAD_PARAMETER;
 	if (data)
 	{
-		status = ft_expansion_put_lst(data, &ft_expansion_replace_word_content);
+		status = ft_while_data(data);
 		if (status == SUCCESS)
-			status = ft_expansion_put_lst(data, &ft_expansion_split_node);
-		if (status == SUCCESS)
-			status = ft_expansion_put_lst(data, &ft_expansion_del_node);
+			ft_while_del_node(data);
 	}
 	return (status);
 }

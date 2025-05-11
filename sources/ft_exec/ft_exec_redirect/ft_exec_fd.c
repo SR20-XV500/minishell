@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:20:14 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/10 17:18:41 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:02:59 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,21 @@ static int	ft_exec_redirect_fd_err(t_data *data, t_redirect redirect,
 		const char *err_str, const char *path)
 {
 	int		status;
-	char	*expansion;
 
 	status = SUCCESS;
-	expansion = NULL;
 	if (redirect.fd == FD_FAIL_OPEN)
 	{
-		expansion = ft_trim_ambiguous(ft_expansion_get_str(data, err_str));
 		status = FAIL;
 		ft_fprintf(STDERR, "minishell: ");
-		perror(expansion);
+		perror(err_str);
 		data->env->exit_status = REDIRECT_FAIL;
 	}
 	else if (ft_is_directory(path) == SUCCESS && redirect.type != D_INPUT)
 	{
-		expansion = ft_trim_ambiguous(ft_expansion_get_str(data, err_str));
 		status = FAIL;
-		ft_fprintf(STDERR, "minishell: %s: Is a directory\n", expansion);
+		ft_fprintf(STDERR, "minishell: %s: Is a directory\n", err_str);
 		data->env->exit_status = REDIRECT_FAIL;
 	}
-	if (expansion)
-		free(expansion);
 	return (status);
 }
 
@@ -76,17 +70,18 @@ int	ft_exec_redirect_fd(t_data *data, int type, const char *path,
 	return (status);
 }
 
-static int	ft_exec_redirect_content(t_data *data, int type, t_word *word_path)
+static int	ft_exec_redirect_content(t_data *data, int type,
+	t_word *word_path, char *error)
 {
 	int		status;
 	char	*path;
 
 	status = BAD_PARAMETER;
 	path = NULL;
-	if (data && type && word_path && word_path->word)
+	if (data && type)
 	{
 		status = FAIL;
-		path = ft_redirect_get_path(data, word_path->word);
+		path = ft_redirect_get_path(data, word_path, error);
 		if (path)
 		{
 			status = ft_exec_redirect_fd(data, type, path, word_path->word);
@@ -94,6 +89,14 @@ static int	ft_exec_redirect_content(t_data *data, int type, t_word *word_path)
 		}
 	}
 	return (status);
+}
+
+t_word	*determinate_word(t_list *current)
+{
+	if (((t_word *)current->content)->word == NULL || (current->next
+			&& ((t_word *)current->next->content)->type == TY_PATH))
+		return (NULL);
+	return (current->content);
 }
 
 int	ft_exec_redirect(t_data *data, t_list *lst)
@@ -109,11 +112,10 @@ int	ft_exec_redirect(t_data *data, t_list *lst)
 		if (type == D_INPUT || type == D_OUTPUT_APPEND || type == D_OUTPUT_NEW)
 		{
 			if (lst->next && lst->next->content
-				&& ((t_word *)lst->next->content)->type == TY_PATH)
-			{
+				&& ((t_word *)lst->next->content)->type == TY_NOEXPENDED)
 				status = ft_exec_redirect_content(data, type,
-						lst->next->content);
-			}
+						determinate_word(lst->next->next),
+						((t_word *)lst->next->content)->word);
 			else
 				status = FAIL;
 		}

@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_env_tab_get_null.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 16:14:15 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/06 00:12:00 by tlassere         ###   ########.fr       */
+/*   Created: 2025/05/11 13:57:11 by tlassere          #+#    #+#             */
+/*   Updated: 2025/05/11 14:06:09 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_parser(t_data *data, const char *str)
+char	*ft_env_tab_get_null(char **envp, const char *name)
 {
-	int	ret;
+	char	*content;
+	int		pos;
 
-	ret = BAD_PARAMETER;
-	if (data && str)
-	{
-		ret = ft_parser_use_line(data, str);
-		if (ret == SUCCESS)
-			ret = ft_check_lst(data);
-		if (ret == SUCCESS)
-			ret = ft_type_set_path(data);
-		if (ret == SUCCESS)
-			ret = ft_expansion(data);
-		if (ret == SUCCESS)
-			ret = ft_type_set_cmd(data);
-	}
-	return (ret);
+	content = NULL;
+	pos = ft_env_tab_get_pos(envp, name);
+	if (pos != ENV_NOT_SET)
+		content = ft_substr(envp[pos], ft_strlen(name) + 1,
+				ft_strlen(envp[pos]));
+	return (content);
 }

@@ -29,9 +29,7 @@ T_FT_EXEC		::= ft_exec ft_exec_cmd_path $(FT_EXEC_RED) $(FT_EXEC_PIPE) \
 					ft_exec_prompt_error
 FT_EXEC			::= $(foreach buffer, $(T_FT_EXEC),\
 						$(SOURCES)ft_exec/$(buffer).c)
-T_FT_PARSING_EX	::= ft_expansion_get ft_expansion_var_join ft_expansion_split \
-					ft_expansion_split_main ft_expansion \
-					ft_expantion_get_str_func
+T_FT_PARSING_EX	::= ft_expansion ft_teraform the_mastermind ft_word ft_join ft_utils ft_remove_node
 FT_PARSING_EX	::= $(foreach buffer, $(T_FT_PARSING_EX), \
 						ft_expansion/$(buffer))
 T_FT_PARSING	::= ft_parser ft_parser_get_elements ft_check_lst ft_type_set \
@@ -43,7 +41,7 @@ T_FT_BUILTINS	::= ft_echo ft_pwd ft_cd ft_cd_env ft_unset ft_export \
 FT_BUILTINS		::= $(foreach buffer, $(T_FT_BUILTINS), \
 						$(SOURCES)ft_builtins/$(buffer).c)
 T_FT_ENV		::= ft_env_data ft_env_tab_get ft_env_get ft_env_iter \
-					ft_env_initial ft_env_initial_shlvl
+					ft_env_initial ft_env_initial_shlvl ft_env_tab_get_null
 FT_ENV			::= $(foreach buffer, $(T_FT_ENV), \
 						$(SOURCES)ft_env/$(buffer).c)
 T_FT_DATA		::= ft_data ft_word ft_word_lst ft_data_clear
