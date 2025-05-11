@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:44:23 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 15:46:18 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:55:17 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ static int	ft_set_expand(t_teraform *teraform, t_data *data)
 	buffer = ft_research_token(teraform->token, data);
 	if (ft_strlen(buffer) >= 1)
 	{
-		if (ft_strchr("\t\v\n\r ", buffer[0]))
+		if (teraform->inquote == FALSE && ft_strchr("\t\v\n\r ", buffer[0]))
 			teraform->ljoin = FALSE;
-		if (ft_strchr("\t\v\n\r ", buffer[ft_strlen(buffer) - 1]))
+		if (teraform->inquote == FALSE &&ft_strchr("\t\v\n\r ",
+				buffer[ft_strlen(buffer) - 1]))
 			teraform->rjoin = FALSE;
 	}
 	if (teraform->inquote || buffer == NULL)

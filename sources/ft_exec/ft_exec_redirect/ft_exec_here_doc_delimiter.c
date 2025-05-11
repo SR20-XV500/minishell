@@ -6,30 +6,34 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:04:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/06 00:32:42 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:51:02 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//static int	ft_expansion_get_while_here_doc(t_data *data, const char *str,
-//		size_t *i, char **buffer)
-//{
-//	int	status;
+static int	ft_expend_word(t_data *data, t_list *lst)
+{
+	t_word	*word;	
+	char	*str;
+	char	*buffer;
 
-//	//if (ft_expansion_is_word(str + *i) == SUCCESS)
-//	//	status = ft_expansion_join_var(data, str + *i, buffer, i);
-//	//else
-//	//	status = ft_expansion_add_car(*buffer, str[*i], buffer);
-//	status = SUCCESS;
-//	// TODO rework this function
-//	(void)buffer;
-//	(void)i;
-//	(void)data;
-//	(void)str;
-
-//	return (status);
-//}
+	word = lst->content;
+	str = word->word;
+	while (str && *str)
+	{
+		if (ft_expansion_is_word(str))
+		{
+			buffer = ft_expend_teraform(data, &lst, str, TRUE);
+			if (buffer == str)
+				return (FAIL);
+			str = buffer;
+		}
+		else
+			str++;
+	}
+	return (SUCCESS);
+}
 
 static t_list	*ft_here_doc_get_content(const char *delim, size_t *line_count)
 {
@@ -60,28 +64,18 @@ static t_list	*ft_here_doc_get_content(const char *delim, size_t *line_count)
 	return (lst);
 }
 
-static void	ft_here_doc_expansion(t_data *data, t_list **lst)
+static int	ft_here_doc_expansion(t_data *data, t_list *current)
 {
-	char	*buffer;
-	t_list	*current;
 	t_word	*word;
 
-	buffer = NULL;
-	current = *lst;
 	while (current)
 	{
 		word = current->content;
-		if (word->type == HER_STR && ft_strchr(word->word, '$'))
-		{
-			//buffer = ft_expansion_get_str_func(data, word->word,
-			//		&ft_expansion_get_while_here_doc); // TODO: rework this
-			buffer = ft_strdup(word->word); // THIS for not bugs :)
-			free(word->word);
-			word->word = buffer;
-		}
+		if (word->type == HER_STR && ft_expend_word(data, current) != SUCCESS)
+			return (FAIL);
 		current = current->next;
 	}
-	(void)data;
+	return (SUCCESS);
 }
 
 t_list	*ft_here_doc_delimiter(t_data *data, char *str)
@@ -101,8 +95,8 @@ t_list	*ft_here_doc_delimiter(t_data *data, char *str)
 		if (buffer != ft_strlen(str))
 			expand = FAIL;
 		lst = ft_here_doc_get_content(str, &line_count);
-		if (lst && expand == SUCCESS)
-			ft_here_doc_expansion(data, &lst);
+		if (lst && expand == SUCCESS && ft_here_doc_expansion(data, lst) != SUCCESS)
+			ft_lstclear(&lst, &ft_word_free);
 		if (lst && ((t_word *)ft_lstlast(lst)->content)->word == NULL
 			&& g_signal_handle != SIGINT_SIGNAL
 			&& (ft_fprintf(STDERR, ERR_HERE_DOC, (int)data->line_count) == -1
