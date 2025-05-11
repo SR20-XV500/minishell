@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:44:23 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 15:39:27 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:46:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,5 @@ char	*ft_expend_teraform(t_data *data, t_list **lst, char *str, int inquote)
 			&& ft_set_expand(&teraform, data) == SUCCESS)
 		ret = join_expand(lst, &teraform, str);
 	ft_free_teraform(&teraform);
-	//ft_printf("bibibou\n");
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 14:18:48 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 14:45:50 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:46:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 static void	ft_del_node(t_data *data, t_list **lst, t_list *last, t_list *next)
 {
-
-	ft_printf("passed %s\n", ((t_word *)(*lst)->content)->word);
 	if (((t_word *)(*lst)->content)->word == NULL)
 	{
-		ft_printf("passed\n");
 		ft_word_free((*lst)->content);
 		free(*lst);
 		*lst = next;
