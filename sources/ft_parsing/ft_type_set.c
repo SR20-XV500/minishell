@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:29:20 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 16:18:45 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:10:23 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,6 @@ static void	ft_type_cmd(t_list *lst)
 	}
 }
 
-static int	ft_type_set(t_data *data, void (*f)(t_list *))
-{
-	int	status;
-
-	status = BAD_PARAMETER;
-	if (data && f)
-	{
-		status = SUCCESS;
-		(*f)(data->words);
-	}
-	return (status);
-}
-
 int	ft_type_set_path(t_data *data)
 {
 	return (ft_type_path(data->words));
@@ -94,5 +81,13 @@ int	ft_type_set_path(t_data *data)
 
 int	ft_type_set_cmd(t_data *data)
 {
-	return (ft_type_set(data, &ft_type_cmd));
+	int	status;
+
+	status = BAD_PARAMETER;
+	if (data)
+	{
+		status = SUCCESS;
+		ft_type_cmd(data->words);
+	}
+	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:20:14 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 16:49:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:02:59 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	ft_exec_redirect_fd(t_data *data, int type, const char *path,
 	return (status);
 }
 
-static int	ft_exec_redirect_content(t_data *data, int type, t_word *word_path, char *error)
+static int	ft_exec_redirect_content(t_data *data, int type,
+	t_word *word_path, char *error)
 {
 	int		status;
 	char	*path;

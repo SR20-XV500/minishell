@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:21:32 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 16:57:06 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:05:25 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_redirect_display_error(t_data *data, const char *error,
 		char **path, int status)
 {
 	data->env->exit_status = REDIRECT_FAIL;
-	if ((*path && **path == '\0'))
+	if (*path && **path == '\0')
 	{
 		ft_fprintf(STDERR, ERR_SUCH_FILE, "");
 		free(*path);
@@ -44,20 +44,14 @@ static void	ft_redirect_display_error(t_data *data, const char *error,
 char	*ft_redirect_get_path(t_data *data, t_word *word, char *error)
 {
 	char	*path;
-	int		status;
 
 	path = NULL;
-	status = REDIRECT_AMBIGUOUS_REDIRECT; // TODO change place for this
 	if (word)
-	{
-		status = MALLOC_FAIL;
 		path = ft_redirect_get_path_parser(data, word->word);
-		if (path)
-			status = SUCCESS;
-	}
 	else
-		ft_redirect_display_error(data, error, &path, status);
+		ft_redirect_display_error(data, error,
+			&path, REDIRECT_AMBIGUOUS_REDIRECT);
 	if (path && path[0] == '\0')
-		ft_redirect_display_error(data, NULL, &path, status);
+		ft_redirect_display_error(data, NULL, &path, 0);
 	return (path);
 }
