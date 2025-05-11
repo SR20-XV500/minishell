@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:20:14 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/06 00:27:52 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 16:49:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,17 @@ int	ft_exec_redirect_fd(t_data *data, int type, const char *path,
 	return (status);
 }
 
-static int	ft_exec_redirect_content(t_data *data, int type, t_word *word_path)
+static int	ft_exec_redirect_content(t_data *data, int type, t_word *word_path, char *error)
 {
 	int		status;
 	char	*path;
 
 	status = BAD_PARAMETER;
 	path = NULL;
-	if (data && type && word_path && word_path->word)
+	if (data && type)
 	{
 		status = FAIL;
-		path = ft_redirect_get_path(data, word_path->word);
+		path = ft_redirect_get_path(data, word_path, error);
 		if (path)
 		{
 			status = ft_exec_redirect_fd(data, type, path, word_path->word);
@@ -88,6 +88,14 @@ static int	ft_exec_redirect_content(t_data *data, int type, t_word *word_path)
 		}
 	}
 	return (status);
+}
+
+t_word	*determinate_word(t_list *current)
+{
+	if (((t_word *)current->content)->word == NULL || (current->next
+			&& ((t_word *)current->next->content)->type == TY_PATH))
+		return (NULL);
+	return (current->content);
 }
 
 int	ft_exec_redirect(t_data *data, t_list *lst)
@@ -103,11 +111,10 @@ int	ft_exec_redirect(t_data *data, t_list *lst)
 		if (type == D_INPUT || type == D_OUTPUT_APPEND || type == D_OUTPUT_NEW)
 		{
 			if (lst->next && lst->next->content
-				&& ((t_word *)lst->next->content)->type == TY_PATH)
-			{
+				&& ((t_word *)lst->next->content)->type == TY_NOEXPENDED)
 				status = ft_exec_redirect_content(data, type,
-						lst->next->content);
-			}
+						determinate_word(lst->next->next),
+						((t_word *)lst->next->content)->word);
 			else
 				status = FAIL;
 		}
