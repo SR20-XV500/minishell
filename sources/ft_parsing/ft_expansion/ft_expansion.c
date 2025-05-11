@@ -6,24 +6,11 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:53:49 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/10 13:33:35 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:33:17 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_expansion_is_word(const char *str)
-{
-	if (*str == '$' && (ft_isalpha(*(str + 1)) || *(str + 1) == '_'
-		|| *(str + 1) == '?'))
-		return (TRUE);
-	return (FALSE);
-}
-
-static void ft_remove_caracter(char *str)
-{
-	memmove(str, str + 1, strlen(str));	
-}
 
 static int ft_quote_using(char *str, int *inquote)
 {

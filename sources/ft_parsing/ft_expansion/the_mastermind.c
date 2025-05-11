@@ -90,10 +90,11 @@ char	**the_mastermind(char *token_split)
 
 	segments = ft_count_seg(token_split);
 	strs = (char **)malloc((segments + 1) * sizeof(char *));
-	if (strs == NULL)
-		return (NULL);
-	strs[segments] = NULL;
-	strs = ft_insert_segments(token_split, strs);
+	if (strs != NULL)
+	{
+		strs[segments] = NULL;
+		strs = ft_insert_segments(token_split, strs);
+	}
 	free(token_split);
 	return (strs);
 }
