@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:51:18 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/10 12:03:06 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:53:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,6 @@ void	ft_word_free(void *data)
 void	ft_word_lst_clear(t_data *data)
 {
 	ft_lstclear(&data->words, &ft_word_free);
-}
-
-void	ft_words_clear(t_list **begin)
-{
-	ft_lstclear(begin, &ft_word_free);
 }
 
 int	ft_word_add(t_data *data, const char *str, int type)

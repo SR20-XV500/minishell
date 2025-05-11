@@ -1,5 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_word.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/11 13:44:12 by tlassere          #+#    #+#             */
+/*   Updated: 2025/05/11 13:53:41 by tlassere         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_words_clear(t_list **begin)
+{
+	ft_lstclear(begin, &ft_word_free);
+}
 
 static t_word	*ft_word_make(char *str, int type)
 {

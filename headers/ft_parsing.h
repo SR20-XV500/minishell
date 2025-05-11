@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 17:21:58 by tlassere          #+#    #+#             */
-/*   Updated: 2025/05/11 13:39:12 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:54:05 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_teraform
 	int		rjoin;
 	int		inquote;
 	size_t	rlen;
-} t_teraform;
+}	t_teraform;
 
 int		ft_parser(t_data *data, const char *str);
 int		ft_parser_use_line(t_data *data, const char *str);
@@ -78,10 +78,11 @@ char	**the_mastermind(char *token_split);
 int		ft_quotes_remove(char *str);
 
 t_list	*ft_word_lst_make_join(char *str, int type);
-void ft_remove_caracter(char *str);
-char *ft_research_token(char *token, t_data *data);
+void	ft_words_clear(t_list **begin);
+void	ft_remove_caracter(char *str);
+char	*ft_research_token(char *token, t_data *data);
 void	join_add_node(t_list **begin, t_list *add);
-int	join_create_set_node(t_list **begin, char *buffer, int type);
+int		join_create_set_node(t_list **begin, char *buffer, int type);
 char	*join_expand(t_list **lst, t_teraform *teraform, char *str);
 
 #endif
